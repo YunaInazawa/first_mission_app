@@ -20,4 +20,19 @@ class AppController extends Controller
     {
         return view('app_create');
     }
+
+    public function screen( $id = 1 )
+    {
+        return view('task_screen', ['app_id'=> $id]);
+    }
+
+    public function detail( $id = 1 )
+    {
+        return view('task_detail', ['app_id'=> $id]);
+    }
+
+    public function design( $id = 1 )
+    {
+        return view('design', ['app_id'=> $id]);
+    }
 }
