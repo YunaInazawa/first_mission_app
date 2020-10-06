@@ -1,9 +1,17 @@
+<!-- 波を生成するためのsvg -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"><path id="wave" d=""/></svg>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"><path id="wave2" d=""/></svg>
+
 @extends('layouts.app_header')
 
 @section('content')
 
+<!-- Stylesheet -->
 <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+
+<!-- 泡を生成するためのキャンバス -->
 <canvas id="canvas"></canvas>
+
 <div class="container logincontent">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -58,23 +66,21 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                        <div class="col-md-6 offset-md-3">
-                            <a href="{{ route('register') }}">
-                                {{ __('新規作成') }}
-                            </a>
-                        </div>
+                    <div class="col-md-6 offset-md-3">
+                        <a href="{{ route('register') }}">
+                            {{ __('新規作成') }}
+                        </a>
                     </div>
+                </div>
             </form>
         </div>
     </div>
 </div>
-         
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg"><path id="wave" d=""/></svg>
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg"><path id="wave2" d=""/></svg>
-          
+
+<!-- 波を生成するためのScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/85188/jquery.wavify.js"></script>
-
 <script src="{{ asset('js/app_guest.js') }}"></script>
+
 @endsection
