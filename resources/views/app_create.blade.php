@@ -1,1 +1,51 @@
-app_create: アプリ作成
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none" id="svg-bg">
+    <path d="M0,0 v50 q10,10 20,0 t20,0 t20,0 t20,0 t20,0 v-50 Z" fill="#FFF"></path>
+</svg>
+@extends('layouts.app')
+
+@section('content')
+
+<!-- Stylesheet -->
+<link href="{{ asset('css/home.css') }}" rel="stylesheet">
+<link href="{{ asset('css/app_create.css') }}" rel="stylesheet">
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <h3>プロジェクト作成</h3>
+        </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group row pjtname">
+                        <label for="" class="col-lg-2 col-form-label text-md-right">{{ __('プロジェクト名') }}</label>
+                        <div class="col-lg-9">
+                            <input id="" type="text" class="form-control" name="" value="" autofocus>
+                        </div>
+                    </div>
+                    <div class="form-group row pjtgaiyo">
+                        <label for="" class="col-lg-2 col-form-label text-md-right">{{ __('概要') }}</label>
+                        <div class="col-lg-9">
+                            <textarea class="form-control" name="example" cols="50" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row menber">
+                        <label for="" class="col-lg-2 col-form-label text-md-right">{{ __('メンバー') }}</label>
+                        <div class="col-lg-9">
+                            <a href="{{ url('/create') }}" class="btn-circle-3d">＋</a>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-5">
+                            <button class="btn btn-primary">キャンセル</button>
+                        </div>
+                        <div class="col-lg-5 offset-lg-2 text-md-right">
+                            <button class="btn btn-primary">作成</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
