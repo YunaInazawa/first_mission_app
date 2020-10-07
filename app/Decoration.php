@@ -11,4 +11,14 @@ class Decoration extends Model
     {
         return $this->hasMany('App\DecorationsTask');
     }
+
+    // 親テーブル
+    public function element()
+    {
+        return $this->belongsTo('App\Element');
+    }
+    public function scene()
+    {
+        return $this->belongsTo('App\Scene');
+    }
 }

@@ -11,4 +11,18 @@ class Task extends Model
     {
         return $this->hasMany('App\DecorationsTask');
     }
+
+    // 親テーブル
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+    public function status()
+    {
+        return $this->belongsTo('App\Status');
+    }
+    public function scene()
+    {
+        return $this->belongsTo('App\Scene');
+    }
 }

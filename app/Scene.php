@@ -15,4 +15,10 @@ class Scene extends Model
     {
         return $this->hasMany('App\Decoration');
     }
+
+    // 親テーブル
+    public function project()
+    {
+        return $this->belongsTo('App\Project');
+    }
 }
