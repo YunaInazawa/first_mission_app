@@ -1,0 +1,85 @@
+/* TOP画面ｃｓｓ */
+
+/* ↓↓↓↓ 付箋みたいな見出し ↓↓↓↓ */
+/* 斜めらせて影を作る */
+.tape{
+    position: absolute;
+    top: -0.75em;
+    background-color: rgba(255,255,255,.4);
+    border-left:2px dotted rgba(0,0,0,.1);
+    border-right:2px dotted rgba(0,0,0,.1);
+    box-shadow:0 0 5px rgba(0,0,0,0.2);
+    padding: 0.25em 2em;
+    color: #65513f;
+    transform: rotate(-3deg);
+    background-size: 40px 40px;
+}
+
+/* 課題付箋と通知付箋で背景色を変える */
+.kadai{
+    background-image: linear-gradient(-45deg, rgba(250,215,215,.5) 25%, transparent 25%, transparent 50%, rgba(250,215,215,.5) 50%, rgba(250,215,215,.5) 75%, transparent 75%, transparent 100%),
+    linear-gradient(45deg, rgba(250,215,215,.5) 25%, transparent 25%, transparent 50%,  rgba(250,215,215,.5) 50%, rgba(250,215,215,.5) 75%, transparent 75%, transparent 100%);    
+}
+.tuti{
+    background-image: linear-gradient(-45deg, rgba(215, 220, 250, 0.5) 25%, transparent 25%, transparent 50%, rgba(215, 220, 250, 0.5) 50%, rgba(215, 220, 250, 0.5) 75%, transparent 75%, transparent 100%),
+    linear-gradient(45deg, rgba(215, 220, 250, 0.5) 25%, transparent 25%, transparent 50%,  rgba(215, 220, 250, 0.5) 50%, rgba(215, 220, 250, 0.5) 75%, transparent 75%, transparent 100%);    
+}
+
+/* ↑↑↑↑ 付箋みたいな見出し ↑↑↑↑ */
+
+/* ↓↓↓↓ プロジェクト一覧の見出し ↓↓↓↓ */
+h3 {
+    position: relative;
+    padding: 0.25em 0;
+}
+h3:after {
+    content: "";
+    display: block;
+    height: 4px;
+    background: -webkit-linear-gradient(to right, rgb(90, 179, 230), transparent);
+    background: linear-gradient(to right, rgb(90, 179, 230), transparent);
+}
+/* ↑↑↑↑ プロジェクト一覧の見出し ↑↑↑↑ */
+
+/* ↓↓↓↓ プロジェクト作成ボタン ↓↓↓↓ */
+.btn-circle-3d {
+    display: inline-block;
+    text-decoration: none;
+    background: royalblue;
+    color: #FFF;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    font-weight: bold;
+    overflow: hidden;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px #6b65bd;
+    transition: .4s;
+    text-decoration: none !important;
+}
+  
+.btn-circle-3d:active {
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+    border-bottom: none;
+}
+/* ↑↑↑↑ プロジェクト作成ボタン ↑↑↑↑ */
+
+/* ↓↓↓↓ 全体的なオブジェクトの位置調整 ↓↓↓↓ */
+.card, .pjt{
+    margin-top: 1em;
+}
+svg {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+body{
+    background-color: rgb(176, 252, 255);
+}
+/* ↑↑↑↑ 全体的なオブジェクトの位置調整 ↑↑↑↑ */

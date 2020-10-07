@@ -1,20 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none" id="svg-bg">
+    <path d="M0,0 v50 q10,10 20,0 t20,0 t20,0 t20,0 t20,0 v-50 Z" fill="#FFF"></path>
+</svg>
 @extends('layouts.app')
 
 @section('content')
+
+<!-- Stylesheet -->
+<link href="{{ asset('css/home.css') }}" rel="stylesheet">
+
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
+            <div class="row justify-content-center">
+                <h1>{{ Auth::user()->name }}</h1>
+            </div>
+        </div>
+        <div class="col-lg-3">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
+                <div class="card-header tape kadai">{{ __('課題') }}</div>
+                <div class="card-body kadailist">
+                    <p>・課題１</p>
+                    <p>・課題２</p>
+                    <p>・課題３</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 pjt">
+            <h3>プロジェクト</h3>
+            <div></div>
+            <a href="#" class="btn-circle-3d">＋</a>
+        </div>   
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-header tape tuti">{{ __('通知') }}</div>
+    
+                <div class="card-body tutilist">
+                    <div>通知１</div>
+                    <div>通知２</div>
+                    <div>通知３</div>
                 </div>
             </div>
         </div>
