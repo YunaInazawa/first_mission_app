@@ -17,6 +17,8 @@ class CreateScenesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
+            $table->boolean('is_finished_design')->default(false);
+            $table->boolean('is_finished_task')->default(false);
             $table->foreignId('project_id')
                 ->constrained()
                 ->cascadeOnDelete()
