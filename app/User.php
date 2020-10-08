@@ -38,12 +38,19 @@ class User extends Authenticatable
     ];
 
     // 子テーブル
-    public function members()
-    {
-        return $this->hasMany('App\Member');
-    }
     public function tasks()
     {
         return $this->hasMany('App\Task');
+    }
+
+    public function projects(){
+        return $this->belongsToMany('App\Project', 'members')
+            ->withPivot('is_join')
+            ->withTimestamps();
+    }
+    public function roles(){
+        return $this->belongsToMany('App\Role', 'members')
+            ->withPivot('is_join')
+            ->withTimestamps();
     }
 }

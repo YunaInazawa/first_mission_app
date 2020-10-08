@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    // 子テーブル
-    public function members()
-    {
-        return $this->hasMany('App\Member');
+    public function projects(){
+        return $this->belongsToMany('App\Project', 'members')
+            ->withTimestamps();
+    }
+    public function users(){
+        return $this->belongsToMany('App\User', 'members')
+            ->withTimestamps();
     }
 }

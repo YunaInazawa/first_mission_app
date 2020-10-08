@@ -11,8 +11,15 @@ class Project extends Model
     {
         return $this->hasMany('App\Scene');
     }
-    public function members()
-    {
-        return $this->hasMany('App\Member');
+
+    public function users(){
+        return $this->belongsToMany('App\User', 'members')
+            ->as('members')
+            ->withTimestamps();
+    }
+    public function roles(){
+        return $this->belongsToMany('App\Role', 'members')
+            ->as('members')
+            ->withTimestamps();
     }
 }

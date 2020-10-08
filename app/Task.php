@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    // 子テーブル
-    public function decorations_tasks()
-    {
-        return $this->hasMany('App\DecorationsTask');
+    public function decorations(){
+        return $this->belongsToMany('App\Decoration', 'decorations_tasks')
+            ->withTimestamps();
     }
 
     // 親テーブル
