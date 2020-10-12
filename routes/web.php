@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/create', 'AppController@create')->name('create');
 Route::get('/app/{id}', 'AppController@index')->name('app_home');
+Route::get('/task_screen/{id}', 'AppController@screen')->name('task_screen');
+Route::get('/task_detail/{id}', 'AppController@detail')->name('task_detail');
+Route::get('/design/{id}', 'AppController@design')->name('design');
 
 Auth::routes();
 
