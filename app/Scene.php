@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Scene extends Model
 {
+    use SoftDeletes;
+
     // 子テーブル
     public function tasks()
     {
