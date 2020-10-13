@@ -5,13 +5,13 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Element extends Model
+class LogCategory extends Model
 {
     use SoftDeletes;
 
     // 子テーブル
-    public function decorations()
+    public function logs()
     {
-        return $this->hasMany('App\Decoration');
+        return $this->hasMany('App\Log');
     }
 }

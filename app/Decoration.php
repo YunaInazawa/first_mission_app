@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Decoration extends Model
 {
+    use SoftDeletes;
+
     public function tasks(){
         return $this->belongsToMany('App\Task', 'decorations_tasks')
             ->withTimestamps();
