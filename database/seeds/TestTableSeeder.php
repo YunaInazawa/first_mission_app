@@ -37,7 +37,7 @@ class TestTableSeeder extends Seeder
         ]);
 
         /**
-         * メンバー
+         * メンバ
          */
         $project_id = DB::table('projects')->where('name', 'TestProjectTitle')->first()->id;
         $user_id = DB::table('users')->where('name', 'hoge')->first()->id;
