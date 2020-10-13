@@ -67,9 +67,12 @@ class TestTableSeeder extends Seeder
          */
         $scene_id = DB::table('scenes')->where('name', 'TestSceneName')->first()->id;
         $status_id = DB::table('statuses')->where('title', 'はやくやれ')->first()->id;
+        $tomorrow = Carbon::now()->addDay(7);
         DB::table('tasks')->insert([
             'title' => 'TestTaskTitle',
             'description' => 'TestTaskDiscription',
+            'start_at' => $now,
+            'end_at' => $tomorrow,
             'scene_id' => $scene_id,
             'user_id' => $user_id,
             'status_id' => $status_id,

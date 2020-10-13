@@ -17,6 +17,8 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('description')->nullable();
+            $table->dateTIme('start_at');
+            $table->dateTime('end_at');
             $table->foreignId('scene_id')
                 ->constrained()
                 ->cascadeOnDelete()
