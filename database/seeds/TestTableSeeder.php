@@ -108,5 +108,31 @@ class TestTableSeeder extends Seeder
             'created_at' => $now, 
             'updated_at' => $now,
         ]);
+
+        /**
+         * ログ
+         */
+        $logTexts = [
+            'ユーザ「hoge」作成', 
+            'ユーザ「hoge」がプロジェクト「TestProjectTitle」を作成', 
+            'ユーザ「hoge」が画面「TestSceneName」を作成', 
+            'ユーザ「hoge」がタスク「TestTaskTitle」を作成', 
+            'ユーザ「hoge」がデザイン「TestDecorationText」を更新'
+        ];
+        $logCategories = ['create', 'create', 'create', 'create', 'update'];
+        $logProjects = [null, 'TestProjectTitle', 'TestProjectTitle', 'TestProjectTitle', 'TestProjectTitle'];
+        for( $i = 0; $i < count($logTexts); $i++ ){
+            $category_id = DB::table('log_categories')->where('content', $logCategories[$i])->first()->id;
+            $logProject_id = is_null($logProjects[$i]) ? null : DB::table('projects')->where('name', $logProjects[$i])->first()->id;
+            DB::table('logs')->insert([
+                'text' => $logTexts[$i],
+                'user_id' => $user_id,
+                'log_category_id' => $category_id,
+                'project_id' => $logProject_id,
+                'created_at' => $now, 
+                'updated_at' => $now,
+            ]);
+        }
+
     }
 }
