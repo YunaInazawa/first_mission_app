@@ -108,7 +108,13 @@ class KinokoTableSeeder extends Seeder
          * タスク
          */
         $taskScenes = ['KINOKOlist', 'KINOKOlist', 'KINOKOrecipe', 'KINOKOrecipe', 'KINOKOrecipe'];
-        $taskTitles = ['○○の王国××地区に生息するキノコを調査', '○○の王国□□地区に生息するキノコを調査', '○月×日 朝食「採れたてキノコのマリネ」', '○月×日 昼食「７種のキノコリゾット」', '○月×日 夕食「タコとキノコのカルパッチョ」'];
+        $taskTitles = [
+            '○○の王国××地区に生息するキノコを調査', 
+            '○○の王国□□地区に生息するキノコを調査', 
+            '○月×日 朝食「採れたてキノコのマリネ」', 
+            '○月×日 昼食「７種のキノコリゾット」', 
+            '○月×日 夕食「タコとキノコのカルパッチョ」'
+        ];
         $taskDescs = [
             '○○の王国××地区に生息する59種類のキノコの形態、構造、味、生態、その他詳細を調査する', 
             '○○の王国□□地区に生息する42種類のキノコの形態、構造、味、生態、その他詳細を調査する', 
@@ -129,6 +135,75 @@ class KinokoTableSeeder extends Seeder
                 'scene_id' => $scene_id,
                 'user_id' => $user_id,
                 'status_id' => $status_id,
+                'created_at' => $now, 
+                'updated_at' => $now,
+            ]);
+        }
+
+        /**
+         * ログ
+         */
+        $logTexts = [
+            'ユーザ「you」作成', 
+            'ユーザ「Octopus of mercy」作成', 
+            'ユーザ「KINOKO is Lovers」作成', 
+            'ユーザ「Wishing DEATH of KINOKO」作成', 
+
+            'ユーザ「KINOKO is Lovers」がプロジェクト「Mountain of KINOKO」を作成', 
+
+            'ユーザ「KINOKO is Lovers」がメンバ「you」に参加申請', 
+            'ユーザ「KINOKO is Lovers」がメンバ「Octopus of mercy」に参加申請', 
+            'ユーザ「KINOKO is Lovers」がメンバ「Wishing DEATH of KINOKO」に参加申請', 
+            'ユーザ「Wishing DEATH of KINOKO」がプロジェクト「Mountain of KINOKO」の参加拒否', 
+            'ユーザ「you」がプロジェクト「Mountain of KINOKO」の参加拒否', 
+            'ユーザ「KINOKO is Lovers」がメンバ「you」に参加申請', 
+            'ユーザ「KINOKO is Lovers」がメンバ「Wishing DEATH of KINOKO」に参加申請', 
+            'ユーザ「Wishing DEATH of KINOKO」がプロジェクト「Mountain of KINOKO」の参加承認', 
+            'ユーザ「you」がプロジェクト「Mountain of KINOKO」の参加拒否', 
+            
+            'ユーザ「KINOKO is Lovers」が画面「TOP」を作成', 
+            'ユーザ「KINOKO is Lovers」が画面「KINOKOlist」を作成', 
+            'ユーザ「KINOKO is Lovers」が画面「KINOKOrecipe」を作成', 
+            'ユーザ「KINOKO is Lovers」が画面「KINOKO」を作成', 
+            'ユーザ「Wishing DEATH of KINOKO」が画面「KINOKO」を削除', 
+            'ユーザ「KINOKO is Lovers」が画面「KINOKONOKO」を作成', 
+
+            'ユーザ「KINOKO is Lovers」がタスク「○○の王国××地区に生息するキノコを調査」を作成', 
+            'ユーザ「KINOKO is Lovers」がタスク「○○の王国□□地区に生息するキノコを調査」を作成', 
+            'ユーザ「KINOKO is Lovers」がタスク「○月×日 朝食「採れたてキノコのマリネ」」を作成', 
+            'ユーザ「KINOKO is Lovers」がタスク「○月×日 昼食「７種のキノコリゾット」」を作成', 
+            'ユーザ「KINOKO is Lovers」がタスク「○月×日 夕食「タコとキノコのカルパッチョ」」を作成', 
+            'ユーザ「KINOKO is Lovers」がタスク「○月×日 夕食「タコとキノコのカルパッチョ」」を変更', 
+        ];
+        $logCategories = [
+            'create', 'create', 'create', 'create', 
+            'create', 
+            'join', 'join', 'join', 'join', 'join', 'join', 'join', 'join', 'join', 
+            'create', 'create', 'create', 'create', 'delete', 'create', 
+            'create', 'create', 'create', 'create', 'create', 'update', 
+        ];
+        $logUsers = [
+            'you', 'Octopus of mercy', 'KINOKO is Lovers', 'Wishing DEATH of KINOKO', 
+            'KINOKO is Lovers', 
+            'KINOKO is Lovers', 'KINOKO is Lovers', 'KINOKO is Lovers', 'Wishing DEATH of KINOKO', 'you', 'KINOKO is Lovers', 'KINOKO is Lovers', 'Wishing DEATH of KINOKO', 'you', 
+            'KINOKO is Lovers', 'KINOKO is Lovers', 'KINOKO is Lovers', 'KINOKO is Lovers', 'Wishing DEATH of KINOKO', 'KINOKO is Lovers', 
+            'KINOKO is Lovers', 'KINOKO is Lovers', 'KINOKO is Lovers', 'KINOKO is Lovers', 'KINOKO is Lovers', 'KINOKO is Lovers', 
+        ];
+        $logProjects = [
+            null, null, null, null, 
+            '', 
+            '', '', '', '', '', '', '', '', '', 
+            '', '', '', '', '', '', 
+            '', '', '', '', '', '', 
+        ];
+        for( $i = 0; $i < count($logTexts); $i++ ){
+            $category_id = DB::table('log_categories')->where('content', $logCategories[$i])->first()->id;
+            $user_id = DB::table('users')->where('name', $logUsers[$i])->first()->id;
+            DB::table('logs')->insert([
+                'text' => $logTexts[$i],
+                'user_id' => $user_id,
+                'log_category_id' => $category_id,
+                'project_id' => is_null($logProjects[$i]) ? null : $project_id,
                 'created_at' => $now, 
                 'updated_at' => $now,
             ]);

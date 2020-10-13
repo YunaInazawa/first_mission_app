@@ -13,7 +13,7 @@ class LogCategoriesTableSeeder extends Seeder
     public function run()
     {
         $now = Carbon::now();
-        $categories = ['error', 'create', 'update', 'delete'];
+        $categories = ['error', 'create', 'update', 'delete', 'join'];
 
         foreach( $categories as $category ){
             DB::table('log_categories')->insert([
