@@ -69,7 +69,7 @@
     </div>
 </div>
 
-<!-- 波を生成するためのScript -->
+<!-- Script -->
 <script src="{{ asset('js/dialog.js') }}"></script>
 
 @endsection

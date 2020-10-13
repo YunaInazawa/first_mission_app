@@ -24,7 +24,21 @@
                         <div class="row menber">
                             <label for="" class="col-lg-2 col-form-label text-md-right">{{ __('メンバー') }}</label>
                             <div class="col-lg-9">
-                                <a href="{{ url('/') }}" class="btn-circle-3d">＋</a>
+                                    <div id="dialog">
+                                            <div id="dialogBackground"></div>
+                                            <div id="dialogContent">
+                                                <div id="dialogMsg">
+                                                    ダイアログメッセージ
+                                                </div>
+                                                <div>
+                                                    <input type="text"><br>
+                                                    <input type="button" value="はい" onclick="func();" />
+                                                    <input type="button" value="いいえ" onclick="dialogHide();" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input class="btn-circle-3d chec" type="checkbox" onclick="dialogShow();" id="check">
+                                        <label for="check" class="btn-circle-3d">+</label>
                             </div>
                         </div>
                         <hr>
@@ -88,4 +102,8 @@
         </div>
     </div>
 </div>
+
+
+<!-- Script -->
+<script src="{{ asset('js/dialog.js') }}"></script>
 @endsection
