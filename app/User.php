@@ -36,4 +36,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // 子テーブル
+    public function tasks()
+    {
+        return $this->hasMany('App\Task');
+    }
+
+    public function projects(){
+        return $this->belongsToMany('App\Project', 'members')
+            ->withPivot('is_join')
+            ->withTimestamps();
+    }
+    public function roles(){
+        return $this->belongsToMany('App\Role', 'members')
+            ->withPivot('is_join')
+            ->withTimestamps();
+    }
 }

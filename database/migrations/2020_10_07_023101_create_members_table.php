@@ -15,7 +15,7 @@ class CreateMembersTable extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_join');
+            $table->boolean('is_join')->nullable();
             $table->foreignId('project_id')
                 ->constrained()
                 ->cascadeOnDelete()
