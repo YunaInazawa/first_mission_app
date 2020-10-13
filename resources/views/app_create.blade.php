@@ -45,12 +45,14 @@
                                         ダイアログメッセージ
                                     </div>
                                     <div>
+                                        <input type="text"><br>
                                         <input type="button" value="はい" onclick="func();" />
                                         <input type="button" value="いいえ" onclick="dialogHide();" />
                                     </div>
                                 </div>
                             </div>
-                            <a href="{{ url('/') }}" class="btn-circle-3d">＋</a>
+                            <input class="btn-circle-3d chec" type="checkbox" onclick="dialogShow();" id="check">
+                            <label for="check" class="btn-circle-3d">+</label>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -66,4 +68,8 @@
         </div>
     </div>
 </div>
+
+<!-- 波を生成するためのScript -->
+<script src="{{ asset('js/dialog.js') }}"></script>
+
 @endsection
