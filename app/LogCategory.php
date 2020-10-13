@@ -9,5 +9,9 @@ class LogCategory extends Model
 {
     use SoftDeletes;
 
-    //
+    // 子テーブル
+    public function logs()
+    {
+        return $this->hasMany('App\Log');
+    }
 }

@@ -9,5 +9,9 @@ class Log extends Model
 {
     use SoftDeletes;
 
-    //
+    // 親テーブル
+    public function log_category()
+    {
+        return $this->belongsTo('App\LogCategory');
+    }
 }
