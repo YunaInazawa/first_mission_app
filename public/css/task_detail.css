@@ -1,0 +1,94 @@
+.cp_tab *, .cp_tab *:before, .cp_tab *:after {
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.cp_tab {
+	margin: 1em auto;
+	position: relative;
+}
+.cp_tab input[type='radio'] {
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-radius: 0;
+	outline: none;
+	background: none;
+	-webkit-appearance: none;
+	        appearance: none;
+	display: none;
+}
+.cp_tab .cp_tabpanel {
+	display: none;
+}
+.cp_tab > input:first-child:checked ~ .cp_tabpanels > .cp_tabpanel:first-child,
+.cp_tab > input:nth-child(3):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(2),
+.cp_tab > input:nth-child(5):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(3),
+.cp_tab > input:nth-child(7):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(4),
+.cp_tab > input:nth-child(9):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(5),
+.cp_tab > input:nth-child(11):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(6) {
+	display: block;
+}
+.cp_tab .cp_tabpanels {
+	position: absolute;
+    top:0;
+    width: 80%;
+	left: 10em;
+    display: block;
+    height: 100%;
+}
+.cp_tab > input + label {
+	position: relative;
+	z-index: 100;
+	top: -15px;
+	left: 1px;
+	display: block;
+	width: 10em;
+	margin-bottom: -1px;
+	padding: 15px;
+	cursor: pointer;
+	border: 1px solid #cccccc;
+	border-right: 0;
+	border-radius: 6px 0 0 6px;
+}
+.cp_tab > input + label:last-of-type {
+	margin-bottom: 100px;
+}
+.cp_tab > label:hover,
+.cp_tab > input:focus + label {
+	color: #0066cc;
+}
+.cp_tab > input:checked + label {
+	border-color: #cccccc;
+	border-right: 1px solid #ffffff;/*背景色と同じ*/
+}
+.cp_tab .cp_tabpanel {
+	padding: 0.5em 1em;
+	border-left: 1px solid #cccccc;
+}/*
+@media (max-width: 480px) {
+	.cp_tab {
+		width: 100%;
+	}
+	.cp_tab > input + label {
+	font-size: 0.7em;
+	}
+	.cp_tab .cp_tabpanels {
+	left: 7em;
+	min-width: 7em;
+	}
+}*/
+
+button{
+    margin-top: 1em;
+}
+
+
+.v_line_fix {
+    width: 1px;
+    background-color: gray;
+}
+
+.card{
+    height: 100%;
+
+}

@@ -47,6 +47,7 @@ input[type="radio"]{
     height: 100%;
     background-color: #000000;
     opacity: 0.05;
+
 }
 #dialogContent {
     position: absolute;
@@ -59,6 +60,7 @@ input[type="radio"]{
     background-color: #dddddd;
     text-align: center;
     border: solid 1px;
+    z-index: 100;
 }
 .chec{
     display: none;
