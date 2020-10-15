@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    <form method="post" action="{{ route('new') }}">
+                    <form method="post" action="{{ route('app_new') }}">
                     @csrf
 
                         <div class="form-group row name">

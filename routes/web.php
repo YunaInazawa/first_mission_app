@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/create', 'AppController@create')->name('create');
-Route::post('new', 'AppController@new')->name('new');
+Route::get('/create', 'AppController@create')->name('app_create');
+Route::post('new', 'AppController@new')->name('app_new');
 Route::get('/app/{id}', 'AppController@index')->name('app_home');
 Route::get('/task_screen/{id}', 'AppController@screen')->name('task_screen');
 Route::get('/task_detail/{id}', 'AppController@detail')->name('task_detail');

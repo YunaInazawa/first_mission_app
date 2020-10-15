@@ -48,6 +48,7 @@ class AppController extends Controller
         $projectName = $request->project_name;
         $projectUsing = $request->project_using;
         $projectDescription = $request->project_description;
+        //$projectMembers = $request->test00; //メンバー追加後：配列で受け取る
 
         // プロジェクト作成
         $newProject = new Project;
@@ -55,7 +56,6 @@ class AppController extends Controller
         $newProject->description = $projectDescription;
         $newProject->using = $projectUsing;
         $newProject->save();
-        $this->createLog('ユーザ「' . Auth::user()->name . '」がプロジェクト「' . $newProject->name . '」を作成', 'create', $newProject->id);
 
         // メンバ登録(作成者)
         $newMember = new Member;
@@ -67,6 +67,8 @@ class AppController extends Controller
 
         // メンバ登録(参加申請)
 
+        // ログ登録
+        $this->createLog('ユーザ「' . Auth::user()->name . '」がプロジェクト「' . $newProject->name . '」を作成', 'create', $newProject->id);
         
         return redirect(route('app_home', ['id' => $newProject->id]));
     }
