@@ -78,3 +78,9 @@ h3:after {
 label{
     display: block; /* ブロックレベル要素化する */
 }
+
+.gaiyo{
+    max-height: 100px;
+    min-height: 100px;
+    
+}

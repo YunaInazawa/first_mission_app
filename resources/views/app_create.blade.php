@@ -32,7 +32,7 @@
                     <div class="form-group row description">
                         <label for="" class="col-lg-2 col-form-label text-md-right">{{ __('概要') }}</label>
                         <div class="col-lg-9">
-                            <textarea class="form-control" name="example" cols="50" rows="10"></textarea>
+                            <textarea class="form-control gaiyo" maxlength="200" name="example" cols="50" rows="10"></textarea>
                         </div>
                     </div>
                     <div class="form-group row menber">
