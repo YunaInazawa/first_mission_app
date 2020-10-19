@@ -17,6 +17,12 @@ class AppController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * ログを登録する関数
+     * $logText( String )       : ログの内容
+     * $logCategory( String )   : ログのカテゴリ
+     * $project_id( integer )   : プロジェクト ID
+     */
     function createLog( $logText, $logCategory, $project_id )
     {
         $newLog = new Log;
@@ -48,7 +54,7 @@ class AppController extends Controller
         $projectName = $request->project_name;
         $projectUsing = $request->project_using;
         $projectDescription = $request->project_description;
-        //$projectMembers = $request->test00; //メンバー追加後：配列で受け取る
+        // $projectMembers = $request->members; //メンバー追加後：配列で受け取る
 
         // プロジェクト作成
         $newProject = new Project;
@@ -56,6 +62,8 @@ class AppController extends Controller
         $newProject->description = $projectDescription;
         $newProject->using = $projectUsing;
         $newProject->save();
+        // ログ登録
+        $this->createLog('ユーザ「' . Auth::user()->name . '」がプロジェクト「' . $newProject->name . '」を作成', 'create', $newProject->id);
 
         // メンバ登録(作成者)
         $newMember = new Member;
@@ -66,9 +74,15 @@ class AppController extends Controller
         $newMember->save();
 
         // メンバ登録(参加申請)
-
-        // ログ登録
-        $this->createLog('ユーザ「' . Auth::user()->name . '」がプロジェクト「' . $newProject->name . '」を作成', 'create', $newProject->id);
+        // foreach( $projectMembers as $member_id ) {
+        //     $newJoinMember = new Member;
+        //     $newJoinMember->project_id = $newProject->id;
+        //     $newJoinMember->user_id = $member_id;
+        //     $newJoinMember->role_id = Role::where('name', '一般')->first()->id;
+        //     $newJoinMember->save();
+        //     // ログ登録
+        //     $this->createLog('ユーザ「' . Auth::user()->name . '」がメンバ「' . $newJoinMember->user->name . '」に参加申請', 'join', $newProject->id);
+        // }        
         
         return redirect(route('app_home', ['id' => $newProject->id]));
     }
