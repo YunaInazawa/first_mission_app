@@ -28,7 +28,7 @@
         <div class="col-lg-6 pjt">
             <h3>プロジェクト</h3>
             <div></div>
-            <a href="#" class="btn-circle-3d">＋</a>
+            <a href="{{ route('app_create') }}" class="btn-circle-3d">＋</a>
         </div>   
         <div class="col-lg-3">
             <div class="card">
