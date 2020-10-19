@@ -83,6 +83,10 @@ button{
 }
 
 
+hr{
+	margin-left: 10px;
+}
+
 .v_line_fix {
     width: 1px;
     background-color: gray;
