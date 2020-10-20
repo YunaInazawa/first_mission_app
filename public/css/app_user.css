@@ -1,0 +1,176 @@
+/*----------------------------------
+ ログインユーザー共通cssメニュー
+
+ 1.見出しの調整
+    1.1 項目見出しスタイル
+    1.2 付箋風見出しスタイル
+ 2.全体的な位置調整
+ 3.背景の設定
+ 4.ダイアログボックスの設定
+ 5.＋の丸型ボタンスタイル
+ 6.入力ボックスの調整
+ 7.水平線
+ ---------------------------------*/
+
+
+/*----------------------------------
+ 見出しの調整
+ ---------------------------------*/
+/*
+ 項目見出しスタイル
+ ---------------------------------*/
+ h3 {
+    position: relative;
+    padding: 0.25em 0;
+}
+h3:after {
+    content: "";
+    display: block;
+    height: 4px;
+    background: -webkit-linear-gradient(to right, var(--maldives-blue), transparent);
+    background: linear-gradient(to right, var(--maldives-blue), transparent);
+}
+
+/*
+ 付箋風見出しスタイル
+ ---------------------------------*/
+ .tag{
+    /* 斜めらせて影を作る */
+    position: absolute;
+    top: -0.75em;
+    background-color: var(--moonlight);
+    border-left:2px dotted rgba(0,0,0,.1);
+    border-right:2px dotted rgba(0,0,0,.1);
+    box-shadow:0 0 5px rgba(0,0,0,0.2);
+    padding: 0.25em 2em;
+    color: var(--dark-shadow);
+    font-weight: bold;
+    font-size: 20px;
+    transform: rotate(-3deg);
+    background-size: 40px 40px;
+}
+/* 紫付箋と橙付箋で背景色を変える */
+.tag_purple{
+    background-image: linear-gradient(-45deg, rgba(187, 160, 197,.5) 25%, transparent 25%, transparent 50%, rgba(187, 160, 197,.5) 50%, rgba(187, 160, 197,.5) 75%, transparent 75%, transparent 100%),
+    linear-gradient(45deg, rgba(187, 160, 197,.5) 25%, transparent 25%, transparent 50%,  rgba(187, 160, 197,.5) 50%, rgba(187, 160, 197,.5) 75%, transparent 75%, transparent 100%);    
+}
+.tag_orange{
+    background-image: linear-gradient(-45deg, rgba(245, 175, 125, 0.5) 25%, transparent 25%, transparent 50%, rgba(245, 175, 125, 0.5) 50%, rgba(245, 175, 125, 0.5) 75%, transparent 75%, transparent 100%),
+    linear-gradient(45deg, rgba(245, 175, 125, 0.5) 25%, transparent 25%, transparent 50%,  rgba(245, 175, 125, 0.5) 50%, rgba(245, 175, 125, 0.5) 75%, transparent 75%, transparent 100%);    
+}
+.tag_list{
+    /* 文字が被らないようにずらす */
+    margin-top: 20px;
+}
+
+
+
+/*----------------------------------
+ 全体的な位置調整
+ ---------------------------------*/ 
+.card, .pjt{
+    margin-top: 1em;
+}
+
+
+
+/*----------------------------------
+ 背景の設定
+ ---------------------------------*/ 
+svg {
+    /* 波型の白背景を設定 */
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+body{
+    /* 波型がない部分を色付け */
+    background-color: var(--fog);
+}
+
+
+
+/*----------------------------------
+ ダイアログボックスの設定
+ ---------------------------------*/ 
+#dialog {
+    display:none;
+}
+#dialogBackground {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.05;
+}
+#dialogContent {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300px;
+    height: 200px;
+    margin-left: -150px;
+    margin-top: -100px;
+    background-color: #dddddd;
+    text-align: center;
+    border: solid 1px;
+}
+.btn_plus_check{
+    /* ダイアログ表示用チェックボックス */
+    display: none !important;
+    margin-right: -40px;
+}
+
+/*---------------------------------
+ ＋の丸型ボタンスタイル
+ ---------------------------------*/
+.btn_plus_circle {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--indian-ocean);
+    color: var(--moonlight);
+    font-weight: bold;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    font-weight: bold;
+    overflow: hidden;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px var(--midnight);
+    transition: .4s;
+    text-decoration: none !important;
+}
+.btn_plus_circle:active {
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+    border-bottom: none;
+}
+
+
+
+/*----------------------------------
+ 入力ボックスの調整
+ ---------------------------------*/
+.input_gaiyo{
+    max-height: 100px;
+    min-height: 100px;    
+}
+
+
+
+/*----------------------------------
+ 水平線
+ ---------------------------------*/
+.v_line_fix {
+    width: 1px;
+    margin-left: -10px;
+    margin-right: 10px;
+    background-color: gray;
+}

@@ -1,0 +1,124 @@
+/*----------------------------------
+ テンプレートcssメニュー
+
+ 1.カラーコードリスト
+ 2.見出しの調整
+ 3.ナビゲーションバーの調整
+    3.1 ナビゲーションスタイル
+    3.2 ナビゲーションリンクのスタイル
+ 4.入力ボックスの調整
+    4.1 入力項目スタイル
+    4.2 入力cardスタイル
+ 5.ボタンの調整
+ ---------------------------------*/
+
+/*----------------------------------
+ カラーコードリスト
+ ---------------------------------*/
+:root{
+    --indian-ocean:    #419ACF;
+    --maldives-blue:   #74C7F0;
+    --bright-turquoise:#00ACEB;
+    --my-blue:         #72C6C7;
+    --pieces-of-blue:  #D4EBEC;
+    --blue-paradise:   #005EA7;
+    --yogurt-smoothie: #E8DBCD;
+    --melon-juice:     #C0DB8C;
+    --orange-sherbet:  #F5AF7D;
+
+    --lagoon:          #00B2C4;
+    --spa-blue:        #00A6DE;
+    --off-the-coast:   #0080AE;
+    --horizon:         #3659A7;
+    --dawn-blue:       #708AC4;
+    --summer-shower:   #94D0C4;
+    --dawn-purple:     #BBA0C5;
+    --ice-cocoa:       #8D7A6A;
+    --black-coffee:    #65473C;
+
+    --breaking-dawn:   #6CB2D3;
+    --moonlight:       #F4F2DB;
+    --dark-shadow:     #002B40;
+    --fog:             #D9E9E5;
+    --twilight:        #3F83A6;
+    --midnight:        #1D4B69;
+    --grave-marker:    #B1C7D4;
+    --moon-mist:       #94A1A9;
+    --moon-shadow:     #424F56;
+}
+
+
+
+/*----------------------------------
+ 見出しの調整
+ ---------------------------------*/
+h1{
+    font-family: 'arial black';
+    font-size: 4em;
+    color: var(--blue-paradise);
+}
+
+
+
+/*----------------------------------
+ ナビゲーションバーの調整
+ ---------------------------------*/
+/*
+ ナビゲーションスタイル
+ ---------------------------------*/
+.navbar{
+    background-color: var(--blue-paradise) !important;
+}
+
+/*
+ ナビゲーションリンクのスタイル
+ ---------------------------------*/
+.nav-link,.navbar-brand{
+    color: var(--moonlight) !important;
+}
+.nav-link:hover, .navbar-brand:hover{
+    /*-- カーソルを合わせてる時 --*/
+    color: var(--moon-shadow) !important;
+}
+
+
+
+/*----------------------------------
+ 入力ボックスの調整
+ ---------------------------------*/
+/*
+ 入力項目スタイル
+ ---------------------------------*/
+.input_box{
+    padding-top: 15px;
+}
+
+/*
+ 入力cardスタイル
+ ---------------------------------*/
+.input-card{
+    background-color: rgb(217, 233, 229,0.5); /* --fog使用 */
+}
+
+
+/*----------------------------------
+ ボタンの調整
+ ---------------------------------*/
+.btn{
+    margin-top: 15px;
+    background-color: var(--indian-ocean) !important;
+    color: var(--moonlight) !important;
+    font-weight: bold !important;
+    border: solid 1px var(--midnight);
+}
+.btn:hover, .btn:active{
+    /*-- カーソルを合わせた時 --*/
+    background-color: var(--maldives-blue) !important;
+    color: var(--moon-shadow) !important;
+}
+.btn:active{
+    /*-- クリックしている時 --*/
+    background-color: var(--dawn-purple) !important;
+    /* 影を入れる */
+    box-shadow: 0 0 0 0.2rem var(--maldives-blue) !important;
+}

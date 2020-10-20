@@ -1,3 +1,15 @@
+/*----------------------------------
+ タスク管理画面cssメニュー
+
+ 1.タブ設定
+ 2.水平線位置
+ 3.cardの調整
+ ---------------------------------*/
+
+
+ /*----------------------------------
+ タブ設定
+ ---------------------------------*/
 .cp_tab *, .cp_tab *:before, .cp_tab *:after {
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;
@@ -64,35 +76,22 @@
 .cp_tab .cp_tabpanel {
 	padding: 0.5em 1em;
 	border-left: 1px solid #cccccc;
-}/*
-@media (max-width: 480px) {
-	.cp_tab {
-		width: 100%;
-	}
-	.cp_tab > input + label {
-	font-size: 0.7em;
-	}
-	.cp_tab .cp_tabpanels {
-	left: 7em;
-	min-width: 7em;
-	}
-}*/
-
-button{
-    margin-top: 1em;
 }
 
 
+
+/*----------------------------------
+ 水平線位置
+ ---------------------------------*/
 hr{
 	margin-left: 10px;
 }
 
-.v_line_fix {
-    width: 1px;
-    background-color: gray;
-}
 
+
+/*----------------------------------
+ cardの調整
+ ---------------------------------*/
 .card{
     height: 100%;
-
 }
