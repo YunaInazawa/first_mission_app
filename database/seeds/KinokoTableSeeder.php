@@ -77,11 +77,11 @@ class KinokoTableSeeder extends Seeder
         $memberJoins = [1, 1, null, 0];
         $project_id = DB::table('projects')->where('name', 'Mountain of KINOKO')->first()->id;
         for( $i = 0; $i < count($memberNames); $i++ ){
-            $user_id = DB::table('users')->where('name', $memberNames[$i])->first()->id;
+            $member_user_id = DB::table('users')->where('name', $memberNames[$i])->first()->id;
             $role_id = DB::table('roles')->where('name', $memberRoles[$i])->first()->id;
             DB::table('members')->insert([
                 'project_id' => $project_id,
-                'user_id' => $user_id,
+                'user_id' => $member_user_id,
                 'role_id' => $role_id,
                 'is_join' => $memberJoins[$i],
                 'created_at' => $now, 
@@ -101,12 +101,14 @@ class KinokoTableSeeder extends Seeder
                 'description' => $sceneDescs[$i],
                 'created_at' => $now, 
                 'updated_at' => $now,
+                'deleted_at' => $sceneNames[$i] == 'KINOKO' ? $now : null, 
             ]);
         }
 
         /**
          * タスク
          */
+        $user_id = DB::table('users')->where('name', 'KINOKO is Lovers')->first()->id;
         $taskScenes = ['KINOKOlist', 'KINOKOlist', 'KINOKOrecipe', 'KINOKOrecipe', 'KINOKOrecipe'];
         $taskTitles = [
             '○○の王国××地区に生息するキノコを調査', 
@@ -198,10 +200,10 @@ class KinokoTableSeeder extends Seeder
         ];
         for( $i = 0; $i < count($logTexts); $i++ ){
             $category_id = DB::table('log_categories')->where('content', $logCategories[$i])->first()->id;
-            $user_id = DB::table('users')->where('name', $logUsers[$i])->first()->id;
+            $log_user_id = DB::table('users')->where('name', $logUsers[$i])->first()->id;
             DB::table('logs')->insert([
                 'text' => $logTexts[$i],
-                'user_id' => $user_id,
+                'user_id' => $log_user_id,
                 'log_category_id' => $category_id,
                 'project_id' => is_null($logProjects[$i]) ? null : $project_id,
                 'created_at' => $now, 
