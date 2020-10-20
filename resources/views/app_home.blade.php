@@ -17,7 +17,7 @@
                     <!-- プロジェクトについて(名、メンバー、概要など) -->
                     <div class="card-body">
                         <!-- プロジェクト名 -->
-                        <h4>KINOKONOSATO☆</h4>
+                        <h4>{{ $project_data->name }}</h4>
                         <hr>
                         <!-- メンバー一覧表示
                         ＊＊＊＊この画面でメンバー追加をするか新画面でするか未定 -->
@@ -38,12 +38,22 @@
                                             </div>
                                         </div>
                                         <input class="btn-circle-3d chec" type="checkbox" onclick="dialogShow();" id="check">
+                                        <!-- メンバー表示 -->
+                                        [ 参加者 ]<br />
+                                        @foreach( $members as $m )
+                                        {{ $m->role->name }} : {{ $m->user->name }}<br />
+                                        @endforeach
+                                        [ 申請中 ]<br />
+                                        @foreach( $members_yet as $m )
+                                        {{ $m->user->name }}<br />
+                                        @endforeach
                                         <label for="check" class="btn-circle-3d">+</label>
                             </div>
                         </div>
                         <hr>
                         <!-- プロジェクト概要 -->
-                        <p>きのこ　たくさん　あるよ</p>
+                        <p>[ 使用言語・技術 ]<br />{{ $project_data->using }}</p>
+                        <p>[ 概要 ]<br />{!! nl2br($project_data->description) !!}</p>
                     </div>
                 </div>
                 <!-- 作成した画面を表示させる 
@@ -65,11 +75,11 @@
                             <!-- 画面一覧の表示 -->
                             <div id="panel1" class="tab_panel">
                                 <div class="row">
-                                    <span class="col-lg-7 offset-lg-1">KINOKOLISTO</span>
+                                    @foreach( $project_data->scenes as $scene )
+                                    <span class="col-lg-7 offset-lg-1">{{ $scene->name }}</span>
                                     <span class="col-lg-2">タスク</span><span class="col-lg-2">デザイン</span>
                                     <hr>
-                                    <span class="col-lg-7 offset-lg-1">TOP</span>
-                                    <span class="col-lg-2">タスク</span><span class="col-lg-2">デザイン</span>
+                                    @endforeach
                                 </div>
                             </div>
                             <!-- 画面遷移が表示される -->
@@ -78,6 +88,16 @@
                             </div>
                             <!-- タスクが表示される -->
                             <div id="panel3" class="tab_panel">
+                                <div class="row">
+                                    @foreach( $project_data->scenes as $scene )
+                                    @foreach( $scene->tasks as $task )
+                                    <span class="col-lg-7 offset-lg-1">[ {{ $scene->name }} ] {{ $task->start_at }} ～ {{ $task->end_at }}</span>
+                                    <span class="col-lg-2">{{ $task->user->name }} : {{ $task->title }}</span>
+                                    <span class="col-lg-2">{!! nl2br($task->description) !!}</span>
+                                    <hr>
+                                    @endforeach
+                                    @endforeach
+                                </div>
                             </div>
                             <!-- デザインが表示される -->
                             <div id="panel4" class="tab_panel">
@@ -92,11 +112,10 @@
             <div class="card">
                 <div class="card-header tape tuti">{{ __('ログ') }}</div>
                 <div class="card-body tutilist">
-                    <p>キノコLOVEさんがKINOKOLISTのデザインを更新しました</p>
+                    @foreach( $logs as $l )
+                    <p>{{ $l->created_at->format('Y/m/d') }}<br />{{ $l->text }}</p>
                     <hr>
-                    <p>キノコ○ねさんがKINOKO画面を削除しました</p>
-                    <hr>
-                    <p>キノコLOVEさんがKINOKO画面を作成しました</p>
+                    @endforeach
                 </div>
             </div>
         </div>
