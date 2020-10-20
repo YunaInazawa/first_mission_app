@@ -92,7 +92,11 @@ class AppController extends Controller
      */
     public function index( $id = 1 )
     {
-        return view('app_home', ['app_id'=> $id, 'data' => '']);
+        $project_data = Project::find($id);
+        $members = Member::where('project_id', $id)->where('is_join', true)->orderBy('role_id')->get();
+        $members_yet = Member::where('project_id', $id)->where('is_join', null)->orderBy('role_id')->get();
+        $logs = Log::where('project_id', $id)->orderBy('id', 'desc')->get();
+        return view('app_home', ['project_data' => $project_data, 'members' => $members, 'members_yet' => $members_yet, 'logs' => $logs]);
     }
 
     /**
