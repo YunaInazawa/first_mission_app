@@ -7,12 +7,12 @@
 @section('content')
 
 <!-- Stylesheet -->
-<link href="{{ asset('css/login.css') }}" rel="stylesheet">
+<link href="{{ asset('css/app_guest.css') }}" rel="stylesheet">
 
 <!-- 泡を生成するためのキャンバス -->
 <canvas id="canvas"></canvas>
 
-<div class="container logincontent">
+<div class="container content">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="row justify-content-center">
@@ -21,7 +21,7 @@
             
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-                <div class="form-group row email">
+                <div class="form-group row input_box">
                     <label for="email" class="col-md-3 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
                     <div class="col-md-6">
@@ -34,7 +34,7 @@
                         @enderror
                     </div>
                 </div>
-                <div class="form-group row pass">
+                <div class="form-group row input_box">
                     <label for="password" class="col-md-3 col-form-label text-md-right">{{ __('Pass') }}</label>
                     <div class="col-md-6">
                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">

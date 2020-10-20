@@ -6,10 +6,8 @@
 @section('content')
 
 <!-- Stylesheet -->
-<link href="{{ asset('css/home.css') }}" rel="stylesheet">
-<link href="{{ asset('css/app_home.css') }}" rel="stylesheet">
-<link href="{{ asset('css/task_detail.css') }}" rel="stylesheet">
 <link href="{{ asset('css/design.css') }}" rel="stylesheet">
+<link href="{{ asset('css/app_user.css') }}" rel="stylesheet">
 
 <div class="container">
     <div class="row">

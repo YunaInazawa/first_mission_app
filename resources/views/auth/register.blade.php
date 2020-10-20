@@ -7,15 +7,15 @@
 @section('content')
 
 <!-- Stylesheet -->
-<link href="{{ asset('css/register.css') }}" rel="stylesheet">
+<link href="{{ asset('css/app_guest.css') }}" rel="stylesheet">
 
 <!-- 泡を生成するためのキャンバス -->
 <canvas id="canvas"></canvas>
 
-<div class="container registercontent">
+<div class="container content">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card input-card">
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <h1>REGISTER</h1>
@@ -23,7 +23,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <div class="form-group row name">
+                        <div class="form-group row input_box">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
@@ -37,7 +37,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row email">
+                        <div class="form-group row input_box">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
@@ -51,7 +51,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row pass">
+                        <div class="form-group row input_box">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
@@ -65,7 +65,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row pass">
+                        <div class="form-group row input_box">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
