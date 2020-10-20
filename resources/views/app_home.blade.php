@@ -91,7 +91,7 @@
                                 <div class="row">
                                     @foreach( $project_data->scenes as $scene )
                                     @foreach( $scene->tasks as $task )
-                                    <span class="col-lg-7 offset-lg-1">[ {{ $scene->name }} ] {{ $task->start_at }} ～ {{ $task->end_at }}</span>
+                                    <span class="col-lg-7 offset-lg-1">[ {{ $scene->name }} ] {{ $task->start_at->format('Y/m/d') }} ～ {{ $task->end_at->format('Y/m/d') }} < {{ $task->status->title }} ></span>
                                     <span class="col-lg-2">{{ $task->user->name }} : {{ $task->title }}</span>
                                     <span class="col-lg-2">{!! nl2br($task->description) !!}</span>
                                     <hr>

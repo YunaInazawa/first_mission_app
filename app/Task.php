@@ -9,6 +9,10 @@ class Task extends Model
 {
     use SoftDeletes;
 
+    protected $dates = [
+        'start_at', 'end_at',
+    ];
+
     public function decorations(){
         return $this->belongsToMany('App\Decoration', 'decorations_tasks')
             ->withTimestamps();
