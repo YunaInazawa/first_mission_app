@@ -43,12 +43,14 @@
                                     <div id="dialogBackground"></div>
                                     <div id="dialogContent">
                                         <div id="dialogMsg">
-                                            ダイアログメッセージ
+                                            メンバーを追加します
                                         </div>
+                                        <hr class="dialog_hr">
                                         <div>
-                                            <input type="text"><br>
-                                            <input type="button" value="はい" onclick="func();" />
-                                            <input type="button" value="いいえ" onclick="dialogHide();" />
+                                            <input type="text" class="form-control dialog_text" size="25" placeholder="MailAddress">
+                                            <i class="fas fa-search"></i><br>
+                                            <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick="func();" />
+                                            <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide();" />
                                         </div>
                                     </div>
                                 </div>
