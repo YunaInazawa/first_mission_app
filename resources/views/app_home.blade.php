@@ -6,8 +6,8 @@
 @section('content')
 
 <!-- Stylesheet -->
-<link href="{{ asset('css/home.css') }}" rel="stylesheet">
 <link href="{{ asset('css/app_home.css') }}" rel="stylesheet">
+<link href="{{ asset('css/app_user.css') }}" rel="stylesheet">
 
 <div class="container">
     <div class="row justify-content-center">
@@ -37,7 +37,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <input class="btn-circle-3d chec" type="checkbox" onclick="dialogShow();" id="check">
+                                        <input class="btn_plus_circle btn_plus_check" type="checkbox" onclick="dialogShow();" id="check">
                                         <!-- メンバー表示 -->
                                         [ 参加者 ]<br />
                                         @foreach( $members as $m )
@@ -47,7 +47,7 @@
                                         @foreach( $members_yet as $m )
                                         {{ $m->user->name }}<br />
                                         @endforeach
-                                        <label for="check" class="btn-circle-3d">+</label>
+                                        <label for="check" class="btn_plus_circle">+</label>
                             </div>
                         </div>
                         <hr>
