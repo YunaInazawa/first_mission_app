@@ -20,6 +20,7 @@ Route::get('/app/{id}', 'AppController@index')->name('app_home');
 Route::get('/task_screen/{id}', 'AppController@screen')->name('task_screen');
 Route::get('/task_detail/{id}', 'AppController@detail')->name('task_detail');
 Route::get('/design/{id}', 'AppController@design')->name('design');
+Route::get('/transition/{id}', 'AppController@transition')->name('transition');
 
 Auth::routes();
 

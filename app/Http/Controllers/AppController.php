@@ -122,4 +122,12 @@ class AppController extends Controller
     {
         return view('design', ['app_id'=> $id]);
     }
+
+    /**
+     * 画面遷移管理
+     */
+    public function transition( $id = 1 )
+    {
+        return view('transition', ['app_id'=> $id]);
+    }
 }
