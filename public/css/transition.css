@@ -1,0 +1,71 @@
+/*----------------------------------
+ デザイン画面cssメニュー
+
+ 1.サイドメニュー調整
+ 2.キャンバスの調整
+ ---------------------------------*/
+
+
+/*----------------------------------
+ サイドメニュー調整
+ ---------------------------------*/
+ body {
+    margin: 0;
+    padding: 0;
+}
+#header {
+    box-sizing: border-box;
+    background: #ccc;
+    height: 50px;
+}
+#main {
+    box-sizing: border-box;
+    margin-left: 220px;
+    padding: 20px 40px;
+}
+#sub {
+    box-sizing: border-box;
+    top: 55px;
+    height: 100%;
+    width: 220px;
+    position: fixed;
+    overflow: auto;
+    background: #eee;
+    padding: 20px;
+  
+}
+#sub2 {
+    box-sizing: border-box;
+    top: 55px;
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+    background: #eee;
+    padding: 20px;
+  
+}
+label{
+    background-color: rebeccapurple;
+    width: 100%;
+}
+
+
+
+/*----------------------------------
+ キャンバスの調整
+ ---------------------------------*/
+canvas{
+    height: 100%;
+    width: 100%;
+    background-color: gray;
+    margin-left: -2%;
+}
+
+.col-lg-2{
+    padding: 0;
+}
+.container{
+    margin-left: 0%;
+    margin-right: 0%;
+    max-width: 100%;
+}
