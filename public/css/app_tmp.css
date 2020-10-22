@@ -6,6 +6,7 @@
  3.ナビゲーションバーの調整
     3.1 ナビゲーションスタイル
     3.2 ナビゲーションリンクのスタイル
+    3.3 ナビゲーションアイコンのスタイル
  4.入力ボックスの調整
     4.1 入力項目スタイル
     4.2 入力cardスタイル
@@ -76,12 +77,21 @@ h1{
 .nav-link,.navbar-brand{
     color: var(--moonlight) !important;
 }
-.nav-link:hover, .navbar-brand:hover{
+.nav-link:hover, .navbar-brand:hover, .nav-icon:hover{
     /*-- カーソルを合わせてる時 --*/
-    color: var(--moon-shadow) !important;
+    color: var(--black-coffee) !important;
 }
 
-
+/*
+ ナビゲーションアイコンのスタイル
+ ---------------------------------*/
+.nav-icon{
+    font-size: 20px;
+    color: var(--moonlight);
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
 
 /*----------------------------------
  入力ボックスの調整
