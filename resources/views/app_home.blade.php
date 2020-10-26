@@ -69,14 +69,10 @@
                     <div class="tab_wrap">
                         <input id="tab1" type="radio" name="tab_btn" checked>
                         <input id="tab2" type="radio" name="tab_btn">
-                        <input id="tab3" type="radio" name="tab_btn">
-                        <input id="tab4" type="radio" name="tab_btn">
                          
                         <div class="tab_area">
                             <label class="tab1_label" for="tab1">画面一覧</label>
                             <label class="tab2_label" for="tab2">画面遷移図</label>
-                            <label class="tab3_label" for="tab3">タスク</label>
-                            <label class="tab4_label" for="tab4">デザイン</label>
                         </div>
                         <div class="panel_area">
                             <!-- 画面一覧の表示 -->
@@ -84,7 +80,7 @@
                                 <div class="row">
                                     @foreach( $project_data->scenes as $scene )
                                     <span class="col-lg-7 offset-lg-1">{{ $scene->name }}</span>
-                                    <span class="col-lg-2">タスク</span><span class="col-lg-2">デザイン</span>
+                                    <span class="col-lg-2">タスク<input class="checkbox" type="checkbox"></span><span class="col-lg-2">デザイン<input class="checkbox" type="checkbox"></span>
                                     <hr class="col-lg-12 tab_hr">
                                     @endforeach
                                 </div>
@@ -93,30 +89,6 @@
                             <div id="panel2" class="tab_panel">
                                 <canvas></canvas>
                             </div>
-                            <!-- タスクが表示される -->
-                            <div id="panel3" class="tab_panel">
-                                    @foreach( $project_data->scenes as $scene )
-                                    @foreach( $scene->tasks as $task )
-                                        <div class="row">
-                                        <span class="col-lg-3">
-                                            <div class="row">
-                                                <div class="col-lg-12 screen_name">{{ $scene->name }}</div>
-                                                <div class="col-lg-12">{{ $task->start_at->format('Y/m/d') }} ～ {{ $task->end_at->format('Y/m/d') }}</div>
-                                                <div class="col-lg-12">< {{ $task->status->title }} ></div>
-                                            </div>
-                                        </span>
-
-                                        <span class="col-lg-4">{{ $task->user->name }} : {{ $task->title }}</span>
-                                        <span class="col-lg-5">{!! nl2br($task->description) !!}</span>
-                                    </div>
-                                    <hr class="col-lg-12 tab_hr">
-                                    
-                                    @endforeach
-                                    @endforeach
-                            </div>
-                            <!-- デザインが表示される -->
-                            <div id="panel4" class="tab_panel">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -124,6 +96,21 @@
         </div>
         <!-- ログ表示 -->
         <div class="col-lg-3">
+            <div class="card card_log">
+                <div class="card-header tag tag_purple">{{ __('タスク') }}</div>
+                <div class="card-body tag_list">
+                    @foreach( $project_data->scenes as $scene )
+                    @foreach( $scene->tasks as $task )
+                    @if( $task->status_id != 1)
+                    @if( $task->user->id == Auth::id())
+                    <p>{{ $task->end_at->format('Y/m/d') }}までに<br>{{ $scene->name }}<br>{{ $task->title }}</p>
+                    <hr>
+                    @endif
+                    @endif
+                    @endforeach
+                    @endforeach
+                </div>
+            </div>
             <div class="card card_log">
                 <div class="card-header tag tag_orange">{{ __('ログ') }}</div>
                 <div class="card-body tag_list">

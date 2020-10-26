@@ -16,8 +16,8 @@ input[type="radio"]{
 }
 .tab_area{font-size:0; margin:0 10px;}
 .tab_area label{
-    width:22%; 
-    margin-left:4%; 
+    width:49%; 
+    margin-left:2%; 
     display:inline-block; 
     padding:12px 0; 
     color:#999; 
@@ -50,6 +50,9 @@ input[type="radio"]{
 #tab3:checked ~ .panel_area #panel3{display:block;}
 #tab4:checked ~ .tab_area .tab4_label{background:#fff; color:#000; border-bottom-color: #fff;}
 #tab4:checked ~ .panel_area #panel4{display:block;}
+
+
+
 
 /*----------------------------------
  概要・メンバースタイル
@@ -103,6 +106,9 @@ input[type="radio"]{
     opacity: 1;
 }
 
+
+
+
 h4{
     font-size: 2em;
     padding: 4px 0px;
@@ -110,7 +116,10 @@ h4{
 
 .tag_list{
     max-height: 900px;
-    overflow: auto
+    overflow: auto;
+}
+.card_log{
+    margin-bottom: 30px;
 }
 
 .tab_hr{
@@ -118,4 +127,9 @@ h4{
 }
 .screen_name{
     font-weight: bold;
+}
+
+.checkbox{
+    margin-left: 10px;
+    margin-top: 10px;
 }
