@@ -114,7 +114,7 @@ body{
 }
 #dialogContent {
     z-index: 100;
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     width: 300px;

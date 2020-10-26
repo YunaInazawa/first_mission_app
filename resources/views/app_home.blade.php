@@ -6,8 +6,9 @@
 @section('content')
 
 <!-- Stylesheet -->
-<link href="{{ asset('css/app_home.css') }}" rel="stylesheet">
+<link href="{{ asset('css/app_tmp.css') }}" rel="stylesheet">
 <link href="{{ asset('css/app_user.css') }}" rel="stylesheet">
+<link href="{{ asset('css/app_home.css') }}" rel="stylesheet">
 
 <div class="container">
     <div class="row justify-content-center">
@@ -16,24 +17,29 @@
                 <div class="card col-lg-12">
                     <!-- プロジェクトについて(名、メンバー、概要など) -->
                     <div class="card-body">
-                        <!-- プロジェクト名 -->
-                        <h4>{{ $project_data->name }}</h4>
-                        <hr>
-                        <!-- メンバー一覧表示
-                        ＊＊＊＊この画面でメンバー追加をするか新画面でするか未定 -->
-                        <div class="row menber">
-                            <label for="" class="col-lg-2 col-form-label text-md-right">{{ __('メンバー') }}</label>
-                            <div class="col-lg-9">
-                                    <div id="dialog">
+                        <div class="hidden_box row">
+                            <!-- プロジェクト名 -->
+                            <h4 class="col-lg-11">{{ $project_data->name }}</h4>
+                            <input type="checkbox" class="hidden_input" id="label1" />
+                            <label for="label1" class="hidden_label fas fa-caret-down col-lg-1"></label>
+                            <div class="hidden_show col-lg-12">
+                                <!-- メンバー一覧表示 -->
+                                <hr>
+                                <div class="row menber">
+                                    <label for="" class="col-lg-2 col-form-label text-md-right">{{ __('メンバー') }}</label>
+                                    <div class="col-lg-9">
+                                        <div id="dialog">
                                             <div id="dialogBackground"></div>
                                             <div id="dialogContent">
                                                 <div id="dialogMsg">
-                                                    ダイアログメッセージ
+                                                    メンバーを追加します
                                                 </div>
+                                                <hr class="dialog_hr">
                                                 <div>
-                                                    <input type="text"><br>
-                                                    <input type="button" value="はい" onclick="func();" />
-                                                    <input type="button" value="いいえ" onclick="dialogHide();" />
+                                                    <input type="text" class="form-control dialog_text" size="25" placeholder="MailAddress">
+                                                    <i class="fas fa-search"></i><br>
+                                                    <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick="func();" />
+                                                    <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide();" />
                                                 </div>
                                             </div>
                                         </div>
@@ -48,16 +54,17 @@
                                         {{ $m->user->name }}<br />
                                         @endforeach
                                         <label for="check" class="btn_plus_circle">+</label>
+                                    </div>
+                                </div>
+                                <hr>
+                                <!-- プロジェクト概要 -->
+                                <p>[ 使用言語・技術 ]<br />{{ $project_data->using }}</p>
+                                <p>[ 概要 ]<br />{!! nl2br($project_data->description) !!}</p>
                             </div>
                         </div>
-                        <hr>
-                        <!-- プロジェクト概要 -->
-                        <p>[ 使用言語・技術 ]<br />{{ $project_data->using }}</p>
-                        <p>[ 概要 ]<br />{!! nl2br($project_data->description) !!}</p>
                     </div>
                 </div>
-                <!-- 作成した画面を表示させる 
-                ＊＊＊＊今後idの変更の可能性あり。-->
+                <!-- 作成した画面を表示させる -->
                 <div class="col-lg-12">
                     <div class="tab_wrap">
                         <input id="tab1" type="radio" name="tab_btn" checked>
@@ -78,7 +85,7 @@
                                     @foreach( $project_data->scenes as $scene )
                                     <span class="col-lg-7 offset-lg-1">{{ $scene->name }}</span>
                                     <span class="col-lg-2">タスク</span><span class="col-lg-2">デザイン</span>
-                                    <hr>
+                                    <hr class="col-lg-12 tab_hr">
                                     @endforeach
                                 </div>
                             </div>
@@ -88,16 +95,24 @@
                             </div>
                             <!-- タスクが表示される -->
                             <div id="panel3" class="tab_panel">
-                                <div class="row">
                                     @foreach( $project_data->scenes as $scene )
                                     @foreach( $scene->tasks as $task )
-                                    <span class="col-lg-7 offset-lg-1">[ {{ $scene->name }} ] {{ $task->start_at->format('Y/m/d') }} ～ {{ $task->end_at->format('Y/m/d') }} < {{ $task->status->title }} ></span>
-                                    <span class="col-lg-2">{{ $task->user->name }} : {{ $task->title }}</span>
-                                    <span class="col-lg-2">{!! nl2br($task->description) !!}</span>
-                                    <hr>
+                                        <div class="row">
+                                        <span class="col-lg-3">
+                                            <div class="row">
+                                                <div class="col-lg-12 screen_name">{{ $scene->name }}</div>
+                                                <div class="col-lg-12">{{ $task->start_at->format('Y/m/d') }} ～ {{ $task->end_at->format('Y/m/d') }}</div>
+                                                <div class="col-lg-12">< {{ $task->status->title }} ></div>
+                                            </div>
+                                        </span>
+
+                                        <span class="col-lg-4">{{ $task->user->name }} : {{ $task->title }}</span>
+                                        <span class="col-lg-5">{!! nl2br($task->description) !!}</span>
+                                    </div>
+                                    <hr class="col-lg-12 tab_hr">
+                                    
                                     @endforeach
                                     @endforeach
-                                </div>
                             </div>
                             <!-- デザインが表示される -->
                             <div id="panel4" class="tab_panel">
@@ -109,9 +124,9 @@
         </div>
         <!-- ログ表示 -->
         <div class="col-lg-3">
-            <div class="card">
-                <div class="card-header tape tuti">{{ __('ログ') }}</div>
-                <div class="card-body tutilist">
+            <div class="card card_log">
+                <div class="card-header tag tag_orange">{{ __('ログ') }}</div>
+                <div class="card-body tag_list">
                     @foreach( $logs as $l )
                     <p>{{ $l->created_at->format('Y/m/d') }}<br />{{ $l->text }}</p>
                     <hr>
