@@ -16,7 +16,7 @@
 /*----------------------------------
  カラーコードリスト
  ---------------------------------*/
-:root{
+ :root{
     --indian-ocean:    #419ACF;
     --maldives-blue:   #74C7F0;
     --bright-turquoise:#00ACEB;
@@ -69,6 +69,7 @@ h1{
  ---------------------------------*/
 .navbar{
     background-color: var(--blue-paradise) !important;
+    z-index: 1000;
 }
 
 /*

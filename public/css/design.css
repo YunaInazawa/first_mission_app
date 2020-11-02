@@ -2,16 +2,19 @@
  デザイン画面cssメニュー
 
  1.サイドメニュー調整
+    1.1 左サイドメニュー調整
  2.キャンバスの調整
+ 3.左ハンバーガーメニュー調整
  ---------------------------------*/
 
 
 /*----------------------------------
  サイドメニュー調整
  ---------------------------------*/
-body {
+ body {
     margin: 0;
     padding: 0;
+    background-color: var(--moon-mist);
 }
 #header {
     box-sizing: border-box;
@@ -23,39 +26,110 @@ body {
     margin-left: 220px;
     padding: 20px 40px;
 }
-#sub {
+#sub ,.sidemenu_left{
     box-sizing: border-box;
-    top: 55px;
+    top: 52px;
     height: 100%;
     width: 220px;
     position: fixed;
     overflow: auto;
-    background: #eee;
+    background-color:  var(--fog);
     padding: 20px;
-  
+    z-index: 10;
 }
-#sub2 {
+.sidemenu_right {
     box-sizing: border-box;
-    top: 55px;
+    top: 52px;
     height: 100%;
     position: fixed;
     overflow: auto;
-    background: #eee;
+    background-color:  var(--fog);
     padding: 20px;
-  
+    z-index: 10;
 }
 label{
-    background-color: rebeccapurple;
     width: 100%;
 }
+/*
+ 左サイドメニュー調整
+ ---------------------------------*/
+.sidemenu_left{
+    width: 280px;
+    left: 45px;
+}
+button{
+    width: 278px;
+    position: relative;
+    left: -16px;
+    height: 45px;
+    border: solid 1px #fff;
+    background-color: transparent;
+    background: linear-gradient(to bottom, transparent 0%, var(--melon-juice) 175%);
+    box-shadow: inset 1px 1px 1px var(--moonlight);
+}
+button:hover{
+    background-color: var(--breaking-dawn);
+}
+button:active{
+    opacity: 0.5;
+    background-color: var(--moonlight);
+}
+button:focus{
+    outline: none;
+    border: solid 1px var(--moon-shadow);
+    opacity: 0.8;
+}
+.ic{
+    position: relative;
+    left: 10px;
+    padding: 3px;
+    max-width: 70px;
+    margin: 0 13px;
+}
+.ic_btn{
+    border: solid 1px black;
+}
 
-
+.ic_radio{
+    border: solid 1px black;
+    border-radius: 15px;
+    max-width: 25px;
+    height: 25px;
+    padding: 1px;
+    margin: 0 35px;
+    margin-top: 5px;
+}
+.ic_textb{
+    border: solid 1px black;
+    text-align: left
+}
+.ic_label{
+    border: dashed 1px black;
+}
+.ic_checkb{    
+    border: solid 1px black;
+    max-width: 20px;
+    height: 20px;
+    font-size: 20px;
+    margin: 0 38px;
+    margin-top: 5px;
+    padding: 0px;
+}
+.ic_screen{
+    border: solid 1px black;
+    max-width: 50px;
+    margin: 0 23px;
+}
+.obj_name{
+    text-align: left;
+    font-size: 20px;
+}
 
 /*----------------------------------
  キャンバスの調整
  ---------------------------------*/
 canvas{
-    height: 100%;
+    height: 950px;
     width: 100%;
     background-color: gray;
     margin-left: -2%;
@@ -69,3 +143,185 @@ canvas{
     margin-right: 0%;
     max-width: 100%;
 }
+
+/*ボタン装飾*/
+.hidden_label {
+    font-weight: bold;
+    background: transparent;
+    border-radius: 5px;
+    cursor :pointer;
+    transition: .5s;
+    max-width: 40px;
+    min-height: 40px;
+    font-size: 30px;
+    text-align: center;
+    border: solid 2px seagreen;
+    z-index: 20;
+}
+
+
+
+/*----------------------------------
+ 左ハンバーガーメニュー調整
+ ---------------------------------*/
+#nav-drawer {
+    z-index: 100;
+    background-color: var(--moon-mist);
+    min-width: 50px;
+    width: 50px;
+    height: 1024px;
+    top: 54px;
+    left: 0px;
+    position: fixed;
+    border: solid 1px var(--moon-shadow);
+}
+  
+/*チェックボックス等は非表示に*/
+.nav-unshown {
+    display:none;
+}
+  
+/*アイコンのスペース*/
+#nav-open {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    color: var(--moon-shadow);
+    background-color: var(--fog);
+    position: relative;
+    font-size: 30px;
+    left: 5px;
+    top: 10px;
+    border: solid 1px var(--midnight);
+    padding: 5px;
+    border-radius: 5px;
+}
+#nav-open:hover, #nav-open:active{
+    /*-- カーソルを合わせた時 --*/
+    background-color: var(--maldives-blue) !important;
+    color: var(--moon-shadow) !important;
+}
+#nav-open:active{
+    /*-- クリックしている時 --*/
+    background-color: var(--dawn-purple) !important;
+    /* 影を入れる */
+    box-shadow: 0 0 0 0.2rem var(--maldives-blue) !important;
+}
+    
+/*閉じる用の薄黒カバー*/
+#nav-close {
+    display: none;/*はじめは隠しておく*/
+    position: fixed;
+    z-index: 98;
+    background-color: transparent;
+    top: 0;/*全体に広がるように*/
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: .3s ease-in-out;
+    
+}
+  
+/*中身*/
+#nav-content {
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;/*最前面に*/
+    width: 90%;/*右側に隙間を作る（閉じるカバーを表示）*/
+    max-width: 330px;/*最大幅（調整してください）*/
+    height: 100%;
+    background: #fff;/*背景色*/
+    transition: .3s ease-in-out;/*滑らかに表示*/
+    -webkit-transform: translateX(-105%);
+    transform: translateX(-105%);/*左に隠しておく*/
+    
+    z-index: 100;
+    top: 54px;
+}
+  
+/*チェックが入ったらもろもろ表示*/
+#nav-input:checked ~ #nav-close {
+    display: block;/*カバーを表示*/
+    opacity: .5;
+}
+  
+#nav-input:checked ~ #nav-content {
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);/*中身を表示（右へスライド）*/
+    box-shadow: 6px 0 25px rgba(0,0,0,.15);
+}
+
+.sidemenu_hr{
+    border-top: 4px solid rgba(255, 255, 255, 1);
+    left: -10px;
+}
+
+
+
+
+/*----------------------------------
+ タブスタイル
+ ---------------------------------*/
+ .tab-trigger:hover{opacity:0.5;}
+
+  /* タブメニュー */
+.tab-menu {
+    display: flex;
+    margin: 0 -5px;
+  }
+  
+  .tab-menu__item {
+    box-sizing: border-box;
+    padding: 0 5px;
+  }
+  
+  
+  .tab-trigger { /* label */
+    text-align: left;
+    cursor: pointer;
+    display: block;
+    padding: 10px;
+    border: 1px solid var(--moon-mist);
+    overflow: hidden;
+    position: relative;
+    color: #999;
+    background: #ddd;
+    
+    text-align: center;
+    font-size: 13px;
+    
+  }
+  
+  .tab-trigger.is-active {
+    background-color: white;
+    color: black;
+  }
+  /* タブコンテンツ */
+  .tab-content__item {
+    box-sizing: border-box;
+    padding: 20px;
+    display: none;
+    text-align: center;
+  }
+  .tab-content__item.is-active {
+    display: block;
+    position: fixed;
+    animation: fade 0.5s ease;
+    left: 340px;
+    top: 70px;
+    width: 68%;
+    overflow: auto;
+  }
+  
+  @keyframes fade {
+      from {
+          opacity: 0;
+      }
+      to {
+          opacity: 1;
+      }
+  }
