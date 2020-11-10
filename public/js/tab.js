@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabTriggers = document.querySelectorAll('.js-tab-trigger');
     // タブコンテンツクラス'.js-tab-target'を持つ要素を取得
     const tabTargets = document.querySelectorAll('.js-tab-target');
+    const select_screen = document.querySelectorAll('.select_screen');
 
     // 要素の数の分だけループ処理をして値を取り出す
     for (let i = 0; i < tabTriggers.length; i++) {
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(currentContent !== null) {
                 currentContent.classList.add('is-active');
             }
+            document.getElementById( "select_screen" ).value = i;
         });
     }
 });
