@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use App\Member;
+use App\Project;
 
 class HomeController extends Controller
 {
@@ -23,6 +26,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $projects = Auth::user()->projects;
+        $requests = Member::where('user_id',Auth::id())->where('is_join',NULL)->get();
+        $tasks = Auth::user()->tasks;
+
+        return view('home', ['projects'=>$projects, 'requests'=>$requests, 'tasks'=>$tasks]);
     }
 }

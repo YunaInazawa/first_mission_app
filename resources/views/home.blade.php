@@ -17,27 +17,35 @@
         </div>
         <div class="col-lg-3">
             <div class="card">
-                <div class="card-header tag tag_purple">{{ __('課題') }}</div>
-                <div class="card-body tag_list">
-                    <p>・課題１</p>
-                    <p>・課題２</p>
-                    <p>・課題３</p>
+
+                <div class="card-header tape kadai">{{ __('課題') }}</div>
+                <div class="card-body kadailist">
+                    @foreach ($tasks as $task)
+                        <p>title:{{ $task->title }}
+                        end_at:{{ $task->end_at }}</p>
+                    @endforeach
                 </div>
             </div>
         </div>
         <div class="col-lg-6 pjt">
             <h3>プロジェクト</h3>
-            <div></div>
-            <a href="{{ route('app_create') }}" class="btn_plus_circle">＋</a>
+            <div>
+                @foreach ($projects as $project)
+                    id:{{ $project->id }}
+                    name:{{ $project->name }}
+                    description:{{ $project->description }}<br><br>
+                @endforeach
+            </div>
+            <a href="#" class="btn-circle-3d">＋</a>
         </div>   
         <div class="col-lg-3">
             <div class="card">
                 <div class="card-header tag tag_orange">{{ __('通知') }}</div>
     
-                <div class="card-body tag_list">
-                    <div>通知１</div>
-                    <div>通知２</div>
-                    <div>通知３</div>
+                <div class="card-body tutilist">
+                    @foreach ($requests as $request)
+                        <div>承認待ち：{{ $request->project->name }}</div>
+                    @endforeach
                 </div>
             </div>
         </div>
