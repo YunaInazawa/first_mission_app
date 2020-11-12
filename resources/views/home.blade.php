@@ -6,7 +6,9 @@
 @section('content')
 
 <!-- Stylesheet -->
+<link href="{{ asset('css/app_tmp.css') }}" rel="stylesheet">
 <link href="{{ asset('css/app_user.css') }}" rel="stylesheet">
+<link href="{{ asset('css/home.css') }}" rel="stylesheet">
 
 <div class="container">
     <div class="row justify-content-center">
@@ -17,12 +19,10 @@
         </div>
         <div class="col-lg-3">
             <div class="card">
-
-                <div class="card-header tape kadai">{{ __('課題') }}</div>
-                <div class="card-body kadailist">
+                <div class="card-header tag tag_purple">{{ __('課題') }}</div>
+                <div class="card-body tag_list">
                     @foreach ($tasks as $task)
-                        <p>title:{{ $task->title }}
-                        end_at:{{ $task->end_at }}</p>
+                        <div class="tag_item"><span>{{ $task->title }}</span><hr>{{ $task->end_at }}</div>
                     @endforeach
                 </div>
             </div>
@@ -31,20 +31,25 @@
             <h3>プロジェクト</h3>
             <div>
                 @foreach ($projects as $project)
-                    id:{{ $project->id }}
-                    name:{{ $project->name }}
-                    description:{{ $project->description }}<br><br>
+                    <a class="pjt_list" href="{{ url('/app/'.$project->id) }}">
+                        <div>
+                            <span class="pjt_name">{{ $project->name }}</span><br>
+                            description:{{ $project->description }}
+                        </div>    
+                    </a>
+                    <hr>
                 @endforeach
             </div>
-            <a href="#" class="btn-circle-3d">＋</a>
+            <a href="{{ route('app_create') }}" class="btn_plus_circle">＋</a>
         </div>   
         <div class="col-lg-3">
             <div class="card">
                 <div class="card-header tag tag_orange">{{ __('通知') }}</div>
-    
-                <div class="card-body tutilist">
+                <div class="card-body tag_list">
                     @foreach ($requests as $request)
-                        <div>承認待ち：{{ $request->project->name }}</div>
+                    <div class="tag_item">承認待ち：{{ $request->project->name }}<hr>
+                            <div><button class="btn btn-primary"> 加入 </button></div><div class="reject"><button class="btn btn-primary"> 拒否 </button></div>
+                    </div>
                     @endforeach
                 </div>
             </div>
