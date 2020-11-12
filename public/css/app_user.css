@@ -34,6 +34,7 @@ h3:after {
 /*
  付箋風見出しスタイル
  ---------------------------------*/
+
  .tag{
     /* 斜めらせて影を作る */
     position: absolute;
@@ -61,6 +62,16 @@ h3:after {
 .tag_list{
     /* 文字が被らないようにずらす */
     margin-top: 20px;
+    
+    overflow: auto;
+}
+.tag_item{
+    border: solid 1px var(--blue-paradise);
+    border-radius: 5px;
+    margin: 15px 0px;
+}
+.tag_item span{
+    font-weight: bold;
 }
 
 

@@ -1,0 +1,38 @@
+.container{
+    max-width: 100%;
+}
+
+.tag_item hr{
+    margin: 0;
+}
+.reject{
+    text-align: right;
+    position: absolute;
+    top: 80px;
+    left: 193px;
+    height: 38px;
+}
+.pjt_name{
+    font-size: 20px;
+    font-weight: bold;
+}
+.pjt_list div{
+    background-color: rgb(217, 233, 229,0.5); /* --fog使用 */
+    border-radius: 5px;
+    padding: 10px;
+}
+.pjt_list{
+    margin: 10px 0;
+    color: var(--black-coffee);
+}
+.pjt_list:hover,.pjt_list:active,.pjt_list:focus{
+    text-decoration: none;
+    color: var(--dark-shadow);
+}
+.card{
+    background-color: rgb(255,255,255,0.7);
+    height: 600px;
+}
+.col-lg-3{
+    max-width: 300px;
+}
