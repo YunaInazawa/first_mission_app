@@ -1,3 +1,21 @@
+function funcAddUser( users_data ) {
+    var userName = document.getElementById('add_user').value;
+    var userId = 0;
+
+    users_data.forEach(element => {
+        if( element['name'] == userName ){
+            userId = element['id'];
+        }
+    });
+
+    var str = '<span>' + userName + '</span>';
+    str += '<input type="hidden" name="project_members[]" value="' + userId + '">'
+    document.getElementById('join_user').innerHTML += str;
+     
+    dialogHide();
+    return;
+}
+
 function func() {
     // ここに「はい」選択時の処理
      
