@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
 use App\Project;
 use App\Member;
 use App\Role;
@@ -42,7 +43,9 @@ class AppController extends Controller
      */
     public function create()
     {
-        return view('app_create');
+        $usersData = User::whereNotIn('id', [Auth::id()])->orderBy('name')->get();
+
+        return view('app_create', ['users_data' => $usersData]);
     }
 
     /**
@@ -57,7 +60,7 @@ class AppController extends Controller
         $projectName = $request->project_name;
         $projectUsing = $request->project_using;
         $projectDescription = $request->project_description;
-        // $projectMembers = $request->members; //メンバー追加後：配列で受け取る
+        $projectMembers = $request->project_members;
 
         // プロジェクト作成
         $newProject = new Project;
@@ -77,15 +80,15 @@ class AppController extends Controller
         $newMember->save();
 
         // メンバ登録(参加申請)
-        // foreach( $projectMembers as $member_id ) {
-        //     $newJoinMember = new Member;
-        //     $newJoinMember->project_id = $newProject->id;
-        //     $newJoinMember->user_id = $member_id;
-        //     $newJoinMember->role_id = Role::where('name', '一般')->first()->id;
-        //     $newJoinMember->save();
-        //     // ログ登録
-        //     $this->createLog('ユーザ「' . Auth::user()->name . '」がメンバ「' . $newJoinMember->user->name . '」に参加申請', 'join', $newProject->id);
-        // }        
+        foreach( $projectMembers as $member_id ) {
+            $newJoinMember = new Member;
+            $newJoinMember->project_id = $newProject->id;
+            $newJoinMember->user_id = $member_id;
+            $newJoinMember->role_id = Role::where('name', '一般')->first()->id;
+            $newJoinMember->save();
+            // ログ登録
+            $this->createLog('ユーザ「' . Auth::user()->name . '」がメンバ「' . $newJoinMember->user->name . '」に参加申請', 'join', $newProject->id);
+        }        
         
         return redirect(route('app_home', ['id' => $newProject->id]));
     }

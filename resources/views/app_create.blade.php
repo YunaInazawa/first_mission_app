@@ -33,11 +33,12 @@
                         <div class="form-group row input_box">
                             <label for="" class="col-lg-2 col-form-label text-md-right">{{ __('概要') }}</label>
                             <div class="col-lg-9">
-                                <textarea class="form-control gaiyo" maxlength="200" name="example" cols="50" rows="10"></textarea>
+                                <textarea class="form-control gaiyo" maxlength="200" name="project_description" cols="50" rows="10"></textarea>
                             </div>
                         </div>
                         <div class="form-group row input_box">
                             <label for="" class="col-lg-2 col-form-label text-md-right">{{ __('メンバー') }}</label>
+                            <div id="join_user"></div>
                             <div class="col-lg-9">
                                 <div id="dialog">
                                     <div id="dialogBackground"></div>
@@ -47,15 +48,23 @@
                                         </div>
                                         <hr class="dialog_hr">
                                         <div>
-                                            <input type="text" class="form-control dialog_text" size="25" placeholder="MailAddress">
-                                            <i class="fas fa-search"></i><br>
-                                            <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick="func();" />
-                                            <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide();" />
+                                            <fieldset>
+                                                <input type="text" id="add_user" class="form-control dialog_text" size="25" autocomplete="on" list="user_name">
+                                                <datalist id="user_name">
+                                                @foreach( $users_data as $user )
+                                                <option id="{{ $user->id }}" value="{{ $user->name }}">
+                                                @endforeach
+                                                </datalist>
+                                                <i class="fas fa-search"></i><br>
+                                                <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick="funcAddUser({{ $users_data }});" />
+                                                <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide();" />
+                                            </fieldset>
                                         </div>
                                     </div>
                                 </div>
                                 <input class="btn_plus_circle btn_plus_check" type="checkbox" onclick="dialogShow();" id="check">
                                 <label for="check" class="btn_plus_circle">+</label>
+
                             </div>
                         </div>
                         <div class="form-group row">
