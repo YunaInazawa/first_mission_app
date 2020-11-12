@@ -50,6 +50,23 @@ $check = 0;
                                 <div class="row" onclick="ObjCheckBoxClick(event)"><span class="col-lg-4 ic ic_checkb"><label class="fas fa-check"></label></span><span class="col-lg-8 obj_name">CheckBox</span></div>
                                 <input type="hidden" id="id_check" value="<?php echo $check; $check++;?>">
                             </button>
+
+                            <p>
+                            < elements ><br />
+                            @foreach( $elements_data as $e )
+                            {{ $e->name }}<br />
+                            @endforeach
+                            </p>
+
+                            <p>
+                            < scenes ><br />
+                            @foreach( $scenes_data as $s )
+                            {{ $s->name }}<br />
+                                @foreach( $decorations_data[$s->id] as $d )
+                                - {{ $d->text }}< {{ $d->element->name }} ><br />
+                                @endforeach
+                            @endforeach
+                            </p>
                     </aside>
                 </div>
             </div>

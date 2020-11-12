@@ -9,6 +9,9 @@ use App\Member;
 use App\Role;
 use App\Log;
 use App\LogCategory;
+use App\Element;
+use App\Decoration;
+use App\Scene;
 
 class AppController extends Controller
 {
@@ -120,7 +123,14 @@ class AppController extends Controller
      */
     public function design( $id = 1 )
     {
-        return view('design', ['app_id'=> $id]);
+        $elementsData = Element::orderBy('name')->get();
+        $scenesData = Scene::where('project_id', $id)->get();
+        $decorationsData = array();
+        foreach( $scenesData as $scene ){
+            $decorationsData[$scene->id] = Decoration::where('scene_id', $scene->id)->get();
+        }
+
+        return view('design', ['app_id'=> $id, 'elements_data' => $elementsData, 'scenes_data' => $scenesData, 'decorations_data' => $decorationsData]);
     }
 
     /**
