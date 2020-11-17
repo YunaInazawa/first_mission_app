@@ -18,60 +18,53 @@
                 <div class="card">
                 <form method="POST" action="">
                     <div class="cp_tab ">
-                        <input type="radio" name="cp_tab" id="tab2_1" aria-controls="first_tab02" checked>
-                        <label for="tab2_1">KINOKOLIST</label>
-                        <input type="radio" name="cp_tab" id="tab2_2" aria-controls="second_tab02">
-                        <label for="tab2_2">TOP</label>
+                        @php
+                            $i = 1;
+                        @endphp
+                        @foreach ($scenes_data as $scene_data)
+                            <input type="radio" name="cp_tab" id="tab2_{{$i}}"
+                            @if ($i == 1)
+                                checked
+                            @endif>
+                            <label for="tab2_{{$i++}}">{{ $scene_data->name }}</label>
+                        @endforeach
 
                         <div class="cp_tabpanels">
-                            <div class="cp_tabpanel">
-                                <div class="row">
-                                    <span class="col-lg-4">ボタン</span><div class="v_line_fix"></div><span class="col-lg-7">キノコ追加ボタン</span>
-                                    <hr class="col-lg-12">  
-                                    <span class="col-lg-4">LIST</span><div class="v_line_fix"></div><span class="col-lg-7">キノコのLIST</span>
-                                    <hr class="col-lg-12">  
-                                    <span class="col-lg-4">TEXT</span><div class="v_line_fix"></div><span class="col-lg-7">キノコの詳細</span>
-                                    <hr class="col-lg-12">    
-                                </div>
-                                <div class="col-lg-12">
-                                    <div id="dialog">
-                                        <div id="dialogBackground"></div>
-                                        <div id="dialogContent">
-                                            <div id="dialogMsg">
-                                                ダイアログメッセージ
-                                            </div>
-                                            <div>
-                                                <input type="text"><br>
-                                                <input type="button" value="はい" onclick="func();" />
-                                                <input type="button" value="いいえ" onclick="dialogHide();" />
+                            @foreach ($scenes_data as $scene_data)
+                                <div class="cp_tabpanel">
+                                    @if ( count($tasks_data[$scene_data->id]) <= 0 )
+                                        nodata
+                                    @else
+                                        <div class="row">
+                                            @foreach ($tasks_data[$scene_data->id] as $task_data)
+                                                <span class="col-lg-4">{{ $task_data->title }}</span><div class="v_line_fix"></div>
+                                                <span class="col-lg-4">{{ $task_data->description }}</span><div class="v_line_fix"></div>
+                                                <span class="col-lg-4">{{ $task_data->end_at }}</span><div class="v_line_fix"></div>
+                                                <span class="col-lg-4">{{ $task_data->user->name }}</span><div class="v_line_fix"></div>
+                                                <span class="col-lg-4">{{ $task_data->status->title }}</span><div class="v_line_fix"></div>
+                                                <hr class="col-lg-12">
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                    <div class="col-lg-12">
+                                        <div id="dialog">
+                                            <div id="dialogBackground"></div>
+                                            <div id="dialogContent">
+                                                <div id="dialogMsg">
+                                                    ダイアログメッセージ
+                                                </div>
+                                                <div>
+                                                    <input type="text"><br>
+                                                    <input type="button" value="はい" onclick="func();" />
+                                                    <input type="button" value="いいえ" onclick="dialogHide();" />
+                                                </div>
                                             </div>
                                         </div>
+                                        <input class="btn_plus_circle btn_plus_check" type="checkbox" onclick="dialogShow();" id="check">
+                                        <label for="check" class="btn_plus_circle">+</label>
                                     </div>
-                                    <input class="btn_plus_circle btn_plus_check" type="checkbox" onclick="dialogShow();" id="check">
-                                    <label for="check" class="btn_plus_circle">+</label>
                                 </div>
-                            </div>
-                            <div class="cp_tabpanel">                                
-                                <div class="row">
-                                </div>
-                                <div class="col-lg-12">
-                                    <div id="dialog">
-                                        <div id="dialogBackground"></div>
-                                        <div id="dialogContent">
-                                            <div id="dialogMsg">
-                                                ダイアログメッセージ
-                                            </div>
-                                            <div>
-                                                <input type="text"><br>
-                                                <input type="button" value="はい" onclick="func();" />
-                                                <input type="button" value="いいえ" onclick="dialogHide();" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input class="btn_plus_circle btn_plus_check" type="checkbox" onclick="dialogShow();" id="check">
-                                    <label for="check" class="btn_plus_circle">+</label>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </form>

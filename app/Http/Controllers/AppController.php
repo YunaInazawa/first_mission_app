@@ -9,6 +9,8 @@ use App\Member;
 use App\Role;
 use App\Log;
 use App\LogCategory;
+use App\Task;
+use App\Scene;
 
 class AppController extends Controller
 {
@@ -112,7 +114,13 @@ class AppController extends Controller
      */
     public function detail( $id = 1 )
     {
-        return view('task_detail', ['app_id'=> $id]);
+        $scenesData = Scene::where('project_id', $id)->get();
+        $tasksData = array();
+        foreach( $scenesData as $scene ){
+            $tasksData[$scene->id] = Task::where('scene_id', $scene->id)->get();
+        }
+
+        return view('task_detail', ['app_id'=> $id, 'scenes_data'=> $scenesData, 'tasks_data'=> $tasksData]);
     }
 
     /**
