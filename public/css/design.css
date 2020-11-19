@@ -12,7 +12,7 @@
 /*----------------------------------
  サイドメニュー調整
  ---------------------------------*/
- body {
+body {
     margin: 0;
     padding: 0;
     background-color: var(--moon-mist);
@@ -42,11 +42,14 @@
     box-sizing: border-box;
     top: 52px;
     height: 100%;
-    position: fixed;
+    max-width: 280px;
+    min-width: 280px;
     overflow: auto;
-    background-color:  var(--fog);
+    background-color: var(--fog);
     padding: 20px;
     z-index: 10;
+    position: fixed;
+    right: 0px;
 }
 label{
     width: 100%;
@@ -491,36 +494,27 @@ button:focus{
     height: auto;
     background-color: var(--fog);
 }
-
 .dragitem.active{
     opacity: 0;
     animation: anm2 0.1s ease 0s 1 normal forwards running;
 }
-/*
-.dragitem.active>span{
-  background: transparent;
-  color: transparent;
-  border: none;
-  animation: anm1 0.1s ease 0s 1 normal forwards running;
-}
-.dragitem.active>.obj_name{
-    animation: anm3 0.1s ease 0s 1 normal forwards running;
-}
-
-@keyframes anm1{
-  100% {
-      color: black;
-      border: solid 1px black;
-  }
-}
-*/
 @keyframes anm2{
     100% {
         opacity: 1;
     }
-  }
- /* @keyframes anm3{
-    100% {
-        border: none;
-    }
-  }*/
+}
+
+.table td{
+    font-size: 15px;
+}
+.table th{
+    width: 100px;
+}
+.js-input-elm{
+    border-radius: 2px;
+    border: none;
+    width: 40px;
+}
+.table tr:nth-child(1) .js-input-elm{   
+    width: 150px;
+}

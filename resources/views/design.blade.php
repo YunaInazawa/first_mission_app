@@ -128,20 +128,28 @@ var object=JSON.parse('<?php echo $varJsSample; ?>');//jsonをparseしてJavaScr
             <aside class="sidemenu sidemenu_right">
                 <div class="row">
                     <h2 class="col-lg-12">詳細</h2>
-                    <hr class="col-lg-12 sidemenu_hr">
+                    <table class="col-lg-12 table table-striped table-sm">
+                        <tr>
+                            <th>表示名</th><td><input class="js-input-elm" id="obj-name" onchange="ChangeText(event)" type="text"></td>
+                        </tr>
+                        <tr>
+                            <th>文字サイズ</th><td><input class="js-input-elm" id="obj-font" type="text" onchange="ChangeText(event)"></td>
+                        </tr>
+                        <tr>
+                            <th>高さ</th><td><input class="js-input-elm" id="obj-height" type="text" onchange="ChangeText(event)"></td>
+                        </tr>
+                        <tr>
+                            <th>幅</th><td><input class="js-input-elm" id="obj-width" type="text" onchange="ChangeText(event)"></td>
+                        </tr>
+                        <tr>
+                            <th>座標X</th><td><input class="js-input-elm" id="obj-x" type="text" onchange="ChangeText(event)"></td>
+                        </tr>
+                        <tr>
+                            <th>座標Y</th><td><input class="js-input-elm" id="obj-y" type="text" onchange="ChangeText(event)"></td>
+                        </tr>
+                    </table>
                     <input type="text" id="select_screen" value="0" hidden>
                     <input type="text" id="select_obj" value="" hidden>
-                    <p class="col-lg-3">表示名</p><div class="v_line_fix"></div>
-                    <input class="col-lg-8 js-input-elm" id="obj-name" onchange="ChangeText(event)" type="text">
-                    <hr class="col-lg-12 sidemenu_hr">
-                    <span class="col-lg-3">文字サイズ</span><div class="v_line_fix"></div>
-                    <input class="col-lg-2 js-input-elm" id="obj-font" type="text" onchange="ChangeText(event)">
-                    <hr class="col-lg-12 sidemenu_hr">
-                    <span class="col-lg-3">高さ</span><div class="v_line_fix"></div><input class="col-lg-2 js-input-elm" id="obj-height" type="text" onchange="ChangeText(event)">
-                    <span class="col-lg-3">幅</span><div class="v_line_fix"></div><input class="col-lg-2 js-input-elm" id="obj-width" type="text" onchange="ChangeText(event)">
-                    <hr class="col-lg-12 sidemenu_hr">
-                    <span class="col-lg-3">座標X</span><div class="v_line_fix"></div><input class="col-lg-2 js-input-elm" id="obj-x" type="text" onchange="ChangeText(event)">
-                    <span class="col-lg-3">座標Y</span><div class="v_line_fix"></div><input class="col-lg-2 js-input-elm" id="obj-y" type="text" onchange="ChangeText(event)">
                 </div>
                 <div class="objectlist ac_menu" id="obj_lists">
                     <span>追加機能一覧</span>
