@@ -33,3 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+function TabChange(event){
+    const tabTriggers = document.querySelectorAll('.cp_tabpanel');
+    
+    // すべてのタブメニューの'is-active'クラスを削除
+    for (let i = 0; i < tabTriggers.length; i++) {
+        tabTriggers[i].classList.remove('active');
+    }
+    document.getElementById((event.target.id).replace("tab2_","tabpanel")).classList.add('active');
+}

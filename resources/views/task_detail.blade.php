@@ -22,7 +22,7 @@
                             $i = 1;
                         @endphp
                         @foreach ($scenes_data as $scene_data)
-                            <input type="radio" name="cp_tab" id="tab2_{{$i}}"
+                            <input type="radio" onchange="TabChange(event)" name="cp_tab" id="tab2_{{$i}}"
                             @if ($i == 1)
                                 checked
                             @endif>
@@ -30,21 +30,35 @@
                         @endforeach
 
                         <div class="cp_tabpanels">
+                            <?php $i = 1 ?>
                             @foreach ($scenes_data as $scene_data)
-                                <div class="cp_tabpanel">
-                                    @if ( count($tasks_data[$scene_data->id]) <= 0 )
-                                        nodata
+                            @if($i == 1)
+                            <div class="cp_tabpanel active" id="tabpanel{{$i++}}">
+                            @else
+                            <div class="cp_tabpanel" id="tabpanel{{$i++}}">
+                            @endif
+                                    @if(count($tasks_data[$scene_data->id]) == 0)
+                                    nodata
                                     @else
-                                        <div class="row">
-                                            @foreach ($tasks_data[$scene_data->id] as $task_data)
-                                                <span class="col-lg-4">{{ $task_data->title }}</span><div class="v_line_fix"></div>
-                                                <span class="col-lg-4">{{ $task_data->description }}</span><div class="v_line_fix"></div>
-                                                <span class="col-lg-4">{{ $task_data->end_at }}</span><div class="v_line_fix"></div>
-                                                <span class="col-lg-4">{{ $task_data->user->name }}</span><div class="v_line_fix"></div>
-                                                <span class="col-lg-4">{{ $task_data->status->title }}</span><div class="v_line_fix"></div>
-                                                <hr class="col-lg-12">
-                                            @endforeach
-                                        </div>
+                                    <div class="row">
+                                        <table class="table table-striped table-sm">
+                                        @foreach($tasks_data[$scene_data->id] as $task_data)
+                                            <tr 
+                                            @if($task_data->status->id == 1)
+                                            class="table-success"
+                                            @elseif($task_data->status->id == 6)
+                                            class="table-danger"
+                                            @elseif($task_data->status->id == 5)
+                                            class="table-warning"
+                                            @endif>
+                                                <td>{{ $task_data->title }}</td><td colspan="2">{{ $task_data->description }}</td><td>{{ $task_data->status->title }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ $task_data->user->name }}</td><td></td><td colspan="2">{{ $task_data->end_at }}</td>
+                                            </tr>
+                                        @endforeach
+                                        </table>
+                                    </div>
                                     @endif
                                     <div class="col-lg-12">
                                         <div id="dialog">
@@ -78,5 +92,6 @@
 
 <!-- Script -->
 <script src="{{ asset('js/dialog.js') }}"></script>
+<script src="{{ asset('js/tab.js') }}"></script>
 
 @endsection

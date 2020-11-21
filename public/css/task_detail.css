@@ -32,18 +32,13 @@
 .cp_tab .cp_tabpanel {
 	display: none;
 }
-.cp_tab > input:first-child:checked ~ .cp_tabpanels > .cp_tabpanel:first-child,
-.cp_tab > input:nth-child(3):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(2),
-.cp_tab > input:nth-child(5):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(3),
-.cp_tab > input:nth-child(7):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(4),
-.cp_tab > input:nth-child(9):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(5),
-.cp_tab > input:nth-child(11):checked ~ .cp_tabpanels > .cp_tabpanel:nth-child(6) {
-	display: block;
+.active{
+	display: block !important;
 }
 .cp_tab .cp_tabpanels {
 	position: absolute;
     top:0;
-    width: 80%;
+    width: auto;
 	left: 10em;
     display: block;
     height: 100%;
@@ -94,4 +89,19 @@ hr{
  ---------------------------------*/
 .card{
     height: 100%;
+}
+
+
+
+.container{
+	max-width: 100%;
+}
+
+
+table tr:nth-child(even) td{
+    border-bottom: solid 1px var(--moon-shadow);
+}
+
+table tr:nth-child(even) td:nth-child(3){
+	text-align: right;
 }
