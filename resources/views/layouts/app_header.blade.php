@@ -52,7 +52,7 @@
                             @endif
                         @else
                             <a class="far fa-window-restore nav-icon" href="{{ url('/task_screen/1') }}"></a>
-                            <a class="fas fa-briefcase nav-icon" href="{{ url('/task_detail/1') }}"></a>
+                            <a class="fas fa-briefcase nav-icon" href="{{ url('/screen_detail/1') }}"></a>
                             <a class="fas fa-palette nav-icon" href="{{ url('/design/1') }}"></a>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

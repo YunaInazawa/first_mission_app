@@ -109,15 +109,11 @@ class AppController extends Controller
     /**
      * 画面詳細
      */
-    public function task_detail( $id = 1 )
+    public function screen_detail( $id = 1 )
     {
-        $scenesData = Scene::where('project_id', $id)->get();
-        $tasksData = array();
-        foreach( $scenesData as $scene ){
-            $tasksData[$scene->id] = Task::where('scene_id', $scene->id)->get();
-        }
+        $sceneData = Scene::find($id);
 
-        return view('task_detail', ['app_id'=> $id, 'scenes_data'=> $scenesData, 'tasks_data'=> $tasksData]);
+        return view('screen_detail', ['app_id'=> $id, 'sceneData'=> $sceneData]);
     }
 
     /**
