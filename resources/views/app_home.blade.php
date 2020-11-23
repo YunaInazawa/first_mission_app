@@ -84,6 +84,7 @@
                                     <hr class="col-lg-12 tab_hr">
                                     @endforeach
                                 </div>
+                                <label class="btn_plus_circle col-lg-7 offset-lg-1">+</label>
                             </div>
                             <!-- 画面遷移が表示される -->
                             <div id="panel2" class="tab_panel">
