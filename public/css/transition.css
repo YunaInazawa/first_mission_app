@@ -69,3 +69,42 @@ canvas{
     margin-right: 0%;
     max-width: 100%;
 }
+body{
+    overflow: hidden;
+}
+.container div div{
+    width: 1300px;
+    height: 850px;
+    /*width: 433px;
+    height: 283px;*/
+    position: absolute;
+}
+.screens div:nth-child(1){
+    background-color: red;
+    top: 85px;
+    left: 200px;
+    z-index: 1;
+}
+
+.screens div:nth-child(2){
+    background-color: blue;
+    top: 900px;
+    left: 2000px;
+    
+}
+
+.screens{
+    position: absolute;
+    background-color: palegreen;
+    top: 0;
+    left: 0;
+}
+.screens div:nth-child(3){
+    background-color: yellow;
+    top: -600px;
+    left: -1200px;
+}
+
+.obj{
+    position: absolute;
+}
