@@ -107,17 +107,9 @@ class AppController extends Controller
     }
 
     /**
-     * 画面管理
+     * 画面詳細
      */
-    public function screen( $id = 1 )
-    {
-        return view('task_screen', ['app_id'=> $id]);
-    }
-
-    /**
-     * タスク管理
-     */
-    public function detail( $id = 1 )
+    public function task_detail( $id = 1 )
     {
         $scenesData = Scene::where('project_id', $id)->get();
         $tasksData = array();
@@ -126,6 +118,14 @@ class AppController extends Controller
         }
 
         return view('task_detail', ['app_id'=> $id, 'scenes_data'=> $scenesData, 'tasks_data'=> $tasksData]);
+    }
+
+    /**
+     * タスク管理
+     */
+    public function task_edit( $id = 1 )
+    {
+        return view('task_edit', ['app_id'=> $id]);
     }
 
     /**
@@ -144,7 +144,7 @@ class AppController extends Controller
     }
 
     /**
-     * 画面遷移管理
+     * 画面遷移
      */
     public function transition( $id = 1 )
     {
