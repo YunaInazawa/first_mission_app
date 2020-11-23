@@ -79,7 +79,7 @@
                             <div id="panel1" class="tab_panel">
                                 <div class="row">
                                     @foreach( $project_data->scenes as $scene )
-                                    <span class="col-lg-7 offset-lg-1">{{ $scene->name }}</span>
+                                    <span class="col-lg-7 offset-lg-1"><a href="{{ route('screen_detail', $scene->id) }}">{{ $scene->name }}</a></span>
                                     <span class="col-lg-2">タスク<input class="checkbox" type="checkbox"></span><span class="col-lg-2">デザイン<input class="checkbox" type="checkbox"></span>
                                     <hr class="col-lg-12 tab_hr">
                                     @endforeach
@@ -88,7 +88,7 @@
                             </div>
                             <!-- 画面遷移が表示される -->
                             <div id="panel2" class="tab_panel">
-                                <canvas></canvas>
+                                <a href="{{ route('transition', $scene->id) }}"><img src="{{ asset('storage/images/sampleImage.png') }}" style="width: 100%;"></a>
                             </div>
                         </div>
                     </div>

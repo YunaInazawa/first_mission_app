@@ -48,7 +48,7 @@
                                         @elseif($task->status->id == 5)
                                         class="table-warning"
                                         @endif>
-                                            <td>{{ $task->title }}</td>
+                                            <td><a href="{{ route('task_detail', $task->id) }}">{{ $task->title }}</a></td>
                                             <td colspan="2">{!! nl2br($task->description) !!}</td>
                                             <td>{{ $task->status->title }}</td>
                                         </tr>

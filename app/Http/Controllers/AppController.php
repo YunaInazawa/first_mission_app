@@ -122,8 +122,9 @@ class AppController extends Controller
     public function task_detail( $id = 1 )
     {
         $taskData = Task::find($id);
+        $andTasksData = Task::where('task_id', $id)->get();
 
-        return view('task_detail', ['taskId'=> $id, 'taskData'=> $taskData]);
+        return view('task_detail', ['taskId'=> $id, 'taskData'=> $taskData, 'andTasksData' => $andTasksData]);
     }
 
     /**
