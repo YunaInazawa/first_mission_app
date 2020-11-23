@@ -113,7 +113,17 @@ class AppController extends Controller
     {
         $sceneData = Scene::find($id);
 
-        return view('screen_detail', ['app_id'=> $id, 'sceneData'=> $sceneData]);
+        return view('screen_detail', ['sceneId'=> $id, 'sceneData'=> $sceneData]);
+    }
+
+    /**
+     * タスク詳細
+     */
+    public function task_detail( $id = 1 )
+    {
+        $taskData = Task::find($id);
+
+        return view('task_detail', ['taskId'=> $id, 'taskData'=> $taskData]);
     }
 
     /**

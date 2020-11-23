@@ -31,8 +31,20 @@ class CreateDecorationsTable extends Migration
                 ->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
+
+            // 表示名
+            // 文字サイズ*
+            // 向き
+            // 幅
+            // 高さ
+            // 座標X*
+            // 座標Y*
+            // is_auto_size def:true
+            // color @string
+            // scene_id
         });
     }
+    
 
     /**
      * Reverse the migrations.
