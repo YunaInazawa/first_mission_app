@@ -107,6 +107,24 @@ class AppController extends Controller
     }
 
     /**
+     * プロジェクト管理 / 画面追加
+     */
+    public function add_screen( $id, Request $request )
+    {
+        $request -> session() -> regenerateToken();
+        $screenName = $request->screenName;
+        $screenDescription = $request->screenDescription;
+
+        $addScene = new Scene;
+        $addScene->name = $screenName;
+        $addScene->description = $screenDescription;
+        $addScene->project_id = $id;
+        $addScene->save();
+
+        return redirect()->back()->with('flash_message', '画面「' . $addScene->name . '」を追加しました');
+    }
+
+    /**
      * 画面詳細
      */
     public function screen_detail( $id = 1 )

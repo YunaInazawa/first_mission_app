@@ -17,6 +17,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/create', 'AppController@create')->name('app_create');
 Route::post('new', 'AppController@new')->name('app_new');
 Route::get('/app/{id}', 'AppController@index')->name('app_home');
+Route::post('/add_screen/{id}', 'AppController@add_screen')->name('add_screen');
 Route::get('/screen_detail/{id}', 'AppController@screen_detail')->name('screen_detail');
 Route::get('/task_detail/{id}', 'AppController@task_detail')->name('task_detail');
 Route::get('/task_edit/{id}', 'AppController@task_edit')->name('task_edit');

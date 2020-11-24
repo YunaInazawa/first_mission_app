@@ -26,20 +26,20 @@
                             </div>
                             <hr>
                             <div class="col-lg-12">
-                                <div id="dialog">
-                                    <div id="dialogBackground"></div>
-                                    <div id="dialogContent">
-                                        <div id="dialogMsg">
+                                <div id="dialog" class="dialog">
+                                    <div class="dialogBackground"></div>
+                                    <div class="dialogContent">
+                                        <div class="dialogMsg">
                                             ダイアログメッセージ
                                         </div>
                                         <div>
                                             <input type="text"><br>
                                             <input type="button" value="はい" onclick="func();" />
-                                            <input type="button" value="いいえ" onclick="dialogHide();" />
+                                            <input type="button" value="いいえ" onclick="dialogHide('dialog');" />
                                         </div>
                                     </div>
                                 </div>
-                                <input class="btn_plus_circle btn_plus_check" type="checkbox" onclick="dialogShow();" id="check">
+                                <input class="btn_plus_circle btn_plus_check" type="checkbox" onclick="dialogShow('dialog');" id="check">
                                 <label for="check" class="btn_plus_circle">+</label>
                             </div>
                         </form>

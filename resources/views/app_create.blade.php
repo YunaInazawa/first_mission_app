@@ -40,10 +40,10 @@
                             <label for="" class="col-lg-2 col-form-label text-md-right">{{ __('メンバー') }}</label>
                             <div id="join_user"></div>
                             <div class="col-lg-9">
-                                <div id="dialog">
-                                    <div id="dialogBackground"></div>
-                                    <div id="dialogContent">
-                                        <div id="dialogMsg">
+                                <div id="dialog" class="dialog">
+                                    <div class="dialogBackground"></div>
+                                    <div class="dialogContent">
+                                        <div class="dialogMsg">
                                             メンバーを追加します
                                         </div>
                                         <hr class="dialog_hr">
@@ -57,12 +57,12 @@
                                                 </datalist>
                                                 <i class="fas fa-search"></i><br>
                                                 <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick="funcAddUser({{ $users_data }});" />
-                                                <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide();" />
+                                                <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide('dialog');" />
                                             </fieldset>
                                         </div>
                                     </div>
                                 </div>
-                                <input class="btn_plus_circle btn_plus_check" type="checkbox" onclick="dialogShow();" id="check">
+                                <input class="btn_plus_circle btn_plus_check" type="checkbox" onclick="dialogShow('dialog');" id="check">
                                 <label for="check" class="btn_plus_circle">+</label>
 
                             </div>

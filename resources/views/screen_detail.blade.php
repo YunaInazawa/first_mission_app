@@ -14,6 +14,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <h3 class="text-center">{{ $sceneData->name }}</h3>
+            <p class="text-center">{!! nl2br($sceneData->description) !!}</p>
             <div class="text-center"><a href="#">--- DELETE ---</a></div>
         </div>
             <div class="col-lg-12">

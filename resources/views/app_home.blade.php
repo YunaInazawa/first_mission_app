@@ -14,6 +14,14 @@
     <div class="row justify-content-center">
         <div class="col-lg-9">
             <div class="row">
+                <!-- フラッシュメッセージ -->
+                @if (session('flash_message'))
+                    <div class="flash_message">
+                        {!! nl2br(session('flash_message')) !!}
+                        <hr>
+                    </div>
+                @endif
+
                 <div class="card col-lg-12">
                     <!-- プロジェクトについて(名、メンバー、概要など) -->
                     <div class="card-body">
@@ -28,10 +36,10 @@
                                 <div class="row menber">
                                     <label for="" class="col-lg-2 col-form-label text-md-right">{{ __('メンバー') }}</label>
                                     <div class="col-lg-9">
-                                        <div id="dialog">
-                                            <div id="dialogBackground"></div>
-                                            <div id="dialogContent">
-                                                <div id="dialogMsg">
+                                        <div id="dialog" class="dialog">
+                                            <div class="dialogBackground"></div>
+                                            <div class="dialogContent">
+                                                <div class="dialogMsg">
                                                     メンバーを追加します
                                                 </div>
                                                 <hr class="dialog_hr">
@@ -39,11 +47,11 @@
                                                     <input type="text" class="form-control dialog_text" size="25" placeholder="MailAddress">
                                                     <i class="fas fa-search"></i><br>
                                                     <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick="func();" />
-                                                    <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide();" />
+                                                    <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide('dialog');" />
                                                 </div>
                                             </div>
                                         </div>
-                                        <input class="btn_plus_circle btn_plus_check" type="checkbox" onclick="dialogShow();" id="check">
+                                        <input class="btn_plus_circle btn_plus_check" type="checkbox" onclick="dialogShow('dialog');" id="check">
                                         <!-- メンバー表示 -->
                                         [ 参加者 ]<br />
                                         @foreach( $members as $m )
@@ -84,11 +92,32 @@
                                     <hr class="col-lg-12 tab_hr">
                                     @endforeach
                                 </div>
-                                <label class="btn_plus_circle col-lg-7 offset-lg-1">+</label>
+
+                                <!-- 画面追加ダイアログ -->
+                                <form method="POST" action="{{ route('add_screen', $project_data->id) }}">
+                                    @csrf
+                                    <div id="screen_dialog" class="dialog">
+                                        <div class="dialogBackground"></div>
+                                        <div class="dialogContent">
+                                            <div class="dialogMsg">
+                                                画面を追加します
+                                            </div>
+                                            <hr class="dialog_hr">
+                                            <div>
+                                                <input type="text" class="form-control dialog_text" size="25" name="screenName">
+                                                <textarea name="screenDescription"></textarea>
+                                                <i class="fas fa-search"></i><br>
+                                                <input type="submit" class="btn btn-primary dialog_btn" value="はい" />
+                                                <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide('screen_dialog');" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label class="btn_plus_circle col-lg-7 offset-lg-1" onclick="dialogShow('screen_dialog');" >+</label>
+                                </form>
                             </div>
                             <!-- 画面遷移が表示される -->
                             <div id="panel2" class="tab_panel">
-                                <a href="{{ route('transition', $scene->id) }}"><img src="{{ asset('storage/images/sampleImage.png') }}" style="width: 100%;"></a>
+                                <a href="{{ route('transition', $project_data->id) }}"><img src="{{ asset('storage/images/sampleImage.png') }}" style="width: 100%;"></a>
                             </div>
                         </div>
                     </div>

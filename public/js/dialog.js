@@ -1,3 +1,4 @@
+// プロジェクト作成画面 / ユーザ追加
 function funcAddUser( users_data ) {
     var userName = document.getElementById('add_user').value;
     var userId = 0;
@@ -22,15 +23,15 @@ function func() {
     dialogHide();
     return;
 }
-function dialogHide() {
-    var dialog = document.getElementById("dialog");
+function dialogHide( id ) {
+    var dialog = document.getElementById(id);
     dialog.style.display = "none";
     return;
 }
-function dialogShow() {
+function dialogShow( id ) {
     // 必要に応じてここに表示前処理(表示メッセージ変更処理など)を入れる
     
-    var dialog = document.getElementById("dialog");
+    var dialog = document.getElementById(id);
     dialog.style.display = "block";
     return;
 }
