@@ -103,7 +103,29 @@ class AppController extends Controller
         $members = Member::where('project_id', $id)->where('is_join', true)->orderBy('role_id')->get();
         $members_yet = Member::where('project_id', $id)->where('is_join', null)->orderBy('role_id')->get();
         $logs = Log::where('project_id', $id)->orderBy('id', 'desc')->get();
-        return view('app_home', ['project_data' => $project_data, 'members' => $members, 'members_yet' => $members_yet, 'logs' => $logs]);
+        $usersData = User::whereNotIn('id', [Auth::id()])->orderBy('name')->get();
+
+        return view('app_home', ['project_data' => $project_data, 'members' => $members, 'members_yet' => $members_yet, 'logs' => $logs, 'users_data' => $usersData]);
+    }
+
+    /**
+     * プロジェクト管理 / メンバ追加
+     */
+    public function add_member( $id, Request $request )
+    {
+        $request -> session() -> regenerateToken();
+        $userName = $request->userName;
+
+        $addMember = new Member;
+        $addMember->project_id = $id;
+        $addMember->user_id = User::where('name', $userName)->first()->id;
+        $addMember->role_id = Role::where('name', '一般')->first()->id;
+        $addMember->save();
+
+        // ログ登録
+        $this->createLog('ユーザ「' . Auth::user()->name . '」がメンバ「' . $userName . '」に参加申請', 'join', $id);
+
+        return redirect()->back()->with('flash_message', 'ユーザ「' . $userName . '」に参加申請しました');
     }
 
     /**
@@ -120,6 +142,9 @@ class AppController extends Controller
         $addScene->description = $screenDescription;
         $addScene->project_id = $id;
         $addScene->save();
+
+        // ログ登録
+        $this->createLog('ユーザ「' . Auth::user()->name . '」が画面「' . $addScene->name . '」を作成', 'create', $id);
 
         return redirect()->back()->with('flash_message', '画面「' . $addScene->name . '」を追加しました');
     }

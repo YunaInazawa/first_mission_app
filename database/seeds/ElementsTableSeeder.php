@@ -13,7 +13,7 @@ class ElementsTableSeeder extends Seeder
     public function run()
     {
         $now = Carbon::now();
-        $elements = ['Button', 'Label', 'TextBox', 'RadioButton', 'CheckBox'];
+        $elements = ['Button', 'Label', 'Link', 'TextBox', 'RadioButton', 'CheckBox'];
 
         foreach( $elements as $element ){
             DB::table('elements')->insert([
