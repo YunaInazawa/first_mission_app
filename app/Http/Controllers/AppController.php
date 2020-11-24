@@ -200,11 +200,17 @@ class AppController extends Controller
     {
         $scenesData = Scene::where('project_id', $id)->get();
         $objects = array();
+        $elementsId = array();
+        $e_name = ['Button', 'Link'];
 
         foreach( $scenesData as $scene ){
             $objects[$scene->id] = Decoration::where('scene_id', $scene->id)->get();
         }
 
-        return view('transition', ['projectId'=> $id, 'scenesData' => $scenesData, 'objectss' => $objects]);
+        foreach( $e_name as $e ){
+            $elementsId[$e] = Element::where('name', $e)->first()->id;
+        }
+
+        return view('transition', ['projectId'=> $id, 'scenesData' => $scenesData, 'objects' => $objects, 'elementsId' => $elementsId]);
     }
 }

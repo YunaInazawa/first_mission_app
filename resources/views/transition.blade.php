@@ -5,43 +5,43 @@
 $newid = 0;
 $tabfst = true;
 $tabtargetnum = 0;
-$objects = array();
+// $objects = array();
 $screenID = 0;
-$objects += array(
-    '1' => array(
-        'element' => 'Buttom',
-        'screen' => '0',
-        'name' => 'BLUE',
-        'height' => '37',
-        'width' => '63',
-        'x' => '610',
-        'y' => '737',
-        'fontsize' => '18',
-        'jumpid' => '1',
-    ),
-    '2' => array(
-        'element' => 'Buttom',
-        'screen' => '1',
-        'name' => 'Yellow',
-        'height' => '37',
-        'width' => '72',
-        'x' => '199',
-        'y' => '527',
-        'fontsize' => '18',
-        'jumpid' => '2',
-    ),
-    '3' => array(
-        'element' => 'Buttom',
-        'screen' => '2',
-        'name' => 'red',
-        'height' => '37',
-        'width' => '44',
-        'x' => '809',
-        'y' => '387',
-        'fontsize' => '18',
-        'jumpid' => '0',
-    ),
-);
+// $objects += array(
+//     '1' => array(
+//         'element' => 'Buttom',
+//         'screen' => '0',
+//         'name' => 'BLUE',
+//         'height' => '37',
+//         'width' => '63',
+//         'x' => '610',
+//         'y' => '737',
+//         'fontsize' => '18',
+//         'jumpid' => '1',
+//     ),
+//     '2' => array(
+//         'element' => 'Buttom',
+//         'screen' => '1',
+//         'name' => 'Yellow',
+//         'height' => '37',
+//         'width' => '72',
+//         'x' => '199',
+//         'y' => '527',
+//         'fontsize' => '18',
+//         'jumpid' => '2',
+//     ),
+//     '3' => array(
+//         'element' => 'Buttom',
+//         'screen' => '2',
+//         'name' => 'red',
+//         'height' => '37',
+//         'width' => '44',
+//         'x' => '809',
+//         'y' => '387',
+//         'fontsize' => '18',
+//         'jumpid' => '0',
+//     ),
+// );
 
 /*
 foreach( $scenes_data as $s ){
@@ -71,7 +71,9 @@ $varJsSample=json_encode($objects);//JavaScriptに渡すためにjson_encodeを�
 ?>
 
 <script type="text/javascript">
-var object=JSON.parse('<?php echo $varJsSample; ?>');//jsonをparseしてJavaScriptの変数に代入
+// var object=JSON.parse('<?php //echo $varJsSample; ?>');//jsonをparseしてJavaScriptの変数に代入
+var object = @json($objects);
+var elementsId = @json($elementsId);
 </script>
 
 @extends('layouts.app_header')
@@ -86,14 +88,7 @@ var object=JSON.parse('<?php echo $varJsSample; ?>');//jsonをparseしてJavaScr
     <div class="row">
         <div class="screens" id="screenlist">
             @foreach( $scenesData as $scene )
-                <div class="screen" id="t_{{ $scene->id }}">{{ $scene->name }}<br />
-                @foreach($objectss as $s)
-                @foreach( $s as $o )
-                @if( $o->move_scene_id != null )
-                {{ $o->text }} -> {{ $o->move_scene->name }}<br />
-                @endif
-                @endforeach
-                @endforeach</div>
+                <div class="screen" id="t_{{ $scene->id }}">{{ $scene->name }}</div>
             @endforeach
         </div>
     </div>
