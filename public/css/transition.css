@@ -42,7 +42,6 @@
     overflow: auto;
     background: #eee;
     padding: 20px;
-  
 }
 label{
     background-color: rebeccapurple;
@@ -54,12 +53,7 @@ label{
 /*----------------------------------
  キャンバスの調整
  ---------------------------------*/
-canvas{
-    height: 100%;
-    width: 100%;
-    background-color: gray;
-    margin-left: -2%;
-}
+
 
 .col-lg-2{
     padding: 0;
@@ -68,4 +62,55 @@ canvas{
     margin-left: 0%;
     margin-right: 0%;
     max-width: 100%;
+}
+body{
+    overflow: hidden;
+}
+.container div div{
+    width: 1300px;
+    height: 850px;
+    /*width: 433px;
+    height: 283px;*/
+    position: absolute;
+    z-index: 1;
+}
+.screens div:nth-child(1){
+    background-color:red; 
+    top: 85px;
+    left: 200px;
+}
+
+.screens div:nth-child(2){
+    background-color: blue;
+    top: 900px;
+    left: 2000px;
+    
+}
+
+.screens{
+    position: absolute;
+    background-color: palegreen;
+    top: 0;
+    left: 0;
+}
+.screens div:nth-child(3){
+    background-color: yellow;
+    top: 1200px;
+    left: -1200px;
+}
+
+.obj{
+    position: absolute;
+}
+
+.conecter {
+    position : absolute;
+    left: 0px;
+    top: 0px;
+    width: 550px;
+    height: 550px;
+}
+
+.kaiten {
+    transform: rotateX( 180deg );
 }

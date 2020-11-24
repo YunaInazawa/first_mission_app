@@ -1,0 +1,162 @@
+let alreadyTmpObj = '<div class="obj"';
+
+StartFunc();
+function StartFunc(){
+    // '.canvas'を持つ要素を取得
+    const tabTargets = document.querySelectorAll('.screen');
+    let key = Object.keys(object);
+    var arrayJump = [];
+    var arrayform = [];
+    var cnt = 0;
+    for (var k in key) {
+        var objitemset = '';// class="obj_btn" value="blue">RED</button>
+        var styleSet = 'style="top: ' + object[key[k]]['y'] + 'px; left: ' + object[key[k]]['x'] + 'px; font-size: ' + object[key[k]]['fontsize'] +'px; height: ' + object[key[k]]['height'] + 'px; width: ' + object[key[k]]['width'] + 'px;"';
+        if(object[key[k]]['element'] == "Buttom"){
+            tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += '<button onclick="ClickButton(event)" class="obj" ' + styleSet +' id="obj_already_btn_' + key[k] + '" value="' + object[key[k]]['jumpid'] + '">' + object[key[k]]['name'] + '</button>';
+            if(object[key[k]]['jumpid'] != "" || object[key[k]]['jumpid'] != null){
+                arrayJump[cnt] = object[key[k]]['jumpid'];
+                arrayform[cnt] = object[key[k]]['screen'];
+                cnt++;
+            //    Conect('t_' + object[key[k]]['screen'] + '_to_t_' + object[key[k]]['jumpid'],object[key[k]]['jumpid'],object[key[k]]['screen']);
+            }
+        }/*else if(object[key[k]]['element'] == "CheckBox"){
+            tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_checkbox"' + styleSet +' id="obj_already_checkbox_' + key[k] + '"><input id="already_checkbox_' + key[k] + '" type="checkbox">' + object[key[k]]['name'] + '</div>';
+            objitemset = objListItem + 'alr_checkbox_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_checkbox_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
+        }else if(object[key[k]]['element'] == "Label"){
+            tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_label"' + styleSet +' id="obj_already_label_' + key[k] + '">' + object[key[k]]['name'] + '</div>';
+            objitemset = objListItem + 'alr_label_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_label_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
+        }else if(object[key[k]]['element'] == "RadioButtom"){
+            tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_radio"' + styleSet +' id="obj_already_radio_' + key[k] + '"><input id="already_radio_' + key[k] + '" type="radio">' + object[key[k]]['name'] + '</div>';
+            objitemset = objListItem + 'alr_radio_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_radio_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
+        }else if(object[key[k]]['element'] == "TextBox"){
+            tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_textbox"' + styleSet +' id="obj_already_textbox_' + key[k] + '"><input id="already_textbox_' + key[k] + '" type="text"></div>';
+            objitemset = objListItem + 'alr_textbox_' + key[k] + '">' + object[key[k]]['element'] + key[k];
+        }*/
+        //document.getElementById('links'+object[key[k]]['s']).innerHTML += objitemset + '</a></li>';
+    }
+    for (var i in arrayJump){
+        document.getElementById('screenlist').innerHTML += '<canvas class="conecter" id="t_' + arrayform[i] + '_to_t_' + arrayJump[i] + '"></canvas>';
+    }
+    Conect(arrayJump,arrayform);
+//    document.getElementById('screenlist').innerHTML += '<canvas class="conecter" id="t_' + object[key[k]]['screen'] + '_to_t_' + object[key[k]]['jumpid'] + '"></canvas>';
+
+ 
+}
+
+function ClickButton(event){
+    const tabTargets = document.querySelectorAll('.screen');
+
+    // 要素の位置座標を取得
+    var clientRect = tabTargets[event.target.value].getBoundingClientRect();
+    var clientRect2 = document.getElementById('screenlist').getBoundingClientRect();
+    
+    var moveX = clientRect.left - 200;
+    var moveY = clientRect.top - 85;
+    moveX = clientRect2.left - moveX;
+    moveY = clientRect2.top - moveY;
+    $(document.getElementById('screenlist')).animate({ left:moveX,top:moveY },"slow");
+}
+
+function Conect(jumpIds,formerIds) {
+    const tabTargets = document.querySelectorAll('.screen');
+
+    function drawLine(){
+
+
+        for(var i in jumpIds){
+
+            var canvas = document.getElementById('t_' + formerIds[i] + '_to_t_' + jumpIds[i]);
+            var ctx = canvas.getContext("2d");
+
+            var formCenterX = tabTargets[formerIds[i]].getBoundingClientRect().left + 650;
+            var formCenterY = tabTargets[formerIds[i]].getBoundingClientRect().top + 425;
+            var jumpCenterX = tabTargets[jumpIds[i]].getBoundingClientRect().left + 650;
+            var jumpCenterY = tabTargets[jumpIds[i]].getBoundingClientRect().top + 425;
+            var width = Math.abs(jumpCenterX - formCenterX);
+            var height = Math.abs(jumpCenterY - formCenterY);
+            var left = 0;
+            var top = 0;
+
+            document.getElementById('t_' + formerIds[i] + '_to_t_' + jumpIds[i]).style.width = width + "px";
+            document.getElementById('t_' + formerIds[i] + '_to_t_' + jumpIds[i]).style.height = height + "px";
+            if(formCenterX <= jumpCenterX && formCenterY <= jumpCenterY){
+                left = formCenterX;
+                top = formCenterY;
+            }else if(formCenterX > jumpCenterX && formCenterY > jumpCenterY){
+                left = jumpCenterX;
+                top = jumpCenterY;
+            }else if(formCenterX < jumpCenterX){
+                left = formCenterX;
+                top = jumpCenterY;
+                document.getElementById('t_' + formerIds[i] + '_to_t_' + jumpIds[i]).classList.add('kaiten');
+            }else{
+                left = jumpCenterX;
+                top = formCenterY;
+                document.getElementById('t_' + formerIds[i] + '_to_t_' + jumpIds[i]).classList.add('kaiten');
+            }
+            
+            document.getElementById('t_' + formerIds[i] + '_to_t_' + jumpIds[i]).style.left =left + "px";
+            document.getElementById('t_' + formerIds[i] + '_to_t_' + jumpIds[i]).style.top = top + "px";
+                
+            ctx.strokeStyle = "red";
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(550, 275);
+            ctx.closePath();
+            ctx.stroke();
+        }
+    }
+
+    
+    onload = drawLine;
+};
+/**
+function Conect(conecterId,jumpIds,formerIds) {
+    /*
+    width: 1300px;
+    height: 850px;*/
+  /*  const tabTargets = document.querySelectorAll('.screen');
+
+    var formCenterX = tabTargets[formerId].getBoundingClientRect().left + 650;
+    var formCenterY = tabTargets[formerId].getBoundingClientRect().top + 425;
+    var jumpCenterX = tabTargets[jumpId].getBoundingClientRect().left + 650;
+    var jumpCenterY = tabTargets[jumpId].getBoundingClientRect().top + 425;
+    var width = Math.abs(tabTargets[formerId].getBoundingClientRect().left) + Math.abs(tabTargets[jumpId].getBoundingClientRect().left);
+    var height = Math.abs(tabTargets[formerId].getBoundingClientRect().top) + Math.abs(tabTargets[jumpId].getBoundingClientRect().top);
+    var left = 0;
+    var top = 0;
+
+    document.getElementById(conecterId).style.width = width + "px";
+    document.getElementById(conecterId).style.height = height + "px";
+
+    if(formCenterX <= jumpCenterX && formCenterY <= jumpCenterY){
+        left = formCenterX;
+        top = formCenterY;
+    }else if(formCenterX > jumpCenterX && formCenterY > jumpCenterY){
+        left = jumpCenterX;
+        top = jumpCenterY;
+    }else if(formCenterX < jumpCenterX){
+        left = formCenterX;
+        top = jumpCenterY;
+    }else{
+        left = jumpCenterX;
+        top = formCenterY;
+    }
+    
+    document.getElementById(conecterId).style.left =left + "px";
+    document.getElementById(conecterId).style.top = top + "px";
+    function drawLine(){
+        var canvas = document.getElementById(conecterId);
+        
+        var ctx = canvas.getContext("2d");
+        
+        ctx.strokeStyle = "red";
+        ctx.beginPath();
+        ctx.moveTo(left, top);
+        ctx.lineTo(550, 275);
+        ctx.closePath();
+        ctx.stroke();
+    }
+    
+    onload = drawLine;
+}; */
