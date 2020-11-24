@@ -83,15 +83,18 @@ class TestTableSeeder extends Seeder
         /**
          * デコレーション
          */
-        $element_id = DB::table('elements')->where('name', 'Buttom')->first()->id;
+        $element_id = DB::table('elements')->where('name', 'Button')->first()->id;
         DB::table('decorations')->insert([
             'text' => 'TestDecorationText',
             'description' => 'TestDecorationDiscription',
-            'width' => 100,
-            'height' => 50,
-            'position_x' => 0,
-            'position_y' => 0,
+            'font_size' => 30,
+            'width' => 300,
+            'height' => 100,
+            'position_x' => 100,
+            'position_y' => 100,
             'scene_id' => $scene_id,
+            'is_auto_size' => false,
+            'font_color' => '#ff6347',
             'element_id' => $element_id,
             'created_at' => $now, 
             'updated_at' => $now,

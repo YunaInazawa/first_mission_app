@@ -17,10 +17,18 @@ class CreateDecorationsTable extends Migration
             $table->id();
             $table->string('text')->default('NoText');
             $table->string('description')->nullable();
+            $table->integer('font_size');
             $table->integer('width');
             $table->integer('height');
             $table->integer('position_x');
             $table->integer('position_y');
+            $table->boolean('is_auto_size')->default(true);
+            $table->string('font_color')->default('#000');
+            $table->string('bg_color')->default('#FFF');
+            $table->foreignId('move_scene_id')->nullable()
+                ->references('id')->on('scenes')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->foreignId('scene_id')
                 ->constrained()
                 ->cascadeOnDelete()
@@ -31,17 +39,6 @@ class CreateDecorationsTable extends Migration
                 ->cascadeOnUpdate();
             $table->timestamps();
             $table->softDeletes();
-
-            // 表示名
-            // 文字サイズ*
-            // 向き
-            // 幅
-            // 高さ
-            // 座標X*
-            // 座標Y*
-            // is_auto_size def:true
-            // color @string
-            // scene_id
         });
     }
     

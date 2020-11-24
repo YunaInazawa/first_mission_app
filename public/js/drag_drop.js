@@ -31,7 +31,7 @@ function StartFunc(){
     for (var k in key) {
         var objitemset = '';
         var styleSet = 'style="top: ' + object[key[k]]['y'] + 'px; left: ' + object[key[k]]['x'] + 'px; font-size: 18px; height: ' + object[key[k]]['height'] + 'px; width: ' + object[key[k]]['width'] + 'px;"';
-        if(object[key[k]]['element'] == "Buttom"){
+        if(object[key[k]]['element'] == "Button"){
             tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_btn"' + styleSet +' id="obj_already_btn_' + key[k] + '">' + object[key[k]]['name'] + '</div>';
             objitemset = objListItem + 'alr_btn_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_btn_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
         }else if(object[key[k]]['element'] == "CheckBox"){
@@ -40,7 +40,7 @@ function StartFunc(){
         }else if(object[key[k]]['element'] == "Label"){
             tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_label"' + styleSet +' id="obj_already_label_' + key[k] + '">' + object[key[k]]['name'] + '</div>';
             objitemset = objListItem + 'alr_label_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_label_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
-        }else if(object[key[k]]['element'] == "RadioButtom"){
+        }else if(object[key[k]]['element'] == "RadioButton"){
             tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_radio"' + styleSet +' id="obj_already_radio_' + key[k] + '"><input id="already_radio_' + key[k] + '" type="radio">' + object[key[k]]['name'] + '</div>';
             objitemset = objListItem + 'alr_radio_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_radio_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
         }else if(object[key[k]]['element'] == "TextBox"){
@@ -129,7 +129,7 @@ function DropAdd(id) {
     // drop_radio → obj_radio_0
     if(dropObjId.indexOf("btn") != -1){
         tabTargets[num].innerHTML += droptmpObj + 'obj_btn" id="obj_btn_' + document.getElementById('id_new').value + '"' + styleSet + '>Button</div>';
-        AddObjList('Buttom','btn');
+        AddObjList('Button','btn');
         SelectSet('obj_btn_' + document.getElementById('id_new').value);
     }else if(dropObjId.indexOf("checkbox") != -1){
         tabTargets[num].innerHTML += droptmpObj + 'obj_checkbox" id="obj_checkbox_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="checkbox_1" type="checkbox">CheckBox</div>';
@@ -141,7 +141,7 @@ function DropAdd(id) {
         SelectSet('obj_label_' + document.getElementById('id_new').value);
     }else if(dropObjId.indexOf("radio") != -1){
         tabTargets[num].innerHTML += droptmpObj + 'obj_radio" id="obj_radio_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="radio_1" type="radio">RadioButton</div>';
-        AddObjList('RadioButtom','radio');
+        AddObjList('RadioButton','radio');
         SelectSet('obj_radio_' + document.getElementById('id_new').value);
     }else if(dropObjId.indexOf("textbox") != -1){
         tabTargets[num].innerHTML += droptmpObj + 'obj_textbox" id="obj_textbox_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="textbox_1" type="text"></div>';
@@ -221,7 +221,7 @@ function ObjBtnClick(event) {
     const tabTargets = document.querySelectorAll('.canvas');
     var num = document.getElementById( "select_screen").value;
     $(tabTargets[num]).append(tmpObj + 'obj_btn" id="obj_btn_' + document.getElementById('id_new').value + '">' + event.target.innerText + '</div>');
-    AddObjList('Buttom','btn');
+    AddObjList('Button','btn');
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
 }
 
@@ -239,7 +239,7 @@ function ObjRadioClick(event) {
     const tabTargets = document.querySelectorAll('.canvas');
     var num = document.getElementById( "select_screen").value;
     $(tabTargets[num]).append(tmpObj + 'obj_radio" id="obj_radio_' + document.getElementById('id_new').value + '"><input id="radio_1" type="radio">' + event.target.innerText + '</div>');
-    AddObjList('RadioButtom','radio');
+    AddObjList('RadioButton','radio');
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
 }
 
