@@ -37,27 +37,29 @@
                                     <label for="" class="col-lg-2 col-form-label text-md-right">{{ __('メンバー') }}</label>
                                     <div class="col-lg-9">
                                         <form method="POST" action="{{ route('add_member', $project_data->id) }}">
-                                        <div id="dialog" class="dialog">
-                                            <div class="dialogBackground"></div>
-                                            <div class="dialogContent">
-                                                <div class="dialogMsg">
-                                                    メンバーを追加します
-                                                </div>
-                                                <hr class="dialog_hr">
-                                                <div>
-                                                    <input type="text" class="form-control dialog_text" size="25" name="userName" autocomplete="on" list="user_name">
-                                                    <datalist id="user_name">
-                                                    @foreach( $users_data as $user )
-                                                    <option id="{{ $user->id }}" value="{{ $user->name }}">
-                                                    @endforeach
-                                                    </datalist>
-                                                    <i class="fas fa-search"></i><br>
-                                                    <input type="submit" class="btn btn-primary dialog_btn" value="はい" />
-                                                    <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide('dialog');" />
+                                            @csrf
+                                            <div id="dialog" class="dialog">
+                                                <div class="dialogBackground"></div>
+                                                <div class="dialogContent">
+                                                    <div class="dialogMsg">
+                                                        メンバーを追加します
+                                                    </div>
+                                                    <hr class="dialog_hr">
+                                                    <div>
+                                                        <input type="text" class="form-control dialog_text" size="25" name="userName" autocomplete="on" list="user_name">
+                                                        <datalist id="user_name">
+                                                        @foreach( $users_data as $user )
+                                                        <option id="{{ $user->id }}" value="{{ $user->name }}">
+                                                        @endforeach
+                                                        </datalist>
+                                                        <i class="fas fa-search"></i><br>
+                                                        <input type="submit" class="btn btn-primary dialog_btn" value="はい" />
+                                                        <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide('dialog');" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <input class="btn_plus_circle btn_plus_check" type="checkbox" onclick="dialogShow('dialog');" id="check">
+                                            <input class="btn_plus_circle btn_plus_check" type="checkbox" onclick="dialogShow('dialog');" id="check">
+                                        </form>
                                         <!-- メンバー表示 -->
                                         [ 参加者 ]<br />
                                         @foreach( $members as $m )

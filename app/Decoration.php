@@ -23,4 +23,8 @@ class Decoration extends Model
     {
         return $this->belongsTo('App\Scene');
     }
+    public function move_scene()
+    {
+        return $this->belongsTo('App\Scene', 'move_scene_id');
+    }
 }

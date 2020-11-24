@@ -198,6 +198,13 @@ class AppController extends Controller
      */
     public function transition( $id = 1 )
     {
-        return view('transition', ['app_id'=> $id]);
+        $scenesData = Scene::where('project_id', $id)->get();
+        $objects = array();
+
+        foreach( $scenesData as $scene ){
+            $objects[$scene->id] = Decoration::where('scene_id', $scene->id)->get();
+        }
+
+        return view('transition', ['projectId'=> $id, 'scenesData' => $scenesData, 'objectss' => $objects]);
     }
 }

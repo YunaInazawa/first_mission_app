@@ -85,9 +85,16 @@ var object=JSON.parse('<?php echo $varJsSample; ?>');//jsonをparseしてJavaScr
 <div class="container">
     <div class="row">
         <div class="screens" id="screenlist">
-            @for($i = 0; $i != 3; $i++)
-                <div class="screen" id="t_{{ $i }}"></div>
-            @endfor
+            @foreach( $scenesData as $scene )
+                <div class="screen" id="t_{{ $scene->id }}">{{ $scene->name }}<br />
+                @foreach($objectss as $s)
+                @foreach( $s as $o )
+                @if( $o->move_scene_id != null )
+                {{ $o->text }} -> {{ $o->move_scene->name }}<br />
+                @endif
+                @endforeach
+                @endforeach</div>
+            @endforeach
         </div>
     </div>
 </div>
