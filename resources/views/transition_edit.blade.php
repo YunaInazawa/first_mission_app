@@ -1,3 +1,8 @@
+<script type="text/javascript">
+    var scenesData = @json($scenesData);
+    var elementsId = @json($elementsId);
+</script>
+
 @extends('layouts.app_header')
 
 @section('content')

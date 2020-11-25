@@ -2,6 +2,33 @@ var tmp = '<div onclick="ObjClick(event)" ondrag="Drag(event)" draggable="true" 
 var dropObjId = "";
 var startX = 0;
 var startY = 0;
+
+let objListItem = '<li><a onclick="TreeClick(event)" class="obj_list_item" id="obj_list_';
+StartFunc();
+function StartFunc(){
+    const screens = document.getElementById('drop');
+    const objectlists = document.getElementsByClassName('screen_objs');
+
+    // 画面ループ (s_id = scene_id)
+    for (var s_id in scenesData) {
+        var scene = scenesData[s_id];       // 略
+
+        if( scene['position_x'] != null ){
+            var styleSet = 'style="top:' + scene['position_y'] + 'px;left:' + scene['position_x'] + 'px;font-size:18px;"';
+
+            screens.innerHTML += tmp + scene['id'] + '" ' + styleSet +'>' + document.getElementById('drop_screen_' + scene['id']).innerText + '</div>';
+
+            for(var i = 0; i < objectlists.length; i++){
+                objectlists[i].classList.remove('active_objs');
+            }
+            document.getElementById('objlists_' + scene['id']).classList.add('active_objs');
+            document.getElementById('drop_screen_' + scene['id']).classList.add('disable');
+        }
+
+    }
+    
+}
+
 /*
  * 2.1 ドラッグ&ドロップ
  *****************************************/
