@@ -213,4 +213,31 @@ class AppController extends Controller
 
         return view('transition', ['projectId'=> $id, 'scenesData' => $scenesData, 'objects' => $objects, 'elementsId' => $elementsId]);
     }
+
+    /**
+     * 申請 / 承認拒否
+     */
+    public function judgmentJoin( $id, Request $request ) 
+    {
+        $memberData = Member::find($id);
+        
+        $reply = $request->reply;
+        if( $reply ){
+            $memberData->is_join = true;
+            $memberData->save();
+            $result = '承認';
+
+            // ログ登録
+            $this->createLog('ユーザ「' . Auth::user()->name . '」がプロジェクト「' . $memberData->project->name . '」に参加', 'join', $memberData->project->id);
+
+        }else{
+            $memberData->is_join = false;
+            $memberData->save();
+            $result = '拒否';
+
+        }
+
+        $msg = 'プロジェクト「' . $memberData->project->name . '」の参加申請を ' . $result . ' しました';
+        return redirect()->back()->with('flash_message', $msg);
+    }
 }

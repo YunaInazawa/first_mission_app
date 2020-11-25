@@ -13,6 +13,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            <!-- フラッシュメッセージ -->
+            @if (session('flash_message'))
+                <div class="flash_message text-center">
+                    {!! nl2br(session('flash_message')) !!}
+                    <hr>
+                </div>
+            @endif
+
             <div class="row justify-content-center">
                 <h1>{{ Auth::user()->name }}</h1>
             </div>
@@ -48,7 +56,8 @@
                 <div class="card-body tag_list">
                     @foreach ($requests as $request)
                     <div class="tag_item">承認待ち：{{ $request->project->name }}<hr>
-                            <div><button class="btn btn-primary"> 加入 </button></div><div class="reject"><button class="btn btn-primary"> 拒否 </button></div>
+                            <div><button class="btn btn-primary" onclick=location.href="{{ route('judgment_join', ['id' => $request->id, 'reply' => true]) }}"> 加入 </button></div>
+                            <div class="reject"><button class="btn btn-primary" onclick=location.href="{{ route('judgment_join', ['id' => $request->id, 'reply' => false]) }}"> 拒否 </button></div>
                     </div>
                     @endforeach
                 </div>
