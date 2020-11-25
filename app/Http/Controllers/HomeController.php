@@ -26,9 +26,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $projects = Auth::user()->projects;
+        $joins = Member::where('user_id',Auth::id())->where('is_join', true)->get();
         $requests = Member::where('user_id',Auth::id())->where('is_join',NULL)->get();
         $tasks = Auth::user()->tasks;
+        $projects = array();
+
+        foreach( $joins as $join ){
+            $projects[] = $join->project;
+        }
 
         return view('home', ['projects'=>$projects, 'requests'=>$requests, 'tasks'=>$tasks]);
     }
