@@ -56,7 +56,7 @@
                                                 @endforeach
                                                 </datalist>
                                                 <i class="fas fa-search"></i><br>
-                                                <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick="funcAddUser({{ $users_data }});" />
+                                                <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick="funcAddUser({{ $users_data }}, 'dialog');" />
                                                 <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide('dialog');" />
                                             </fieldset>
                                         </div>

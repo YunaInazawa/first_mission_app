@@ -1,5 +1,5 @@
-// プロジェクト作成画面 / ユーザ追加
-function funcAddUser( users_data ) {
+// プロジェクト作成 / ユーザ追加
+function funcAddUser( users_data, id ) {
     var userName = document.getElementById('add_user').value;
     var userId = 0;
 
@@ -13,7 +13,15 @@ function funcAddUser( users_data ) {
     str += '<input type="hidden" name="project_members[]" value="' + userId + '">'
     document.getElementById('join_user').innerHTML += str;
      
-    dialogHide();
+    dialogHide(id);
+    return;
+}
+
+// 画面遷移管理 / 遷移先設定
+function funcSetMoveScene(id) {
+    alert(document.getElementById('conectsel').value);
+    
+    dialogHide(id);
     return;
 }
 
@@ -42,9 +50,19 @@ function dialogConecterShow(event){
     const screenNames = document.getElementsByClassName('screennames');
     
     document.getElementById('conectsel').innerHTML = '';
+
+    var str = event.target.innerText;
+    var valueStr = str.substring(0, str.indexOf(" ")) + ' : ';
+    document.getElementById('conectsel').innerHTML += '<option value="' + (valueStr + '---') + '">' + '---' + '</option>'
+
+
     for(var i = 0; i < screenNames.length; i++){
-        if(i != id){
-            document.getElementById('conectsel').innerHTML += '<option value="' + i + '">' + screenNames[i].innerText + '</option>'
+        var scene_id = screenNames[i].id.replace('drop_screen_', '');
+
+        if(scene_id != id){
+            valueStr += screenNames[i].innerText;
+
+            document.getElementById('conectsel').innerHTML += '<option value="' + valueStr + '">' + screenNames[i].innerText + '</option>'
         }
     }
 

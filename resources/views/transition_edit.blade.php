@@ -11,11 +11,11 @@
         <div class="col-lg-2">
             <aside class="sidemenu sidemenu_left">
                 <h2>スクリーン</h2>
-                @for($i = 0;$i != 3;$i++)
+                @foreach( $scenesData as $scene )
                 <button>
-                    <div class="row dragitem screennames" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" id="drop_screen_{{$i}}"><span>Screen{{$i}}</span></div>
+                    <div class="row dragitem screennames" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" id="drop_screen_{{ $scene->id }}"><span>{{ $scene->name }}</span></div>
                 </button>
-                @endfor
+                @endforeach
                 <input type="text" id="select_screen" value="" hidden>
             </aside>
         </div>
@@ -26,15 +26,17 @@
         <div class="col-lg-2 ">
             <aside class="sidemenu sidemenu_right">
                 <h2 class="col-lg-12">オブジェクト</h2>
-                @for($j = 0;$j != 3;$j++)
-                <div class="screen_objs" id="objlists_{{$j}}">
-                        @for($i = 0;$i != 3;$i++)
+                @foreach( $scenesData as $scene )
+                <div class="screen_objs" id="objlists_{{ $scene->id }}">
+                        @foreach( $objects[$scene->id] as $object )
+                        @if( in_array($object->element_id, $elementsId, true) )
                         <button>
-                            <div  onclick="dialogConecterShow(event)" class="row dragitem" id="screen_{{$j}}_obj_{{$i}}"><span>s{{$j}}objrct{{$i}}</span></div>
+                            <div onclick="dialogConecterShow(event)" class="row dragitem" id="screen_{{ $scene->id }}_obj_{{ $object->id }}"><span>{{ $object->text }} : {{ ($object->move_scene->name == null) ? '---' : $object->move_scene->name }}</span></div>
                         </button>
-                        @endfor
+                        @endif
+                        @endforeach
                     </div>
-                @endfor
+                @endforeach
             </aside>
         </div>
     </div>
@@ -52,7 +54,7 @@
                     <option value="tokyo"></option>
                 </select>
                 <br>
-                <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick="" />
+                <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick="funcSetMoveScene('dialog')" />
                 <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide('dialog');" />
             </fieldset>
         </div>

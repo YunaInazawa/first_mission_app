@@ -246,6 +246,19 @@ class AppController extends Controller
      */
     public function transition_edit( $id = 1 )
     {
-        return view('transition_edit', ['app_id'=> $id]);
+        $scenesData = Scene::where('project_id', $id)->get();
+        $objects = array();
+        $elementsId = array();
+        $e_name = ['Button', 'Link'];
+
+        foreach( $scenesData as $scene ){
+            $objects[$scene->id] = Decoration::where('scene_id', $scene->id)->get();
+        }
+
+        foreach( $e_name as $e ){
+            $elementsId[$e] = Element::where('name', $e)->first()->id;
+        }
+
+        return view('transition_edit', ['projectId'=> $id, 'scenesData' => $scenesData, 'objects' => $objects, 'elementsId' => $elementsId]);
     }
 }
