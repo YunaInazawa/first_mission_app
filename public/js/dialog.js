@@ -19,7 +19,8 @@ function funcAddUser( users_data, id ) {
 
 // 画面遷移管理 / 遷移先設定
 function funcSetMoveScene(id) {
-    alert(document.getElementById('conectsel').value);
+    divId = document.getElementById('divId').value;
+    document.getElementById(divId).innerText = document.getElementById('conectsel').value;
     
     dialogHide(id);
     return;
@@ -60,11 +61,14 @@ function dialogConecterShow(event){
         var scene_id = screenNames[i].id.replace('drop_screen_', '');
 
         if(scene_id != id){
+            var valueStr = str.substring(0, str.indexOf(" ")) + ' : ';
             valueStr += screenNames[i].innerText;
 
             document.getElementById('conectsel').innerHTML += '<option value="' + valueStr + '">' + screenNames[i].innerText + '</option>'
         }
     }
+
+    document.getElementById('divId').value = event.target.id;
 
     var dialog = document.getElementById('dialog');
     dialog.style.display = "block";

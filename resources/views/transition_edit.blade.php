@@ -31,7 +31,7 @@
                         @foreach( $objects[$scene->id] as $object )
                         @if( in_array($object->element_id, $elementsId, true) )
                         <button>
-                            <div onclick="dialogConecterShow(event)" class="row dragitem" id="screen_{{ $scene->id }}_obj_{{ $object->id }}"><span>{{ $object->text }} : {{ ($object->move_scene->name == null) ? '---' : $object->move_scene->name }}</span></div>
+                            <div onclick="dialogConecterShow(event)" class="row dragitem" id="screen_{{ $scene->id }}_obj_{{ $object->id }}">{{ $object->text }} : {{ ($object->move_scene->name == null) ? '---' : $object->move_scene->name }}</div>
                         </button>
                         @endif
                         @endforeach
@@ -54,6 +54,7 @@
                     <option value="tokyo"></option>
                 </select>
                 <br>
+                <input type="hidden" id="divId" value="">
                 <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick="funcSetMoveScene('dialog')" />
                 <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide('dialog');" />
             </fieldset>
