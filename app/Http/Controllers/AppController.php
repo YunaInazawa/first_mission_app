@@ -213,4 +213,12 @@ class AppController extends Controller
 
         return view('transition', ['projectId'=> $id, 'scenesData' => $scenesData, 'objects' => $objects, 'elementsId' => $elementsId]);
     }
+
+    /**
+     * 画面遷移管理
+     */
+    public function transition_edit( $id = 1 )
+    {
+        return view('transition_edit', ['app_id'=> $id]);
+    }
 }

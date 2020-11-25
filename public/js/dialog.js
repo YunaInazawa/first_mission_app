@@ -35,3 +35,20 @@ function dialogShow( id ) {
     dialog.style.display = "block";
     return;
 }
+
+function dialogConecterShow(event){
+    var id = document.getElementById('select_screen').value;
+    
+    const screenNames = document.getElementsByClassName('screennames');
+    
+    document.getElementById('conectsel').innerHTML = '';
+    for(var i = 0; i < screenNames.length; i++){
+        if(i != id){
+            document.getElementById('conectsel').innerHTML += '<option value="' + i + '">' + screenNames[i].innerText + '</option>'
+        }
+    }
+
+    var dialog = document.getElementById('dialog');
+    dialog.style.display = "block";
+    return;
+}

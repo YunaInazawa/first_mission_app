@@ -1,0 +1,34 @@
+.sidemenu_left {
+    width: 280px;
+    left: 0px;
+    overflow: hidden;
+}
+.dragitem{
+    margin-left: 15px;
+}
+.screens{
+    background-color: red;
+    height: 875px;
+}
+body{
+    overflow: hidden;
+}
+.obj_screen{
+    width: 130px;
+    height: 85px;
+    background: var(--moonlight);
+    position: absolute;
+    border-radius: 5px;
+    text-align: center;
+}
+.screen_objs{
+    display: none;
+}
+.active_objs{
+	display: block !important;
+}
+.disable{
+    pointer-events: none;
+    background-color: var(--moon-mist);
+    opacity: 0.5;
+}
