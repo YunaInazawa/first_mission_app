@@ -240,4 +240,12 @@ class AppController extends Controller
         $msg = 'プロジェクト「' . $memberData->project->name . '」の参加申請を ' . $result . ' しました';
         return redirect()->back()->with('flash_message', $msg);
     }
+
+    /**
+     * 画面遷移管理
+     */
+    public function transition_edit( $id = 1 )
+    {
+        return view('transition_edit', ['app_id'=> $id]);
+    }
 }

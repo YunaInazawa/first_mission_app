@@ -25,7 +25,8 @@ Route::get('/task_detail/{id}', 'AppController@task_detail')->name('task_detail'
 Route::get('/task_edit/{id}', 'AppController@task_edit')->name('task_edit');
 Route::get('/design/{id}', 'AppController@design')->name('design');
 Route::get('/transition/{id}', 'AppController@transition')->name('transition');
+Route::get('/transition_edit/{id}', 'AppController@transition_edit')->name('transition_edit');
 
-Auth::routes();
+Auth::routes();///
 
 Route::get('/home', 'HomeController@index')->name('home');
