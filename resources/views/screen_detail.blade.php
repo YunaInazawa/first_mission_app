@@ -67,7 +67,11 @@
 
                             <!-- デザイン -->
                             <div id="panel2" class="tab_panel">
-                                <canvas></canvas>
+                                <!-- <canvas></canvas> -->
+                                <div class="text-center">
+                                    <img src="{{ asset('storage/images/sampleImage2.png') }}"><br />
+                                    <a href="{{ route('design', $sceneData->project->id) }}">--- EDIT ---</a>
+                                </div>
                             </div>
 
                         </div>
