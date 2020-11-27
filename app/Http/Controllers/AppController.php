@@ -136,6 +136,17 @@ class AppController extends Controller
     }
 
     /**
+     * プロジェクト削除（GET）
+     */
+    public function app_delete( $id )
+    {
+        $projectData = Project::find($id);
+        $projectName = $projectData->name;
+
+        return redirect()->route('home')->with('flash_message', 'プロジェクト「' . $projectName . '」を削除しました');
+    }
+
+    /**
      * プロジェクト管理
      */
     public function index( $id = 1 )
@@ -146,7 +157,9 @@ class AppController extends Controller
         $logs = Log::where('project_id', $id)->orderBy('id', 'desc')->get();
         $usersData = User::whereNotIn('id', [Auth::id()])->orderBy('name')->get();
 
-        return view('app_home', ['project_data' => $project_data, 'members' => $members, 'members_yet' => $members_yet, 'logs' => $logs, 'users_data' => $usersData]);
+        $myRole = Member::where('user_id', Auth::id())->where('project_id', $id)->first()->role->name;
+
+        return view('app_home', ['project_data' => $project_data, 'members' => $members, 'members_yet' => $members_yet, 'logs' => $logs, 'users_data' => $usersData, 'myRole' => $myRole]);
     }
 
     /**

@@ -76,8 +76,12 @@
                                 <!-- プロジェクト概要 -->
                                 <p>[ 使用言語・技術 ]<br />{{ $project_data->using }}</p>
                                 <p>[ 概要 ]<br />{!! nl2br($project_data->description) !!}</p>
+                                
+                                @if( $myRole == '代表' )
                                 <hr>
-                                <a href="{{ route('app_edit', $project_data->id) }}">--- EDIT ---</a>
+                                <a href="{{ route('app_edit', $project_data->id) }}">--- EDIT ---</a><br />
+                                <a href="{{ route('app_delete', $project_data->id) }}">--- DELETE ---</a>
+                                @endif
                             </div>
                         </div>
                     </div>

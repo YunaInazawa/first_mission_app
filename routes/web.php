@@ -20,6 +20,7 @@ Route::post('new', 'AppController@app_new')->name('app_new');
 Route::get('/app/{id}', 'AppController@index')->name('app_home');
 Route::get('/app_edit/{id}', 'AppController@app_edit')->name('app_edit');
 Route::post('/app_update/{id}', 'AppController@app_update')->name('app_update');
+Route::get('/app_delete/{id}', 'AppController@app_delete')->name('app_delete');
 Route::post('/add_member/{id}', 'AppController@add_member')->name('add_member');
 Route::post('/add_screen/{id}', 'AppController@add_screen')->name('add_screen');
 Route::get('/screen_detail/{id}', 'AppController@screen_detail')->name('screen_detail');
