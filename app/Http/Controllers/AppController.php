@@ -95,6 +95,16 @@ class AppController extends Controller
     }
 
     /**
+     * プロジェクト編集
+     */
+    public function app_edit( $id )
+    {
+        $projectData = Project::find($id);
+
+        return view('app_edit', ['projectData' => $projectData]);
+    }
+
+    /**
      * プロジェクト管理
      */
     public function index( $id = 1 )
