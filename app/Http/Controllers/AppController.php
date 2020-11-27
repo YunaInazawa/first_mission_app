@@ -348,23 +348,30 @@ class AppController extends Controller
     public function transition_update( $id, Request $request )
     {
         $request -> session() -> regenerateToken();
-
         $scenesData = Scene::where('project_id', $id)->get();
-        $str = '';
-        $str2 = '';
 
         foreach( $scenesData as $scene ){
-            $tmp = $request->scenes[$scene->id];
-            $str .= $tmp[0] . ' / ';
+            
+            // scene / DB 登録
+            $scenePosition = explode(',', $request->scenes[$scene->id]);
+            $scene->position_x = $scenePosition[0] == '' ? null : $scenePosition[0];
+            $scene->position_y = $scenePosition[1] == '' ? null : $scenePosition[1];
+            $scene->save();
 
             foreach( $scene->decorations as $decoration ){
+
+                // decoration 存在チェック（ Button, Link のみ ）
                 if( isset($request->decorations[$decoration->id]) ){
-                    $tmp = $request->decorations[$decoration->id];
-                    $str2 .= $tmp[0] . ' / ';
+                    $decoration->move_scene_id = $request->decorations[$decoration->id];
+                    $decoration->save();
+
                 }
             }
         }
 
-        return redirect()->route('app_home', $id)->with('flash_message', '画面遷移を編集しました' . $str2);
+        // ログ登録
+        $this->createLog('ユーザ「' . Auth::user()->name . '」が画面遷移を編集しました', 'update', $id);
+
+        return redirect()->route('app_home', $id)->with('flash_message', '画面遷移を編集しました');
     }
 }
