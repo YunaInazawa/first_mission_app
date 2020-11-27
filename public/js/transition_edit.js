@@ -60,6 +60,9 @@ function Drop(event) {
     }
     var elm = document.getElementById(id);
 
+    // scene_{id} に登録（ POST で送る ）
+    createPostSceneData(id, ((document.getElementById(id).style.top).replace("px","") - (startY - endY)), ((document.getElementById(id).style.left).replace("px","") - (startX - endX)))
+
     //alert("x:" + xxx + ",y:" + yyy + ",w:" + xx + ",h:" + yy);
     document.getElementById(id).classList.add('is-drop');
     document.getElementById(id).style.top = ((document.getElementById(id).style.top).replace("px","") - (startY - endY)) + "px" ;
@@ -89,6 +92,9 @@ function DropAdd(id) {
     }
     document.getElementById('objlists_' + id).classList.add('active_objs');
     document.getElementById('drop_screen_' + id).classList.add('disable');
+
+    // scene_{id} に登録（ POST で送る ）
+    createPostSceneData(id, (event.clientY - 87), (event.clientX - 383))
 }
 // ブラウザ標準のドロップ動作をキャンセル
 function DragOver(event) {
@@ -106,5 +112,13 @@ function ObjClick(event) {
 }
 
 function ClickAdd(event){
+
+}
+
+// scene_{id} に登録（ POST で送る ）
+function createPostSceneData(id, x, y){
+    var hide_name = 'scene_' + id.replace("obj_screen_","");
+    var value_str = y + ',' + x;
+    document.getElementById(hide_name).value = value_str;
 
 }

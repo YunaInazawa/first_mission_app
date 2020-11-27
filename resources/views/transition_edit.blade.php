@@ -23,7 +23,7 @@
                     <button>
                         <div class="row dragitem screennames" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" id="drop_screen_{{ $scene->id }}"><span>{{ $scene->name }}</span></div>
                     </button>
-                    <input type="hidden" name="scenes[{{ $scene->id }}][]" value="{{ $scene->position_x }}, {{ $scene->position_y }}">
+                    <input type="hidden" id="scene_{{ $scene->id }}" name="scenes[{{ $scene->id }}][]" value="{{ $scene->position_x }}, {{ $scene->position_y }}">
                     @endforeach
                     
                     <!-- 仮リンク -->
