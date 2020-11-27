@@ -81,15 +81,17 @@ class AppController extends Controller
         $newMember->save();
 
         // メンバ登録(参加申請)
-        foreach( $projectMembers as $member_id ) {
-            $newJoinMember = new Member;
-            $newJoinMember->project_id = $newProject->id;
-            $newJoinMember->user_id = $member_id;
-            $newJoinMember->role_id = Role::where('name', '一般')->first()->id;
-            $newJoinMember->save();
-            // ログ登録
-            $this->createLog('ユーザ「' . Auth::user()->name . '」がメンバ「' . $newJoinMember->user->name . '」に参加申請', 'join', $newProject->id);
-        }        
+        if( $projectMembers != null ){
+            foreach( $projectMembers as $member_id ) {
+                $newJoinMember = new Member;
+                $newJoinMember->project_id = $newProject->id;
+                $newJoinMember->user_id = $member_id;
+                $newJoinMember->role_id = Role::where('name', '一般')->first()->id;
+                $newJoinMember->save();
+                // ログ登録
+                $this->createLog('ユーザ「' . Auth::user()->name . '」がメンバ「' . $newJoinMember->user->name . '」に参加申請', 'join', $newProject->id);
+            }      
+        }
         
         return redirect(route('app_home', ['id' => $newProject->id]));
     }
