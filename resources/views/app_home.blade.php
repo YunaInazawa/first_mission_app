@@ -76,6 +76,8 @@
                                 <!-- プロジェクト概要 -->
                                 <p>[ 使用言語・技術 ]<br />{{ $project_data->using }}</p>
                                 <p>[ 概要 ]<br />{!! nl2br($project_data->description) !!}</p>
+                                <hr>
+                                <a href="#">--- EDIT ---</a>
                             </div>
                         </div>
                     </div>
@@ -124,8 +126,11 @@
                                 </form>
                             </div>
                             <!-- 画面遷移が表示される -->
-                            <div id="panel2" class="tab_panel">
-                                <a href="{{ route('transition', $project_data->id) }}"><img src="{{ asset('storage/images/sampleImage.png') }}" style="width: 100%;"></a>
+                            <div id="panel2" class="tab_panel text-center">
+                                <a href="{{ route('transition', $project_data->id) }}">
+                                    <img src="{{ asset('storage/images/sampleImage.png') }}" style="width: 100%;">
+                                </a>
+                                <a href="{{ route('transition_edit', $project_data->id) }}">--- EDIT ---</a>
                             </div>
                         </div>
                     </div>
