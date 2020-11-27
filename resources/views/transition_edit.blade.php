@@ -20,7 +20,7 @@
                 <aside class="sidemenu sidemenu_left">
                     <h2>スクリーン</h2>
                     @foreach( $scenesData as $scene )
-                    <button>
+                    <button type="button">
                         <div class="row dragitem screennames" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" id="drop_screen_{{ $scene->id }}"><span>{{ $scene->name }}</span></div>
                     </button>
                     <input type="hidden" id="scene_{{ $scene->id }}" name="scenes[{{ $scene->id }}][]" value="{{ $scene->position_x }}, {{ $scene->position_y }}">
@@ -43,9 +43,10 @@
                     <div class="screen_objs" id="objlists_{{ $scene->id }}">
                             @foreach( $objects[$scene->id] as $object )
                             @if( in_array($object->element_id, $elementsId, true) )
-                            <button>
-                                <div onclick="dialogConecterShow(event)" class="row dragitem" id="screen_{{ $scene->id }}_obj_{{ $object->id }}">{{ $object->text }} : {{ ($object->move_scene->name == null) ? '---' : $object->move_scene->name }}</div>
+                            <button type="button">
+                                <div onclick="dialogConecterShow(event, {{ $object->id }})" class="row dragitem" id="screen_{{ $scene->id }}_obj_{{ $object->id }}">{{ $object->text }} : {{ ($object->move_scene->name == null) ? '---' : $object->move_scene->name }}</div>
                             </button>
+                            <input type="hidden" id="decoration_{{ $object->id }}" name="decorations[{{ $object->id }}][]" value="{{ $object->move_scene_id }}">
                             @endif
                             @endforeach
                         </div>

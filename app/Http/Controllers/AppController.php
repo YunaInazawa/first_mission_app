@@ -351,12 +351,20 @@ class AppController extends Controller
 
         $scenesData = Scene::where('project_id', $id)->get();
         $str = '';
+        $str2 = '';
 
         foreach( $scenesData as $scene ){
             $tmp = $request->scenes[$scene->id];
             $str .= $tmp[0] . ' / ';
+
+            foreach( $scene->decorations as $decoration ){
+                if( isset($request->decorations[$decoration->id]) ){
+                    $tmp = $request->decorations[$decoration->id];
+                    $str2 .= $tmp[0] . ' / ';
+                }
+            }
         }
 
-        return redirect()->route('app_home', $id)->with('flash_message', '画面遷移を編集しました' . $str);
+        return redirect()->route('app_home', $id)->with('flash_message', '画面遷移を編集しました' . $str2);
     }
 }

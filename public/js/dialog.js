@@ -19,8 +19,13 @@ function funcAddUser( users_data, id ) {
 
 // 画面遷移管理 / 遷移先設定
 function funcSetMoveScene(id) {
+    var selectValue = document.getElementById('conectsel').value.split(',');
+
     divId = document.getElementById('divId').value;
-    document.getElementById(divId).innerText = document.getElementById('conectsel').value;
+    document.getElementById(divId).innerText = selectValue[0];
+    
+    var decoration_id = divId.substring(divId.lastIndexOf('_')+1);
+    document.getElementById('decoration_' + decoration_id).value = selectValue[1];
     
     dialogHide(id);
     return;
@@ -45,29 +50,53 @@ function dialogShow( id ) {
     return;
 }
 
-function dialogConecterShow(event){
+function dialogConecterShow(event, decoration_id){
+
+    // 選択している画面id
     var id = document.getElementById('select_screen').value;
     
+    // 全ての画面名
     const screenNames = document.getElementsByClassName('screennames');
     
+    // select の option を全削除
     document.getElementById('conectsel').innerHTML = '';
 
+    // 選択したオブジェクト名
     var str = event.target.innerText;
-    var valueStr = str.substring(0, str.indexOf(" ")) + ' : ';
-    document.getElementById('conectsel').innerHTML += '<option value="' + (valueStr + '---') + '">' + '---' + '</option>'
 
+    // option の valueStr / 選択したオブジェクト名だけ抽出
+    var valueStr = str.substring(0, str.indexOf(" ")) + ' : ---,null';
 
+    // 「---」を option に追加
+    document.getElementById('conectsel').innerHTML += '<option value="' + valueStr + '">' + '---' + '</option>'
+    
+    // 現在、遷移先に設定されている画面id
+    var nowScreenId = document.getElementById('decoration_' + decoration_id).value;
+
+    /* 画面の数だけ繰り返す */
     for(var i = 0; i < screenNames.length; i++){
+
+        // 画面id
         var scene_id = screenNames[i].id.replace('drop_screen_', '');
-
+        
+        /* 自分が置かれている画面以外の場合 */
         if(scene_id != id){
-            var valueStr = str.substring(0, str.indexOf(" ")) + ' : ';
-            valueStr += screenNames[i].innerText;
 
-            document.getElementById('conectsel').innerHTML += '<option value="' + valueStr + '">' + screenNames[i].innerText + '</option>'
+            // option の valueStr / 表示名を作る
+            var valueStr = str.substring(0, str.indexOf(" ")) + ' : ';
+            valueStr += screenNames[i].innerText + ',' + scene_id;
+
+            /* 現在、遷移先に設定されている画面を初期値に設定する */
+            if( nowScreenId == scene_id ){
+                document.getElementById('conectsel').innerHTML += '<option value="' + valueStr + '" selected>' + screenNames[i].innerText + '</option>'
+            }else{
+                document.getElementById('conectsel').innerHTML += '<option value="' + valueStr + '">' + screenNames[i].innerText + '</option>'
+            }
+            
         }
     }
 
+    // 選択したオブジェクトid を保存
     document.getElementById('divId').value = event.target.id;
 
     var dialog = document.getElementById('dialog');
