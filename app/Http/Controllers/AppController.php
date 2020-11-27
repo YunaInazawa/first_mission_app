@@ -52,7 +52,7 @@ class AppController extends Controller
     /**
      * プロジェクト作成 / DB登録（POST）
      */
-    public function new( Request $request )
+    public function app_new( Request $request )
     {
         // 二重送信禁止
         $request->session()->regenerateToken();  
@@ -102,6 +102,37 @@ class AppController extends Controller
         $projectData = Project::find($id);
 
         return view('app_edit', ['projectData' => $projectData]);
+    }
+
+    /**
+     * プロジェクト編集 / DB登録（POST）
+     */
+    public function app_update( $id, Request $request )
+    {
+        // 二重送信禁止
+        $request->session()->regenerateToken();
+
+        if( $request->has('back') ){
+            // 「戻る」ボタンが押されたとき
+            return redirect()->route('app_home', $id);
+            
+        }
+        
+        // データ取得
+        $projectName = $request->project_name;
+        $projectUsing = $request->project_using;
+        $projectDescription = $request->project_description;
+
+        // プロジェクト作成
+        $editProject = Project::find($id);
+        $editProject->name = $projectName;
+        $editProject->description = $projectDescription;
+        $editProject->using = $projectUsing;
+        $editProject->save();
+        // ログ登録
+        $this->createLog('ユーザ「' . Auth::user()->name . '」がプロジェクト「' . $editProject->name . '」を編集', 'update', $editProject->id);
+        
+        return redirect(route('app_home', ['id' => $editProject->id]))->with('flash_message', 'プロジェクト情報を編集しました');
     }
 
     /**
