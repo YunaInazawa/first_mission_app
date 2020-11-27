@@ -145,6 +145,7 @@ class AppController extends Controller
         $projectData = Project::find($id);
         $projectName = $projectData->name;
         $projectId = $projectData->id;
+        $sceneId = $projectData->scenes[0]->id;
 
         // ログ登録
         $this->createLog('ユーザ「' . Auth::user()->name . '」がプロジェクト「' . $projectName . '」を削除', 'delete', $projectId);
@@ -153,6 +154,8 @@ class AppController extends Controller
         $projectData->delete();
         Scene::where('project_id', $id)->delete();
         Member::where('project_id', $id)->delete();
+        Task::where('scene_id', $sceneId)->delete();
+        Decoration::where('scene_id', $sceneId)->delete();
 
         return redirect()->route('home')->with('flash_message', 'プロジェクト「' . $projectName . '」を削除しました');
     }
