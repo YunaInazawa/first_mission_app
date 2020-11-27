@@ -79,8 +79,23 @@
                                 
                                 @if( $myRole == '代表' )
                                 <hr>
+                                <div id="dialogDelete" class="dialog">
+                                    <div class="dialogBackground"></div>
+                                    <div class="dialogContent">
+                                        <div class="dialogMsg">
+                                            メンバーを追加します
+                                        </div>
+                                        <hr class="dialog_hr">
+                                        <div>
+                                            プロジェクト「{{ $project_data->name }}」を削除します<br />
+                                            復元できませんが、よろしいですか？
+                                            <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick=location.href="{{ route('app_delete', $project_data->id) }}" />
+                                            <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide('dialogDelete');" />
+                                        </div>
+                                    </div>
+                                </div>
                                 <a href="{{ route('app_edit', $project_data->id) }}">--- EDIT ---</a><br />
-                                <a href="{{ route('app_delete', $project_data->id) }}">--- DELETE ---</a>
+                                <span onclick="dialogShow('dialogDelete');"><a href="#">--- DELETE ---</a></span>
                                 @endif
                             </div>
                         </div>
