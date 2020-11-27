@@ -29,6 +29,7 @@ Route::get('/task_edit/{id}', 'AppController@task_edit')->name('task_edit');
 Route::get('/design/{id}', 'AppController@design')->name('design');
 Route::get('/transition/{id}', 'AppController@transition')->name('transition');
 Route::get('/transition_edit/{id}', 'AppController@transition_edit')->name('transition_edit');
+Route::post('/trandition_update/{id}', 'AppController@transition_update')->name('transition_update');
 
 Auth::routes();///
 

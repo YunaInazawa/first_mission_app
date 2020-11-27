@@ -297,6 +297,8 @@ class AppController extends Controller
      */
     public function judgmentJoin( $id, Request $request ) 
     {
+        $request -> session() -> regenerateToken();
+
         $memberData = Member::find($id);
         
         $reply = $request->reply;
@@ -338,5 +340,23 @@ class AppController extends Controller
         }
 
         return view('transition_edit', ['projectId'=> $id, 'scenesData' => $scenesData, 'objects' => $objects, 'elementsId' => $elementsId]);
+    }
+
+    /**
+     * 画面遷移 / DB 登録
+     */
+    public function transition_update( $id, Request $request )
+    {
+        $request -> session() -> regenerateToken();
+
+        $scenesData = Scene::where('project_id', $id)->get();
+        $str = '';
+
+        foreach( $scenesData as $scene ){
+            $tmp = $request->scenes[$scene->id];
+            $str .= $tmp[0] . ' / ';
+        }
+
+        return redirect()->route('app_home', $id)->with('flash_message', '画面遷移を編集しました' . $str);
     }
 }
