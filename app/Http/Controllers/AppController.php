@@ -115,17 +115,27 @@ class AppController extends Controller
     {
         $request -> session() -> regenerateToken();
         $userName = $request->userName;
+        $addUser_id = User::where('name', $userName)->first()->id;
 
-        $addMember = new Member;
-        $addMember->project_id = $id;
-        $addMember->user_id = User::where('name', $userName)->first()->id;
-        $addMember->role_id = Role::where('name', '一般')->first()->id;
-        $addMember->save();
+        if( Member::where('user_id', $addUser_id)->where('project_id', $id)->count() == 0 ){
+            $addMember = new Member;
+            $addMember->project_id = $id;
+            $addMember->user_id = $addUser_id;
+            $addMember->role_id = Role::where('name', '一般')->first()->id;
+            $addMember->save();
 
-        // ログ登録
-        $this->createLog('ユーザ「' . Auth::user()->name . '」がメンバ「' . $userName . '」に参加申請', 'join', $id);
+            // ログ登録
+            $this->createLog('ユーザ「' . Auth::user()->name . '」がメンバ「' . $userName . '」に参加申請', 'join', $id);
 
-        return redirect()->back()->with('flash_message', 'ユーザ「' . $userName . '」に参加申請しました');
+            // $msg 登録
+            $msg = 'ユーザ「' . $userName . '」に参加申請しました';
+
+        }else{
+            // $msg 登録
+            $msg = 'ユーザ「' . $userName . '」は申請済みです。';
+        }
+
+        return redirect()->back()->with('flash_message', $msg);
     }
 
     /**
