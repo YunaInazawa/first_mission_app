@@ -279,16 +279,22 @@ class AppController extends Controller
         $request -> session() -> regenerateToken();
 
         $scenesData = Scene::where('project_id', $id)->get();
-        $str = '';
-        $str2 = '';
 
         // 既に存在するオブジェクトの上書き
         foreach( $scenesData as $scene ){
             foreach( $scene->decorations as $deco ){
                 if( isset($request->decorations[$deco->id]) ){
-                    $str .= $request->decorations[$deco->id] . ' / ';
+                    $editDecoData = explode(',', $request->decorations[$deco->id]);
+                    $deco->text = $editDecoData[0];
+                    $deco->font_size = $editDecoData[1];
+                    $deco->width = $editDecoData[2];
+                    $deco->height = $editDecoData[3];
+                    $deco->position_x = $editDecoData[4];
+                    $deco->position_y = $editDecoData[5];
+                    $deco->save();
+
                 }else{
-                    $str .= 'none:' . $deco->id . ' / ';
+                    // 削除処理
                 }
             }
         }
@@ -297,11 +303,25 @@ class AppController extends Controller
         if( isset($request->new_decorations) ){
             $newObjects = $request->new_decorations;
             foreach( $newObjects as $newObject ){
-                $str2 .= $newObject . ' / ';
+                $addDecoData = explode(',', $newObject);
+                $addDeco = new Decoration;
+                $addDeco->text = $addDecoData[0];
+                $addDeco->font_size = $addDecoData[1];
+                $addDeco->width = $addDecoData[2];
+                $addDeco->height = $addDecoData[3];
+                $addDeco->position_x = $addDecoData[4];
+                $addDeco->position_y = $addDecoData[5];
+                $addDeco->scene_id = $addDecoData[6];
+                $addDeco->element_id = $addDecoData[7];
+                $addDeco->save();
+                
             }
         }
 
-        return redirect()->route('app_home', $id)->with('flash_message', 'デザインを編集しました' . $str2);
+        // ログ登録
+        $this->createLog('ユーザ「' . Auth::user()->name . '」がデザインを編集しました', 'update', $id);
+
+        return redirect()->route('app_home', $id)->with('flash_message', 'デザインを編集しました');
     }
 
     /**

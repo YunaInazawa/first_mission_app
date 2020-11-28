@@ -451,7 +451,6 @@ function ChangeText(event){
         objectHidden = document.getElementById('new_decoration_' + objectId);
     }
     var arrHidden = objectHidden.value.split(',');
-    alert(arrHidden)
 
     if(evId == 'obj-name'){
         document.getElementById(selObj).innerText = elms[0].value;
@@ -462,36 +461,33 @@ function ChangeText(event){
             sellist = selObj.replace("obj","list");
         }
         document.getElementById(sellist).innerText = elms[0].value;
-        arrHidden[0] = elms[0].value;
         
     }else if(evId == 'obj-height'){
         document.getElementById(selObj).style.height = elms[2].value + "px";
-        arrHidden[3] = elms[2].value;
 
     }else if(evId == 'obj-width'){
         document.getElementById(selObj).style.width = elms[3].value + "px";
-        arrHidden[2] = elms[3].value;
 
     }else if(evId == 'obj-x'){
         document.getElementById(selObj).style.left = elms[4].value + "px";
-        arrHidden[4] = elms[4].value;
 
     }else if(evId == 'obj-y'){
         document.getElementById(selObj).style.top = elms[5].value + "px";
-        arrHidden[5] = elms[5].value;
 
     }else if(evId == 'obj-font'){
         document.getElementById(selObj).style.fontSize = elms[1].value + "px";
         elms[2].value = document.getElementById(selObj).clientHeight;
         elms[3].value = document.getElementById(selObj).clientWidth;
-        arrHidden[1] = elms[1].value;
-        arrHidden[3] = elms[2].value;
-        arrHidden[2] = elms[3].value;
     }
 
     // POST データ hidden 更新
+    SelectSet(selObj);
+    arrHidden[1] = elms[1].value;
+    arrHidden[2] = elms[3].value;
+    arrHidden[3] = elms[2].value;
+    arrHidden[4] = elms[4].value;
+    arrHidden[5] = elms[5].value;
     objectHidden.value = arrHidden.join(',');
-    alert(objectHidden.value)
 }
 
 

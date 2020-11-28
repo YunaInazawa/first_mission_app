@@ -44,7 +44,7 @@
                             @foreach( $objects[$scene->id] as $object )
                             @if( in_array($object->element_id, $elementsId, true) )
                             <button type="button">
-                                <div onclick="dialogConecterShow(event, {{ $object->id }})" class="row dragitem" id="screen_{{ $scene->id }}_obj_{{ $object->id }}">{{ $object->text }} : {{ ($object->move_scene->name == null) ? '---' : $object->move_scene->name }}</div>
+                                <div onclick="dialogConecterShow(event, {{ $object->id }})" class="row dragitem" id="screen_{{ $scene->id }}_obj_{{ $object->id }}">{{ $object->text }} : {{ ($object->move_scene_id == null) ? '---' : $object->move_scene->name }}</div>
                             </button>
                             <input type="hidden" id="decoration_{{ $object->id }}" name="decorations[{{ $object->id }}]" value="{{ $object->move_scene_id }}">
                             @endif
