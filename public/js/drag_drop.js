@@ -29,7 +29,7 @@ StartFunc();
  * POST で送る hidden の作成
  */
 function createHideStr( key, text, font_size, width, height, x, y, scene_id, element_id ){
-    var hideId = 'decoration_new_' + key;
+    var hideId = 'new_decoration_' + key;
     var hideName = 'new_decorations[]';
     var valueStr = text + ',' + font_size + ',' + width + ',' + height + ',' + x + ',' + y + ',' + scene_id + ',' + element_id;
     var hideStr = '<input type="hidden" id="' + hideId + '" name="' + hideName + '" value="' + valueStr + '">';
@@ -165,12 +165,28 @@ function Drop(event) {
     
     // 画面の上端から、要素の上端までの距離
     var yy = clientRect.top ;
+
+    var position_y = ((document.getElementById(id).style.top).replace("px","") - (startY - endY));
+    var position_x = ((document.getElementById(id).style.left).replace("px","") - (startX - endX));
     //alert("x:" + xxx + ",y:" + yyy + ",w:" + xx + ",h:" + yy);
     document.getElementById(id).classList.add('is-drop');
-    document.getElementById(id).style.top = ((document.getElementById(id).style.top).replace("px","") - (startY - endY)) + "px" ;
-    document.getElementById(id).style.left = ((document.getElementById(id).style.left).replace("px","") - (startX - endX)) + "px" ;
+    document.getElementById(id).style.top = position_y + "px" ;
+    document.getElementById(id).style.left = position_x + "px" ;
     event.currentTarget.appendChild(elm);
     event.preventDefault();
+
+    // POST データ hidden 更新
+    var objectHidden = '';
+    var objectId = id.substring(id.lastIndexOf('_')+1);
+    if(id.indexOf('already') != -1){
+        objectHidden = document.getElementById('decoration_' + objectId);
+    }else{
+        objectHidden = document.getElementById('new_decoration_' + objectId);
+    }
+    var arrHidden = objectHidden.value.split(',');
+    arrHidden[4] = position_x;
+    arrHidden[5] = position_y;
+    objectHidden.value = arrHidden.join(',');
 }
 function DrapAddStart(event) {
     event.target.classList.add('active');
