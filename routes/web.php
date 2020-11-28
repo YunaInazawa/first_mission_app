@@ -27,6 +27,7 @@ Route::get('/screen_detail/{id}', 'AppController@screen_detail')->name('screen_d
 Route::get('/task_detail/{id}', 'AppController@task_detail')->name('task_detail');
 Route::get('/task_edit/{id}', 'AppController@task_edit')->name('task_edit');
 Route::get('/design/{id}', 'AppController@design')->name('design');
+Route::post('/design_edit/{id}', 'AppController@design_edit')->name('design_edit');
 Route::get('/transition/{id}', 'AppController@transition')->name('transition');
 Route::get('/transition_edit/{id}', 'AppController@transition_edit')->name('transition_edit');
 Route::post('/trandition_update/{id}', 'AppController@transition_update')->name('transition_update');

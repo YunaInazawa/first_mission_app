@@ -268,7 +268,17 @@ class AppController extends Controller
             $decorationsData[$scene->id] = Decoration::where('scene_id', $scene->id)->get();
         }
 
-        return view('design', ['app_id'=> $id, 'elements_data' => $elementsData, 'scenes_data' => $scenesData, 'decorations_data' => $decorationsData]);
+        return view('design', ['projectId'=> $id, 'elements_data' => $elementsData, 'scenes_data' => $scenesData, 'decorations_data' => $decorationsData]);
+    }
+
+    /**
+     * デザイン管理 / DB 登録
+     */
+    public function design_edit( $id, Request $request )
+    {
+        $str = '';
+
+        return redirect()->route('app_home', $id)->with('flash_message', 'デザインを編集しました' . $str);
     }
 
     /**
