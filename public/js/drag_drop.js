@@ -181,7 +181,7 @@ function DragAddEnd(event){
     event.target.classList.remove('active');
 }
 function DropAdd(id) {
-    var num = document.getElementById( "select_screen").value;
+    var num = document.getElementById("select_screen").value;
     var tabTarget = document.getElementById('canvas_' + num);
     var styleSet = 'style="top:' + (event.clientY - 87) + 'px;left:' + (event.clientX - 383) + 'px;font-size:18px;"';
 
@@ -202,10 +202,6 @@ function DropAdd(id) {
         // POST データ
         var idStr = 'obj_btn_' + document.getElementById('id_new').value;
         text = 'Button';
-        width = getInfo(idStr, 'width');
-        height = getInfo(idStr, 'height');
-        x = getInfo(idStr, 'x');
-        y = getInfo(idStr, 'y');
         element_id = dropObjId.replace('drop_btn_', '');
 
     }else if(dropObjId.indexOf("checkbox") != -1){
@@ -216,10 +212,6 @@ function DropAdd(id) {
         // POST データ
         var idStr = 'obj_checkbox_' + document.getElementById('id_new').value;
         text = 'CheckBox';
-        width = getInfo(idStr, 'width');
-        height = getInfo(idStr, 'height');
-        x = getInfo(idStr, 'x');
-        y = getInfo(idStr, 'y');
         element_id = dropObjId.replace('drop_checkbox_', '');
 
     }else if(dropObjId.indexOf("label") != -1){
@@ -231,10 +223,6 @@ function DropAdd(id) {
         // POST データ
         var idStr = 'obj_label_' + document.getElementById('id_new').value;
         text = 'Label';
-        width = getInfo(idStr, 'width');
-        height = getInfo(idStr, 'height');
-        x = getInfo(idStr, 'x');
-        y = getInfo(idStr, 'y');
         element_id = dropObjId.replace('drop_label_', '');
 
     }else if(dropObjId.indexOf("radio") != -1){
@@ -245,10 +233,6 @@ function DropAdd(id) {
         // POST データ
         var idStr = 'obj_radio_' + document.getElementById('id_new').value;
         text = 'RadioButton';
-        width = getInfo(idStr, 'width');
-        height = getInfo(idStr, 'height');
-        x = getInfo(idStr, 'x');
-        y = getInfo(idStr, 'y');
         element_id = dropObjId.replace('drop_radio_', '');
 
     }else if(dropObjId.indexOf("textbox") != -1){
@@ -259,15 +243,15 @@ function DropAdd(id) {
         // POST データ
         var idStr = 'obj_textbox_' + document.getElementById('id_new').value;
         text = 'TextBox';
-        width = getInfo(idStr, 'width');
-        height = getInfo(idStr, 'height');
-        x = getInfo(idStr, 'x');
-        y = getInfo(idStr, 'y');
         element_id = dropObjId.replace('drop_textbox_', '');
         
     }
 
     // hidden を追加（ POST で送信 ）
+    width = getInfo(idStr, 'width');
+    height = getInfo(idStr, 'height');
+    x = getInfo(idStr, 'x');
+    y = getInfo(idStr, 'y');
     tabTarget.innerHTML += createHideStr(document.getElementById('id_new').value, text, 18, width, height, x, y, num, element_id);
 
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
@@ -338,43 +322,93 @@ let js_array = <?php echo $json_array; ?>
 /*****************************************
  * 3.新規オブジェクト追加
  *****************************************/
-function ObjBtnClick(event) {
-    var num = document.getElementById( "select_screen").value;
+function ObjBtnClick(event, e_id) {
+    var num = document.getElementById("select_screen").value;
     var tabTarget = document.getElementById('canvas_' + num);
     $(tabTarget).append(tmpObj + 'obj_btn" id="obj_btn_' + document.getElementById('id_new').value + '">' + event.target.innerText + '</div>');
     AddObjList('Button','btn');
+
+    // hidden を追加（ POST で送信 ）
+    var idStr = 'obj_btn_' + document.getElementById('id_new').value;
+    width = getInfo(idStr, 'width');
+    height = getInfo(idStr, 'height');
+    x = getInfo(idStr, 'x');
+    y = getInfo(idStr, 'y');
+    var valueStr = createHideStr(document.getElementById('id_new').value, 'Button', 18, width, height, x, y, num, e_id);
+    $(tabTarget).append(valueStr);
+
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
 }
 
-function ObjLabelClick(event) {
-    var num = document.getElementById( "select_screen").value;
+function ObjLabelClick(event, e_id) {
+    var num = document.getElementById("select_screen").value;
     var tabTarget = document.getElementById('canvas_' + num);
     $(tabTarget).append(tmpObj + 'obj_label" id="obj_label_' + document.getElementById('id_new').value +'">' + event.target.innerText + '</div>');
     AddObjList('Label','label');
+
+    // hidden を追加（ POST で送信 ）
+    var idStr = 'obj_label_' + document.getElementById('id_new').value;
+    width = getInfo(idStr, 'width');
+    height = getInfo(idStr, 'height');
+    x = getInfo(idStr, 'x');
+    y = getInfo(idStr, 'y');
+    var valueStr = createHideStr(document.getElementById('id_new').value, 'Label', 18, width, height, x, y, num, e_id);
+    $(tabTarget).append(valueStr);
+
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
 }
 
-function ObjRadioClick(event) {
-    var num = document.getElementById( "select_screen").value;
+function ObjRadioClick(event, e_id) {
+    var num = document.getElementById("select_screen").value;
     var tabTarget = document.getElementById('canvas_' + num);
     $(tabTarget).append(tmpObj + 'obj_radio" id="obj_radio_' + document.getElementById('id_new').value + '"><input id="radio_1" type="radio">' + event.target.innerText + '</div>');
     AddObjList('RadioButton','radio');
+
+    // hidden を追加（ POST で送信 ）
+    var idStr = 'obj_radio_' + document.getElementById('id_new').value;
+    width = getInfo(idStr, 'width');
+    height = getInfo(idStr, 'height');
+    x = getInfo(idStr, 'x');
+    y = getInfo(idStr, 'y');
+    var valueStr = createHideStr(document.getElementById('id_new').value, 'RadioButton', 18, width, height, x, y, num, e_id);
+    $(tabTarget).append(valueStr);
+
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
 }
 
-function ObjTextBoxClick(event) {
-    var num = document.getElementById( "select_screen").value;
+function ObjTextBoxClick(event, e_id) {
+    var num = document.getElementById("select_screen").value;
     var tabTarget = document.getElementById('canvas_' + num);
     $(tabTarget).append(tmpObj + 'obj_textbox" id="obj_textbox_' + document.getElementById('id_new').value + '"><input id="textbox_1" type="text"></div>');
     AddObjList('TextBox','textbox');
+
+    // hidden を追加（ POST で送信 ）
+    var idStr = 'obj_textbox_' + document.getElementById('id_new').value;
+    width = getInfo(idStr, 'width');
+    height = getInfo(idStr, 'height');
+    x = getInfo(idStr, 'x');
+    y = getInfo(idStr, 'y');
+    var valueStr = createHideStr(document.getElementById('id_new').value, 'TextBox', 18, width, height, x, y, num, e_id);
+    $(tabTarget).append(valueStr);
+
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
 }
 
-function ObjCheckBoxClick(event) {
-    var num = document.getElementById( "select_screen").value;
+function ObjCheckBoxClick(event, e_id) {
+    var num = document.getElementById("select_screen").value;
     var tabTarget = document.getElementById('canvas_' + num);
     $(tabTarget).append(tmpObj + 'obj_checkbox" id="obj_checkbox_' + document.getElementById('id_new').value + '"><input id="checkbox_1" type="checkbox">' + event.target.innerText + '</div>');
     AddObjList('CheckBox','checkbox');
+
+    // hidden を追加（ POST で送信 ）
+    var idStr = 'obj_checkbox_' + document.getElementById('id_new').value;
+    width = getInfo(idStr, 'width');
+    height = getInfo(idStr, 'height');
+    x = getInfo(idStr, 'x');
+    y = getInfo(idStr, 'y');
+    var valueStr = createHideStr(document.getElementById('id_new').value, 'CheckBox', 18, width, height, x, y, num, e_id);
+    $(tabTarget).append(valueStr);
+
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
 }
 

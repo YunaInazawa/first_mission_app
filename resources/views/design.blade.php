@@ -74,24 +74,24 @@ var object=JSON.parse('<?php echo $varJsSample; ?>');//jsonをparseしてJavaScr
                                 @foreach( $elements_data as $e )
                                 @if( $e->name == 'Button' )
                                 <button type="button">
-                                    <div class="row dragitem" id="drop_btn_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjBtnClick(event)"><span class="col-lg-4 ic ic_btn">BUTTON</span><span class="col-lg-8 obj_name">Button</span></div>
+                                    <div class="row dragitem" id="drop_btn_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjBtnClick(event, {{ $e->id }})"><span class="col-lg-4 ic ic_btn">BUTTON</span><span class="col-lg-8 obj_name">Button</span></div>
                                     <input type="hidden" id="id_new" value="<?php echo $newid; $newid++;?>">
                                 </button>
                                 @elseif( $e->name == 'RadioButton' )
                                 <button type="button">
-                                    <div class="row dragitem" id="drop_radio_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjRadioClick(event)"><span class="col-lg-4 ic ic_radio">●</span><span class="col-lg-8 obj_name">RadioButton</span></div>
+                                    <div class="row dragitem" id="drop_radio_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjRadioClick(event, {{ $e->id }})"><span class="col-lg-4 ic ic_radio">●</span><span class="col-lg-8 obj_name">RadioButton</span></div>
                                 </button>
                                 @elseif( $e->name == 'TextBox' )
                                 <button type="button">
-                                    <div class="row dragitem" id="drop_textbox_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjTextBoxClick(event)"><span class="col-lg-4 ic ic_textb">abc |</span><span class="col-lg-8 obj_name">TextBox</span></div>
+                                    <div class="row dragitem" id="drop_textbox_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjTextBoxClick(event, {{ $e->id }})"><span class="col-lg-4 ic ic_textb">abc |</span><span class="col-lg-8 obj_name">TextBox</span></div>
                                 </button>
                                 @elseif( $e->name == 'Label' )
                                 <button type="button">
-                                    <div class="row dragitem" id="drop_label_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjLabelClick(event)"><span class="col-lg-4 ic ic_label">label</span><span class="col-lg-8 obj_name">Label</span></div>
+                                    <div class="row dragitem" id="drop_label_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjLabelClick(event, {{ $e->id }})"><span class="col-lg-4 ic ic_label">label</span><span class="col-lg-8 obj_name">Label</span></div>
                                 </button>
                                 @elseif( $e->name == 'CheckBox' )
                                 <button type="button">
-                                    <div class="row dragitem" id="drop_checkbox_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjCheckBoxClick(event)"><span class="col-lg-4 ic ic_checkb"><label class="fas fa-check"></label></span><span class="col-lg-8 obj_name">CheckBox</span></div>
+                                    <div class="row dragitem" id="drop_checkbox_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjCheckBoxClick(event, {{ $e->id }})"><span class="col-lg-4 ic ic_checkb"><label class="fas fa-check"></label></span><span class="col-lg-8 obj_name">CheckBox</span></div>
                                 </button>
                                 @else
                                 <button type="button">{{ $e->name }}</button>
