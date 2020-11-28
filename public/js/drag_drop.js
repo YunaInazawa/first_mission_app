@@ -343,6 +343,7 @@ function ObjBtnClick(event, e_id) {
     var tabTarget = document.getElementById('canvas_' + num);
     $(tabTarget).append(tmpObj + 'obj_btn" id="obj_btn_' + document.getElementById('id_new').value + '">' + event.target.innerText + '</div>');
     AddObjList('Button','btn');
+    SelectSet('obj_btn_' + document.getElementById('id_new').value);
 
     // hidden を追加（ POST で送信 ）
     var idStr = 'obj_btn_' + document.getElementById('id_new').value;
@@ -361,6 +362,7 @@ function ObjLabelClick(event, e_id) {
     var tabTarget = document.getElementById('canvas_' + num);
     $(tabTarget).append(tmpObj + 'obj_label" id="obj_label_' + document.getElementById('id_new').value +'">' + event.target.innerText + '</div>');
     AddObjList('Label','label');
+    SelectSet('obj_label_' + document.getElementById('id_new').value);
 
     // hidden を追加（ POST で送信 ）
     var idStr = 'obj_label_' + document.getElementById('id_new').value;
@@ -379,6 +381,7 @@ function ObjRadioClick(event, e_id) {
     var tabTarget = document.getElementById('canvas_' + num);
     $(tabTarget).append(tmpObj + 'obj_radio" id="obj_radio_' + document.getElementById('id_new').value + '"><input id="radio_1" type="radio">' + event.target.innerText + '</div>');
     AddObjList('RadioButton','radio');
+    SelectSet('obj_radio_' + document.getElementById('id_new').value);
 
     // hidden を追加（ POST で送信 ）
     var idStr = 'obj_radio_' + document.getElementById('id_new').value;
@@ -397,6 +400,7 @@ function ObjTextBoxClick(event, e_id) {
     var tabTarget = document.getElementById('canvas_' + num);
     $(tabTarget).append(tmpObj + 'obj_textbox" id="obj_textbox_' + document.getElementById('id_new').value + '"><input id="textbox_1" type="text"></div>');
     AddObjList('TextBox','textbox');
+    SelectSet('obj_textbox_' + document.getElementById('id_new').value);
 
     // hidden を追加（ POST で送信 ）
     var idStr = 'obj_textbox_' + document.getElementById('id_new').value;
@@ -415,6 +419,7 @@ function ObjCheckBoxClick(event, e_id) {
     var tabTarget = document.getElementById('canvas_' + num);
     $(tabTarget).append(tmpObj + 'obj_checkbox" id="obj_checkbox_' + document.getElementById('id_new').value + '"><input id="checkbox_1" type="checkbox">' + event.target.innerText + '</div>');
     AddObjList('CheckBox','checkbox');
+    SelectSet('obj_checkbox_' + document.getElementById('id_new').value);
 
     // hidden を追加（ POST で送信 ）
     var idStr = 'obj_checkbox_' + document.getElementById('id_new').value;
@@ -436,6 +441,18 @@ function ObjCheckBoxClick(event, e_id) {
 function ChangeText(event){
     var selObj = document.getElementById('select_obj').value;
     var evId = event.target.id;
+
+    // POST データ hidden 取得
+    var objectHidden = '';
+    var objectId = selObj.substring(selObj.lastIndexOf('_')+1);
+    if(selObj.indexOf('already') != -1){
+        objectHidden = document.getElementById('decoration_' + objectId);
+    }else{
+        objectHidden = document.getElementById('new_decoration_' + objectId);
+    }
+    var arrHidden = objectHidden.value.split(',');
+    alert(arrHidden)
+
     if(evId == 'obj-name'){
         document.getElementById(selObj).innerText = elms[0].value;
         var sellist = '';
@@ -445,19 +462,36 @@ function ChangeText(event){
             sellist = selObj.replace("obj","list");
         }
         document.getElementById(sellist).innerText = elms[0].value;
+        arrHidden[0] = elms[0].value;
+        
     }else if(evId == 'obj-height'){
         document.getElementById(selObj).style.height = elms[2].value + "px";
+        arrHidden[3] = elms[2].value;
+
     }else if(evId == 'obj-width'){
         document.getElementById(selObj).style.width = elms[3].value + "px";
+        arrHidden[2] = elms[3].value;
+
     }else if(evId == 'obj-x'){
         document.getElementById(selObj).style.left = elms[4].value + "px";
+        arrHidden[4] = elms[4].value;
+
     }else if(evId == 'obj-y'){
         document.getElementById(selObj).style.top = elms[5].value + "px";
+        arrHidden[5] = elms[5].value;
+
     }else if(evId == 'obj-font'){
         document.getElementById(selObj).style.fontSize = elms[1].value + "px";
         elms[2].value = document.getElementById(selObj).clientHeight;
         elms[3].value = document.getElementById(selObj).clientWidth;
+        arrHidden[1] = elms[1].value;
+        arrHidden[3] = elms[2].value;
+        arrHidden[2] = elms[3].value;
     }
+
+    // POST データ hidden 更新
+    objectHidden.value = arrHidden.join(',');
+    alert(objectHidden.value)
 }
 
 
