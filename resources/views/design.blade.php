@@ -58,9 +58,9 @@ var object=JSON.parse('<?php echo $varJsSample; ?>');//jsonをparseしてJavaScr
                             <div id="nav-content">
                                 @foreach( $scenes_data as $s )
                                     @if($tabfst == true)
-                                        <span class="tab-trigger js-tab-trigger is-active" data-id="tab0<?php echo $s->id;$tabfst = false; ?>">{{ $s->name }}</span>
+                                        <span class="tab-trigger js-tab-trigger is-active" id="scene_{{ $s->id }}" data-id="tab0<?php echo $s->id;$tabfst = false; ?>">{{ $s->name }}</span>
                                     @else
-                                        <span class="tab-trigger js-tab-trigger" data-id="tab0<?php echo $s->id ?>">{{ $s->name }}</span>
+                                        <span class="tab-trigger js-tab-trigger" id="scene_{{ $s->id }}" data-id="tab0<?php echo $s->id ?>">{{ $s->name }}</span>
                                     @endif
                                 @endforeach
                                 <?php $tabfst = true; ?>
@@ -70,32 +70,36 @@ var object=JSON.parse('<?php echo $varJsSample; ?>');//jsonをparseしてJavaScr
                     <div class="col-lg-10">
                         <aside class="sidemenu sidemenu_left">
                             <h2>オブジェクト</h2>
+
+                                @foreach( $elements_data as $e )
+                                @if( $e->name == 'Button' )
                                 <button type="button">
-                                    <div class="row dragitem" id="drop_btn" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjBtnClick(event)"><span class="col-lg-4 ic ic_btn">BUTTON</span><span class="col-lg-8 obj_name">Button</span></div>
+                                    <div class="row dragitem" id="drop_btn_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjBtnClick(event)"><span class="col-lg-4 ic ic_btn">BUTTON</span><span class="col-lg-8 obj_name">Button</span></div>
                                     <input type="hidden" id="id_new" value="<?php echo $newid; $newid++;?>">
                                 </button>
+                                @elseif( $e->name == 'RadioButton' )
                                 <button type="button">
-                                    <div class="row dragitem" id="drop_radio" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjRadioClick(event)"><span class="col-lg-4 ic ic_radio">●</span><span class="col-lg-8 obj_name">RadioButton</span></div>
+                                    <div class="row dragitem" id="drop_radio_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjRadioClick(event)"><span class="col-lg-4 ic ic_radio">●</span><span class="col-lg-8 obj_name">RadioButton</span></div>
                                 </button>
+                                @elseif( $e->name == 'TextBox' )
                                 <button type="button">
-                                    <div class="row dragitem" id="drop_textbox" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjTextBoxClick(event)"><span class="col-lg-4 ic ic_textb">abc |</span><span class="col-lg-8 obj_name">TextBox</span></div>
+                                    <div class="row dragitem" id="drop_textbox_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjTextBoxClick(event)"><span class="col-lg-4 ic ic_textb">abc |</span><span class="col-lg-8 obj_name">TextBox</span></div>
                                 </button>
+                                @elseif( $e->name == 'Label' )
                                 <button type="button">
-                                    <div class="row dragitem" id="drop_label" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjLabelClick(event)"><span class="col-lg-4 ic ic_label">label</span><span class="col-lg-8 obj_name">Label</span></div>
+                                    <div class="row dragitem" id="drop_label_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjLabelClick(event)"><span class="col-lg-4 ic ic_label">label</span><span class="col-lg-8 obj_name">Label</span></div>
                                 </button>
+                                @elseif( $e->name == 'CheckBox' )
                                 <button type="button">
-                                    <div class="row dragitem" id="drop_checkbox" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjCheckBoxClick(event)"><span class="col-lg-4 ic ic_checkb"><label class="fas fa-check"></label></span><span class="col-lg-8 obj_name">CheckBox</span></div>
+                                    <div class="row dragitem" id="drop_checkbox_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjCheckBoxClick(event)"><span class="col-lg-4 ic ic_checkb"><label class="fas fa-check"></label></span><span class="col-lg-8 obj_name">CheckBox</span></div>
                                 </button>
+                                @else
+                                <button type="button">{{ $e->name }}</button>
+                                @endif
+                                @endforeach
 
                                 <!-- 仮リンク -->
                                 <button type="submit">完了</button>
-
-                                <p>
-                                < elements ><br />
-                                @foreach( $elements_data as $e )
-                                {{ $e->name }}<br />
-                                @endforeach
-                                </p>
 
                                 <p>
                                 < scenes ><br />
@@ -119,12 +123,12 @@ var object=JSON.parse('<?php echo $varJsSample; ?>');//jsonをparseしてJavaScr
                     @foreach( $scenes_data as $s )
                     @if($tabfst == true)
                         <div id="tab0<?php echo $s->id; $tabfst = false;?>" class="tab-content__item js-tab-target is-active">
-                            <div id="drop" class="canvas" ondragover="DragOver(event)" ondrop="Drop(event)" >
+                            <div id="canvas_{{ $s->id }}" class="canvas" ondragover="DragOver(event)" ondrop="Drop(event)" >
                             {{ $s->name }}</div>
                         </div>
                     @else
                         <div id="tab0<?php echo $s->id;?>" class="tab-content__item js-tab-target">
-                            <div id="drop" class="canvas" ondragover="DragOver(event)" ondrop="Drop(event)" >
+                            <div id="canvas_{{ $s->id }}" class="canvas" ondragover="DragOver(event)" ondrop="Drop(event)" >
                             {{ $s->name }}</div>
                         </div>
                     @endif
@@ -156,7 +160,7 @@ var object=JSON.parse('<?php echo $varJsSample; ?>');//jsonをparseしてJavaScr
                                 <th>座標Y</th><td><input class="js-input-elm" id="obj-y" type="text" onchange="ChangeText(event)"></td>
                             </tr>
                         </table>
-                        <input type="text" id="select_screen" value="0" hidden>
+                        <input type="text" id="select_screen" value="{{ $scenes_data[0]->id }}" hidden>
                         <input type="text" id="select_obj" value="" hidden>
                     </div>
                     <div class="objectlist ac_menu" id="obj_lists">

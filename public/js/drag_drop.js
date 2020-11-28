@@ -24,32 +24,78 @@ var startX = 0;
 var endY = 0;
 var endX = 0;
 StartFunc();
+
+/**
+ * POST で送る hidden の作成
+ */
+function createHideStr( key, text, font_size, width, height, x, y, scene_id, element_id ){
+    var hideId = 'decoration_new_' + key;
+    var hideName = 'decorations[\'new_objects\']';
+    var valueStr = text + ',' + font_size + ',' + width + ',' + height + ',' + x + ',' + y + ',' + scene_id + ',' + element_id;
+    var hideStr = '<input type="hidden" id="' + hideId + '" name="' + hideName + '" value="' + valueStr + '">';
+    alert(hideStr)
+
+    return hideStr;
+}
+
+/**
+ * 情報の取得
+ */
+function getInfo( id, type ){
+    var selObjId = id;
+    if(-1 == selObjId.indexOf('obj')){
+        selObjId = "obj_" + selObjId;
+    }
+    selObjId = selObjId.replace("list_","");
+    selObjId = selObjId.replace("alr_","already_");
+    var selObj = document.getElementById(selObjId);
+
+    // 選択したオブジェクトのIDを取得
+    document.getElementById('select_obj').value = selObjId;
+    
+    // 選択したオブジェクトの欲しい情報を返す
+    if( type == 'x' ){
+        return (selObj.style.left).replace("px","");
+    }else if( type == 'y' ){
+        return (selObj.style.top).replace("px","");
+    }else if( type == 'text' ){
+        return selObj.innerText;
+    }else if( type == 'font' ){
+        return (selObj.style.fontSize).replace("px","");
+    }else if( type == 'width' ){
+        return selObj.clientWidth;
+    }else if( type == 'height' ){
+        return selObj.clientHeight;
+    }
+}
+
 function StartFunc(){
-    // '.canvas'を持つ要素を取得
-    const tabTargets = document.querySelectorAll('.canvas');
     let key = Object.keys(object);
     for (var k in key) {
         var objitemset = '';
         var styleSet = 'style="top: ' + object[key[k]]['y'] + 'px; left: ' + object[key[k]]['x'] + 'px; font-size: 18px; height: ' + object[key[k]]['height'] + 'px; width: ' + object[key[k]]['width'] + 'px;"';
 
+        var tabTarget = document.getElementById('canvas_' + object[key[k]]['sceneId']);
+
         if(object[key[k]]['element'] == "Button"){
-            tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_btn"' + styleSet +' id="obj_already_btn_' + key[k] + '">' + object[key[k]]['name'] + '</div>';
+            tabTarget.innerHTML += alreadyTmpObj + 'obj_btn"' + styleSet +' id="obj_already_btn_' + key[k] + '">' + object[key[k]]['name'] + '</div>';
             objitemset = objListItem + 'alr_btn_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_btn_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
         }else if(object[key[k]]['element'] == "CheckBox"){
-            tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_checkbox"' + styleSet +' id="obj_already_checkbox_' + key[k] + '"><input id="already_checkbox_' + key[k] + '" type="checkbox">' + object[key[k]]['name'] + '</div>';
+            tabTarget.innerHTML += alreadyTmpObj + 'obj_checkbox"' + styleSet +' id="obj_already_checkbox_' + key[k] + '"><input id="already_checkbox_' + key[k] + '" type="checkbox">' + object[key[k]]['name'] + '</div>';
             objitemset = objListItem + 'alr_checkbox_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_checkbox_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
         }else if(object[key[k]]['element'] == "Label"){
-            tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_label"' + styleSet +' id="obj_already_label_' + key[k] + '">' + object[key[k]]['name'] + '</div>';
+            tabTarget.innerHTML += alreadyTmpObj + 'obj_label"' + styleSet +' id="obj_already_label_' + key[k] + '">' + object[key[k]]['name'] + '</div>';
             objitemset = objListItem + 'alr_label_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_label_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
         }else if(object[key[k]]['element'] == "RadioButton"){
-            tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_radio"' + styleSet +' id="obj_already_radio_' + key[k] + '"><input id="already_radio_' + key[k] + '" type="radio">' + object[key[k]]['name'] + '</div>';
+            tabTarget.innerHTML += alreadyTmpObj + 'obj_radio"' + styleSet +' id="obj_already_radio_' + key[k] + '"><input id="already_radio_' + key[k] + '" type="radio">' + object[key[k]]['name'] + '</div>';
             objitemset = objListItem + 'alr_radio_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_radio_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
         }else if(object[key[k]]['element'] == "TextBox"){
-            tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_textbox"' + styleSet +' id="obj_already_textbox_' + key[k] + '"><input id="already_textbox_' + key[k] + '" type="text"></div>';
+            tabTarget.innerHTML += alreadyTmpObj + 'obj_textbox"' + styleSet +' id="obj_already_textbox_' + key[k] + '"><input id="already_textbox_' + key[k] + '" type="text"></div>';
             objitemset = objListItem + 'alr_textbox_' + key[k] + '">' + object[key[k]]['element'] + key[k];
         }
 
         // hidden を作成（ POST で送信 ）
+        var hideId = 'decoration_' + object[key[k]]['id'];
         var hideName = 'decorations[' + object[key[k]]['id'] + ']';
         var valueStr = object[key[k]]['name'] + ',' + 
             object[key[k]]['fontsize'] + ',' + 
@@ -57,19 +103,21 @@ function StartFunc(){
             object[key[k]]['height'] + ',' + 
             object[key[k]]['x'] + ',' + 
             object[key[k]]['y'];
-        var hideStr = '<input type="hidden" name="' + hideName + '" value="' + valueStr + '">';
+        var hideStr = '<input type="hidden" id="' + hideId + '" name="' + hideName + '" value="' + valueStr + '">';
 
         document.getElementById('links'+object[key[k]]['s']).innerHTML += objitemset + '</a></li>' + hideStr;
     }
 }
 function AddObjList(addobj,addid){
-    const tabTargets = document.querySelectorAll('.js-tab-target');
-    var num = document.getElementById( "select_screen").value;
+    var num = document.getElementById("select_screen").value;
+    var tabTarget = document.getElementById('canvas_' + num);
     var objitemset = objListItem + addid + '_' + document.getElementById('id_new').value + '"><span class="new_c">●</span><span class="new_p">＋</span>' + addobj + document.getElementById('id_new').value;
+
     if(addobj != "TextBox"){
         objitemset += '-<span id="list_' + addid +'_' + document.getElementById('id_new').value +'">' + addobj + '</span>';
     }
-    document.getElementById('links' + (tabTargets[num].id).replace("tab0","")).innerHTML += objitemset + '</a></li>';
+
+    document.getElementById('links' + (tabTarget.id).replace("canvas_","")).innerHTML += objitemset + '</a></li>';
 }
 
 /*****************************************
@@ -134,32 +182,95 @@ function DragAddEnd(event){
     event.target.classList.remove('active');
 }
 function DropAdd(id) {
-    // '.canvas'を持つ要素を取得
-    const tabTargets = document.querySelectorAll('.canvas');
     var num = document.getElementById( "select_screen").value;
+    var tabTarget = document.getElementById('canvas_' + num);
     var styleSet = 'style="top:' + (event.clientY - 87) + 'px;left:' + (event.clientX - 383) + 'px;font-size:18px;"';
+
+    // POST データ
+    var text = '';
+    var width = 0;
+    var height = 0;
+    var x = 0;
+    var y = 0;
+    var element_id = 0;
+
     // drop_radio → obj_radio_0
     if(dropObjId.indexOf("btn") != -1){
-        tabTargets[num].innerHTML += droptmpObj + 'obj_btn" id="obj_btn_' + document.getElementById('id_new').value + '"' + styleSet + '>Button</div>';
+        tabTarget.innerHTML += droptmpObj + 'obj_btn" id="obj_btn_' + document.getElementById('id_new').value + '"' + styleSet + '>Button</div>';
         AddObjList('Button','btn');
         SelectSet('obj_btn_' + document.getElementById('id_new').value);
+
+        // POST データ
+        var idStr = 'obj_btn_' + document.getElementById('id_new').value;
+        text = 'Button';
+        width = getInfo(idStr, 'width');
+        height = getInfo(idStr, 'height');
+        x = getInfo(idStr, 'x');
+        y = getInfo(idStr, 'y');
+        element_id = dropObjId.replace('drop_btn_', '');
+
     }else if(dropObjId.indexOf("checkbox") != -1){
-        tabTargets[num].innerHTML += droptmpObj + 'obj_checkbox" id="obj_checkbox_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="checkbox_1" type="checkbox">CheckBox</div>';
+        tabTarget.innerHTML += droptmpObj + 'obj_checkbox" id="obj_checkbox_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="checkbox_1" type="checkbox">CheckBox</div>';
         AddObjList('CheckBox','checkbox');
         SelectSet('obj_checkbox_' + document.getElementById('id_new').value);
+
+        // POST データ
+        var idStr = 'obj_checkbox_' + document.getElementById('id_new').value;
+        text = 'CheckBox';
+        width = getInfo(idStr, 'width');
+        height = getInfo(idStr, 'height');
+        x = getInfo(idStr, 'x');
+        y = getInfo(idStr, 'y');
+        element_id = dropObjId.replace('drop_checkbox_', '');
+
     }else if(dropObjId.indexOf("label") != -1){
-        tabTargets[num].innerHTML += droptmpObj + 'obj_label" id="obj_label_' + document.getElementById('id_new').value +'"' + styleSet + '>Label</div>';
+        text = '';
+        tabTarget.innerHTML += droptmpObj + 'obj_label" id="obj_label_' + document.getElementById('id_new').value +'"' + styleSet + '>Label</div>';
         AddObjList('Label','label');
         SelectSet('obj_label_' + document.getElementById('id_new').value);
+
+        // POST データ
+        var idStr = 'obj_label_' + document.getElementById('id_new').value;
+        text = 'Label';
+        width = getInfo(idStr, 'width');
+        height = getInfo(idStr, 'height');
+        x = getInfo(idStr, 'x');
+        y = getInfo(idStr, 'y');
+        element_id = dropObjId.replace('drop_label_', '');
+
     }else if(dropObjId.indexOf("radio") != -1){
-        tabTargets[num].innerHTML += droptmpObj + 'obj_radio" id="obj_radio_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="radio_1" type="radio">RadioButton</div>';
+        tabTarget.innerHTML += droptmpObj + 'obj_radio" id="obj_radio_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="radio_1" type="radio">RadioButton</div>';
         AddObjList('RadioButton','radio');
         SelectSet('obj_radio_' + document.getElementById('id_new').value);
+
+        // POST データ
+        var idStr = 'obj_radio_' + document.getElementById('id_new').value;
+        text = 'RadioButton';
+        width = getInfo(idStr, 'width');
+        height = getInfo(idStr, 'height');
+        x = getInfo(idStr, 'x');
+        y = getInfo(idStr, 'y');
+        element_id = dropObjId.replace('drop_radio_', '');
+
     }else if(dropObjId.indexOf("textbox") != -1){
-        tabTargets[num].innerHTML += droptmpObj + 'obj_textbox" id="obj_textbox_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="textbox_1" type="text"></div>';
+        tabTarget.innerHTML += droptmpObj + 'obj_textbox" id="obj_textbox_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="textbox_1" type="text"></div>';
         AddObjList('TextBox','textbox');
         SelectSet('obj_textbox_' + document.getElementById('id_new').value);
+
+        // POST データ
+        var idStr = 'obj_textbox_' + document.getElementById('id_new').value;
+        text = 'TextBox';
+        width = getInfo(idStr, 'width');
+        height = getInfo(idStr, 'height');
+        x = getInfo(idStr, 'x');
+        y = getInfo(idStr, 'y');
+        element_id = dropObjId.replace('drop_textbox_', '');
+        
     }
+
+    // hidden を追加（ POST で送信 ）
+    tabTarget.innerHTML += createHideStr(document.getElementById('id_new').value, text, 18, width, height, x, y, num, element_id);
+
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
     
 }
@@ -229,46 +340,41 @@ let js_array = <?php echo $json_array; ?>
  * 3.新規オブジェクト追加
  *****************************************/
 function ObjBtnClick(event) {
-    // '.canvas'を持つ要素を取得
-    const tabTargets = document.querySelectorAll('.canvas');
     var num = document.getElementById( "select_screen").value;
-    $(tabTargets[num]).append(tmpObj + 'obj_btn" id="obj_btn_' + document.getElementById('id_new').value + '">' + event.target.innerText + '</div>');
+    var tabTarget = document.getElementById('canvas_' + num);
+    $(tabTarget).append(tmpObj + 'obj_btn" id="obj_btn_' + document.getElementById('id_new').value + '">' + event.target.innerText + '</div>');
     AddObjList('Button','btn');
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
 }
 
 function ObjLabelClick(event) {
-    // '.canvas'を持つ要素を取得
-    const tabTargets = document.querySelectorAll('.canvas');
     var num = document.getElementById( "select_screen").value;
-    $(tabTargets[num]).append(tmpObj + 'obj_label" id="obj_label_' + document.getElementById('id_new').value +'">' + event.target.innerText + '</div>');
+    var tabTarget = document.getElementById('canvas_' + num);
+    $(tabTarget).append(tmpObj + 'obj_label" id="obj_label_' + document.getElementById('id_new').value +'">' + event.target.innerText + '</div>');
     AddObjList('Label','label');
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
 }
 
 function ObjRadioClick(event) {
-    // '.canvas'を持つ要素を取得
-    const tabTargets = document.querySelectorAll('.canvas');
     var num = document.getElementById( "select_screen").value;
-    $(tabTargets[num]).append(tmpObj + 'obj_radio" id="obj_radio_' + document.getElementById('id_new').value + '"><input id="radio_1" type="radio">' + event.target.innerText + '</div>');
+    var tabTarget = document.getElementById('canvas_' + num);
+    $(tabTarget).append(tmpObj + 'obj_radio" id="obj_radio_' + document.getElementById('id_new').value + '"><input id="radio_1" type="radio">' + event.target.innerText + '</div>');
     AddObjList('RadioButton','radio');
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
 }
 
 function ObjTextBoxClick(event) {
-    // '.canvas'を持つ要素を取得
-    const tabTargets = document.querySelectorAll('.canvas');
     var num = document.getElementById( "select_screen").value;
-    $(tabTargets[num]).append(tmpObj + 'obj_textbox" id="obj_textbox_' + document.getElementById('id_new').value + '"><input id="textbox_1" type="text"></div>');
+    var tabTarget = document.getElementById('canvas_' + num);
+    $(tabTarget).append(tmpObj + 'obj_textbox" id="obj_textbox_' + document.getElementById('id_new').value + '"><input id="textbox_1" type="text"></div>');
     AddObjList('TextBox','textbox');
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
 }
 
 function ObjCheckBoxClick(event) {
-    // '.canvas'を持つ要素を取得
-    const tabTargets = document.querySelectorAll('.canvas');
     var num = document.getElementById( "select_screen").value;
-    $(tabTargets[num]).append(tmpObj + 'obj_checkbox" id="obj_checkbox_' + document.getElementById('id_new').value + '"><input id="checkbox_1" type="checkbox">' + event.target.innerText + '</div>');
+    var tabTarget = document.getElementById('canvas_' + num);
+    $(tabTarget).append(tmpObj + 'obj_checkbox" id="obj_checkbox_' + document.getElementById('id_new').value + '"><input id="checkbox_1" type="checkbox">' + event.target.innerText + '</div>');
     AddObjList('CheckBox','checkbox');
     document.getElementById('id_new').value = Number(document.getElementById('id_new').value) + 1;
 }

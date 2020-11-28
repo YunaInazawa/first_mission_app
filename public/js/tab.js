@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(currentContent !== null) {
                 currentContent.classList.add('is-active');
             }
-            document.getElementById( "select_screen" ).value = i;
+            document.getElementById( "select_screen" ).value = currentContent.id.replace('tab0', '');
         });
     }
 });

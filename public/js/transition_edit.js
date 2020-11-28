@@ -29,6 +29,14 @@ function StartFunc(){
     
 }
 
+// scene_{id} に登録（ POST で送る ）
+function createPostSceneData(id, x, y){
+    var hide_name = 'scene_' + id.replace("obj_screen_","");
+    var value_str = y + ',' + x;
+    document.getElementById(hide_name).value = value_str;
+
+}
+
 /*
  * 2.1 ドラッグ&ドロップ
  *****************************************/
@@ -112,13 +120,5 @@ function ObjClick(event) {
 }
 
 function ClickAdd(event){
-
-}
-
-// scene_{id} に登録（ POST で送る ）
-function createPostSceneData(id, x, y){
-    var hide_name = 'scene_' + id.replace("obj_screen_","");
-    var value_str = y + ',' + x;
-    document.getElementById(hide_name).value = value_str;
 
 }

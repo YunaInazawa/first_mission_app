@@ -285,13 +285,17 @@ class AppController extends Controller
         // 既に存在するオブジェクトの上書き
         foreach( $scenesData as $scene ){
             foreach( $scene->decorations as $deco ){
-                $str .= $request->decorations[$deco->id] . ' / ';
+                if( isset($request->decorations[$deco->id]) ){
+                    $str .= $request->decorations[$deco->id] . ' / ';
+                }else{
+                    $str .= 'none:' . $deco->id . ' / ';
+                }
             }
         }
 
         // 新しく追加されたオブジェクトを登録
         if( isset($request->decorations['new']) ){
-            $newObjects = $request->decorations['new'];
+            $newObjects = $request->decorations['new_objects'];
             foreach( $newObjects as $newObject ){
                 $str2 .= $newObject;
             }
