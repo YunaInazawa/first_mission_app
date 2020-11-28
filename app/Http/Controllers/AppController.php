@@ -294,14 +294,14 @@ class AppController extends Controller
         }
 
         // 新しく追加されたオブジェクトを登録
-        if( isset($request->decorations['new']) ){
-            $newObjects = $request->decorations['new_objects'];
+        if( isset($request->new_decorations) ){
+            $newObjects = $request->new_decorations;
             foreach( $newObjects as $newObject ){
-                $str2 .= $newObject;
+                $str2 .= $newObject . ' / ';
             }
         }
 
-        return redirect()->route('app_home', $id)->with('flash_message', 'デザインを編集しました' . $str);
+        return redirect()->route('app_home', $id)->with('flash_message', 'デザインを編集しました' . $str2);
     }
 
     /**

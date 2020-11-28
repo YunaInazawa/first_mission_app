@@ -30,10 +30,9 @@ StartFunc();
  */
 function createHideStr( key, text, font_size, width, height, x, y, scene_id, element_id ){
     var hideId = 'decoration_new_' + key;
-    var hideName = 'decorations[\'new_objects\']';
+    var hideName = 'new_decorations[]';
     var valueStr = text + ',' + font_size + ',' + width + ',' + height + ',' + x + ',' + y + ',' + scene_id + ',' + element_id;
     var hideStr = '<input type="hidden" id="' + hideId + '" name="' + hideName + '" value="' + valueStr + '">';
-    alert(hideStr)
 
     return hideStr;
 }
