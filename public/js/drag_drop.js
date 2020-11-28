@@ -31,6 +31,7 @@ function StartFunc(){
     for (var k in key) {
         var objitemset = '';
         var styleSet = 'style="top: ' + object[key[k]]['y'] + 'px; left: ' + object[key[k]]['x'] + 'px; font-size: 18px; height: ' + object[key[k]]['height'] + 'px; width: ' + object[key[k]]['width'] + 'px;"';
+
         if(object[key[k]]['element'] == "Button"){
             tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_btn"' + styleSet +' id="obj_already_btn_' + key[k] + '">' + object[key[k]]['name'] + '</div>';
             objitemset = objListItem + 'alr_btn_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_btn_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
@@ -47,7 +48,18 @@ function StartFunc(){
             tabTargets[parseInt(object[key[k]]['screen'])].innerHTML += alreadyTmpObj + 'obj_textbox"' + styleSet +' id="obj_already_textbox_' + key[k] + '"><input id="already_textbox_' + key[k] + '" type="text"></div>';
             objitemset = objListItem + 'alr_textbox_' + key[k] + '">' + object[key[k]]['element'] + key[k];
         }
-        document.getElementById('links'+object[key[k]]['s']).innerHTML += objitemset + '</a></li>';
+
+        // hidden を作成（ POST で送信 ）
+        var hideName = 'decorations[' + object[key[k]]['id'] + ']';
+        var valueStr = object[key[k]]['name'] + ',' + 
+            object[key[k]]['fontsize'] + ',' + 
+            object[key[k]]['width'] + ',' + 
+            object[key[k]]['height'] + ',' + 
+            object[key[k]]['x'] + ',' + 
+            object[key[k]]['y'];
+        var hideStr = '<input type="hidden" name="' + hideName + '" value="' + valueStr + '">';
+
+        document.getElementById('links'+object[key[k]]['s']).innerHTML += objitemset + '</a></li>' + hideStr;
     }
 }
 function AddObjList(addobj,addid){

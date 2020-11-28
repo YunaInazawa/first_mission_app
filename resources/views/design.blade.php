@@ -10,6 +10,8 @@ foreach( $scenes_data as $s ){
             $d->id => array(
                 'element' => $d->element->name,
                 'screen' => $screenID,
+                'sceneId' => $d->scene_id,
+                'id' => $d->id,
                 'name' => $d->text,
                 'height' => $d->height,
                 'width' => $d->width,

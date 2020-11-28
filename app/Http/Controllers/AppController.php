@@ -276,7 +276,26 @@ class AppController extends Controller
      */
     public function design_edit( $id, Request $request )
     {
+        $request -> session() -> regenerateToken();
+
+        $scenesData = Scene::where('project_id', $id)->get();
         $str = '';
+        $str2 = '';
+
+        // 既に存在するオブジェクトの上書き
+        foreach( $scenesData as $scene ){
+            foreach( $scene->decorations as $deco ){
+                $str .= $request->decorations[$deco->id] . ' / ';
+            }
+        }
+
+        // 新しく追加されたオブジェクトを登録
+        if( isset($request->decorations['new']) ){
+            $newObjects = $request->decorations['new'];
+            foreach( $newObjects as $newObject ){
+                $str2 .= $newObject;
+            }
+        }
 
         return redirect()->route('app_home', $id)->with('flash_message', 'デザインを編集しました' . $str);
     }
