@@ -17,7 +17,7 @@ const elms = document.querySelectorAll('.js-input-elm');
 let tmpObj = '<div onclick="ObjClick(event)" ondrag="Drag(event)" draggable="true" ondragstart="DragStart(event)" style="top:0;left:0;font-size:18px;" class="draggable obj ';
 var droptmpObj ='<div onclick="ObjClick(event)" ondrag="Drag(event)" draggable="true" ondragstart="DragStart(event)" class="draggable obj ';
 let alreadyTmpObj = '<div onclick="ObjClick(event)" ondrag="Drag(event)" draggable="true" ondragstart="DragStart(event)" class="draggable obj ';
-let objListItem = '<li><a onclick="TreeClick(event)" class="obj_list_item" id="obj_list_';
+let objListItem = '<a onclick="TreeClick(event)" class="obj_list_item" id="obj_list_';
 var dropObjId = "";
 var startY = 0;
 var startX = 0;
@@ -68,6 +68,46 @@ function getInfo( id, type ){
     }
 }
 
+/**
+ * 右要素＋選択要素のリセット
+ */
+function selectReset() {
+
+    // 右要素 / クリア
+    elms.forEach(element => {
+        element.value = '';
+    });
+
+    // 選択オブジェクト / リセット
+    document.getElementById('select_obj').value = '';
+}
+
+/**
+ * オブジェクトの削除
+ */
+function deleteObject() {
+    var Delobject_id = document.getElementById('select_obj').value;
+
+    if( Delobject_id != '' ){
+        // div 削除
+        document.getElementById(Delobject_id).remove();
+
+        // hidden / list 削除
+        var objectId = Delobject_id.substring(Delobject_id.lastIndexOf('_')+1);
+        if(Delobject_id.indexOf('already') != -1){
+            document.getElementById('decoration_' + objectId).remove();
+            document.getElementById('li_decoration_' + objectId).remove();
+        }else{
+            document.getElementById('new_decoration_' + objectId).remove();
+            document.getElementById('li_new_decoration_' + objectId).remove();
+        }
+
+        // リセットする
+        selectReset();
+
+    }
+}
+
 function StartFunc(){
     let key = Object.keys(object);
     for (var k in key) {
@@ -78,19 +118,19 @@ function StartFunc(){
 
         if(object[key[k]]['element'] == "Button"){
             tabTarget.innerHTML += alreadyTmpObj + 'obj_btn"' + styleSet +' id="obj_already_btn_' + key[k] + '">' + object[key[k]]['name'] + '</div>';
-            objitemset = objListItem + 'alr_btn_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_btn_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
+            objitemset = '<li id="li_decoration_' + object[key[k]]['id'] + '">' + objListItem + 'alr_btn_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_btn_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
         }else if(object[key[k]]['element'] == "CheckBox"){
             tabTarget.innerHTML += alreadyTmpObj + 'obj_checkbox"' + styleSet +' id="obj_already_checkbox_' + key[k] + '"><input id="already_checkbox_' + key[k] + '" type="checkbox">' + object[key[k]]['name'] + '</div>';
-            objitemset = objListItem + 'alr_checkbox_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_checkbox_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
+            objitemset = '<li id="li_decoration_' + object[key[k]]['id'] + '">' + objListItem + 'alr_checkbox_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_checkbox_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
         }else if(object[key[k]]['element'] == "Label"){
             tabTarget.innerHTML += alreadyTmpObj + 'obj_label"' + styleSet +' id="obj_already_label_' + key[k] + '">' + object[key[k]]['name'] + '</div>';
-            objitemset = objListItem + 'alr_label_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_label_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
+            objitemset = '<li id="li_decoration_' + object[key[k]]['id'] + '">' + objListItem + 'alr_label_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_label_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
         }else if(object[key[k]]['element'] == "RadioButton"){
             tabTarget.innerHTML += alreadyTmpObj + 'obj_radio"' + styleSet +' id="obj_already_radio_' + key[k] + '"><input id="already_radio_' + key[k] + '" type="radio">' + object[key[k]]['name'] + '</div>';
-            objitemset = objListItem + 'alr_radio_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_radio_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
+            objitemset = '<li id="li_decoration_' + object[key[k]]['id'] + '">' + objListItem + 'alr_radio_' + key[k] + '">' + object[key[k]]['element'] + key[k] + '-<span id="list_alr_radio_' + key[k] + '">' + object[key[k]]['name'] + '</span>';
         }else if(object[key[k]]['element'] == "TextBox"){
             tabTarget.innerHTML += alreadyTmpObj + 'obj_textbox"' + styleSet +' id="obj_already_textbox_' + key[k] + '"><input id="already_textbox_' + key[k] + '" type="text"></div>';
-            objitemset = objListItem + 'alr_textbox_' + key[k] + '">' + object[key[k]]['element'] + key[k];
+            objitemset = '<li id="li_decoration_' + object[key[k]]['id'] + '">' + objListItem + 'alr_textbox_' + key[k] + '">' + object[key[k]]['element'] + key[k];
         }
 
         // hidden を作成（ POST で送信 ）
@@ -110,7 +150,7 @@ function StartFunc(){
 function AddObjList(addobj,addid){
     var num = document.getElementById("select_screen").value;
     var tabTarget = document.getElementById('canvas_' + num);
-    var objitemset = objListItem + addid + '_' + document.getElementById('id_new').value + '"><span class="new_c">●</span><span class="new_p">＋</span>' + addobj + document.getElementById('id_new').value;
+    var objitemset = '<li id="li_new_decoration_' + document.getElementById('id_new').value + '">' + objListItem + addid + '_' + document.getElementById('id_new').value + '"><span class="new_c">●</span><span class="new_p">＋</span>' + addobj + document.getElementById('id_new').value;
 
     if(addobj != "TextBox"){
         objitemset += '-<span id="list_' + addid +'_' + document.getElementById('id_new').value +'">' + addobj + '</span>';
@@ -221,7 +261,7 @@ function DropAdd(id) {
         element_id = dropObjId.replace('drop_btn_', '');
 
     }else if(dropObjId.indexOf("checkbox") != -1){
-        tabTarget.innerHTML += droptmpObj + 'obj_checkbox" id="obj_checkbox_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="checkbox_1" type="checkbox">CheckBox</div>';
+        tabTarget.innerHTML += droptmpObj + 'obj_checkbox" id="obj_checkbox_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="checkbox_' + document.getElementById('id_new').value + '" type="checkbox">CheckBox</div>';
         AddObjList('CheckBox','checkbox');
         SelectSet('obj_checkbox_' + document.getElementById('id_new').value);
 
@@ -242,7 +282,7 @@ function DropAdd(id) {
         element_id = dropObjId.replace('drop_label_', '');
 
     }else if(dropObjId.indexOf("radio") != -1){
-        tabTarget.innerHTML += droptmpObj + 'obj_radio" id="obj_radio_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="radio_1" type="radio">RadioButton</div>';
+        tabTarget.innerHTML += droptmpObj + 'obj_radio" id="obj_radio_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="radio_' + document.getElementById('id_new').value + '" type="radio">RadioButton</div>';
         AddObjList('RadioButton','radio');
         SelectSet('obj_radio_' + document.getElementById('id_new').value);
 
@@ -252,7 +292,7 @@ function DropAdd(id) {
         element_id = dropObjId.replace('drop_radio_', '');
 
     }else if(dropObjId.indexOf("textbox") != -1){
-        tabTarget.innerHTML += droptmpObj + 'obj_textbox" id="obj_textbox_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="textbox_1" type="text"></div>';
+        tabTarget.innerHTML += droptmpObj + 'obj_textbox" id="obj_textbox_' + document.getElementById('id_new').value + '"' + styleSet + '><input id="textbox_' + document.getElementById('id_new').value + '" type="text"></div>';
         AddObjList('TextBox','textbox');
         SelectSet('obj_textbox_' + document.getElementById('id_new').value);
 
@@ -379,7 +419,7 @@ function ObjLabelClick(event, e_id) {
 function ObjRadioClick(event, e_id) {
     var num = document.getElementById("select_screen").value;
     var tabTarget = document.getElementById('canvas_' + num);
-    $(tabTarget).append(tmpObj + 'obj_radio" id="obj_radio_' + document.getElementById('id_new').value + '"><input id="radio_1" type="radio">' + event.target.innerText + '</div>');
+    $(tabTarget).append(tmpObj + 'obj_radio" id="obj_radio_' + document.getElementById('id_new').value + '"><input id="radio_' + document.getElementById('id_new').value + '" type="radio">' + event.target.innerText + '</div>');
     AddObjList('RadioButton','radio');
     SelectSet('obj_radio_' + document.getElementById('id_new').value);
 
@@ -398,7 +438,7 @@ function ObjRadioClick(event, e_id) {
 function ObjTextBoxClick(event, e_id) {
     var num = document.getElementById("select_screen").value;
     var tabTarget = document.getElementById('canvas_' + num);
-    $(tabTarget).append(tmpObj + 'obj_textbox" id="obj_textbox_' + document.getElementById('id_new').value + '"><input id="textbox_1" type="text"></div>');
+    $(tabTarget).append(tmpObj + 'obj_textbox" id="obj_textbox_' + document.getElementById('id_new').value + '"><input id="textbox_' + document.getElementById('id_new').value + '" type="text"></div>');
     AddObjList('TextBox','textbox');
     SelectSet('obj_textbox_' + document.getElementById('id_new').value);
 
@@ -417,7 +457,7 @@ function ObjTextBoxClick(event, e_id) {
 function ObjCheckBoxClick(event, e_id) {
     var num = document.getElementById("select_screen").value;
     var tabTarget = document.getElementById('canvas_' + num);
-    $(tabTarget).append(tmpObj + 'obj_checkbox" id="obj_checkbox_' + document.getElementById('id_new').value + '"><input id="checkbox_1" type="checkbox">' + event.target.innerText + '</div>');
+    $(tabTarget).append(tmpObj + 'obj_checkbox" id="obj_checkbox_' + document.getElementById('id_new').value + '"><input id="checkbox_' + document.getElementById('id_new').value + '" type="checkbox">' + event.target.innerText + '</div>');
     AddObjList('CheckBox','checkbox');
     SelectSet('obj_checkbox_' + document.getElementById('id_new').value);
 

@@ -160,6 +160,7 @@ var object=JSON.parse('<?php echo $varJsSample; ?>');//jsonをparseしてJavaScr
                                 <th>座標Y</th><td><input class="js-input-elm" id="obj-y" type="text" onchange="ChangeText(event)"></td>
                             </tr>
                         </table>
+                        <button type="button" onClick="deleteObject()">DELETE</button>
                         <input type="text" id="select_screen" value="{{ $scenes_data[0]->id }}" hidden>
                         <input type="text" id="select_obj" value="" hidden>
                     </div>
