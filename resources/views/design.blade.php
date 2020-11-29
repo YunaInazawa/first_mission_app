@@ -17,7 +17,7 @@ foreach( $scenes_data as $s ){
                 'width' => $d->width,
                 'x' => $d->position_x,
                 'y' => $d->position_y,
-                'fontsize' => '18',
+                'fontsize' => $d->font_size,
                 's' => $s->id,
             ),
         );

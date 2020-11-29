@@ -112,7 +112,7 @@ function StartFunc(){
     let key = Object.keys(object);
     for (var k in key) {
         var objitemset = '';
-        var styleSet = 'style="top: ' + object[key[k]]['y'] + 'px; left: ' + object[key[k]]['x'] + 'px; font-size: 18px; height: ' + object[key[k]]['height'] + 'px; width: ' + object[key[k]]['width'] + 'px;"';
+        var styleSet = 'style="top: ' + object[key[k]]['y'] + 'px; left: ' + object[key[k]]['x'] + 'px; font-size: ' + object[key[k]]['fontsize'] + 'px; height: ' + object[key[k]]['height'] + 'px; width: ' + object[key[k]]['width'] + 'px;"';
 
         var tabTarget = document.getElementById('canvas_' + object[key[k]]['sceneId']);
 
@@ -522,6 +522,7 @@ function ChangeText(event){
 
     // POST データ hidden 更新
     SelectSet(selObj);
+    arrHidden[0] = elms[0].value;
     arrHidden[1] = elms[1].value;
     arrHidden[2] = elms[3].value;
     arrHidden[3] = elms[2].value;
