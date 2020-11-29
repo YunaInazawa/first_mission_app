@@ -37,6 +37,49 @@ function createPostSceneData(id, x, y){
 
 }
 
+/**
+ *  送られた id の画面上にあるオブジェクトの遷移先を削除
+ */
+function deleteTransition( scene_id ) {
+    var objects = document.getElementById('objects_' + scene_id);
+    alert('screen_' + scene_id + '_obj_');
+}
+
+/**
+ * シーン削除
+*/
+function deleteScene( scene_id ) {
+
+    // 左側の scene 有効にする
+    document.getElementById('drop_screen_' + scene_id).classList.remove('disable');
+
+    // 未選択状態にする
+    const objectlists = document.getElementsByClassName('screen_objs');
+    for(var i = 0; i < objectlists.length; i++){
+        objectlists[i].classList.remove('active_objs');
+    }
+
+    // 画面削除
+    document.getElementById('obj_screen_' + scene_id).remove();
+
+    // scene 座標削除
+    document.getElementById('scene_' + scene_id).value = ',';
+
+    var objects = document.getElementsByClassName('this_scene_id_' + scene_id);
+    for( var i = 0; i < objects.length; i++ ){
+
+        // null
+        objects[i].value = null;
+
+        // name : ---
+        var object_id = objects[i].id.replace('decoration_', '');
+        var str = document.getElementById('screen_' + scene_id + '_obj_' + object_id).innerText;
+        var valueStr = str.substring(0, str.indexOf(" ")) + ' : ---';
+        document.getElementById('screen_' + scene_id + '_obj_' + object_id).innerText = valueStr;
+    }
+
+}
+
 /*
  * 2.1 ドラッグ&ドロップ
  *****************************************/

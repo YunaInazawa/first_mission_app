@@ -40,15 +40,16 @@
                 <aside class="sidemenu sidemenu_right">
                     <h2 class="col-lg-12">オブジェクト</h2>
                     @foreach( $scenesData as $scene )
-                    <div class="screen_objs" id="objlists_{{ $scene->id }}">
+                        <div class="screen_objs" id="objlists_{{ $scene->id }}">
                             @foreach( $objects[$scene->id] as $object )
                             @if( in_array($object->element_id, $elementsId, true) )
                             <button type="button">
                                 <div onclick="dialogConecterShow(event, {{ $object->id }})" class="row dragitem" id="screen_{{ $scene->id }}_obj_{{ $object->id }}">{{ $object->text }} : {{ ($object->move_scene_id == null) ? '---' : $object->move_scene->name }}</div>
                             </button>
-                            <input type="hidden" id="decoration_{{ $object->id }}" name="decorations[{{ $object->id }}]" value="{{ $object->move_scene_id }}">
+                            <input type="hidden" class="this_scene_id_{{ $scene->id }}" id="decoration_{{ $object->id }}" name="decorations[{{ $object->id }}]" value="{{ $object->move_scene_id }}">
                             @endif
                             @endforeach
+                            <button type="button" onClick="deleteScene({{ $scene->id }})">DELETE</button>
                         </div>
                     @endforeach
                 </aside>

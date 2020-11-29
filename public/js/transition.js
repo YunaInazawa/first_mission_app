@@ -63,12 +63,14 @@ function StartFunc(){
 
             /* 要素が「Button」のとき */
             if( element['element_id'] == elementsId['Button'] ){    
-                // button 作成
-                document.getElementById('t_' + element['scene_id']).innerHTML += 
-                    '<button onclick="ClickButton(event)" class="obj" ' + styleSet +' id="obj_already_btn_' + element['id'] + '" value="' + element['move_scene_id'] + '">' + element['text'] + '</button>';
                     
                 /* 遷移先が設定されているとき */
                 if(element['move_scene_id'] != null){
+
+                    // button 作成
+                    document.getElementById('t_' + element['scene_id']).innerHTML += 
+                    '<button onclick="ClickButton(event)" class="obj" ' + styleSet +' id="obj_already_btn_' + element['id'] + '" value="' + element['move_scene_id'] + '">' + element['text'] + '</button>';
+
                     // canvas 作成
                     document.getElementById('screenlist').innerHTML += 
                     '<canvas class="conecter" id="t_' + element['scene_id'] + '_to_t_' + element['move_scene_id'] + '"></canvas>';
@@ -77,6 +79,12 @@ function StartFunc(){
                     arrayJump.push(element['move_scene_id']);
                     arrayform.push(element['scene_id']);
                 
+                }else{
+
+                    // button 作成
+                    document.getElementById('t_' + element['scene_id']).innerHTML += 
+                    '<button class="obj" ' + styleSet +' id="obj_already_btn_' + element['id'] + '" value="">' + element['text'] + '</button>';
+
                 }
 
             /* 要素が「Link」のとき */

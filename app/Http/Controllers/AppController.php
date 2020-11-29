@@ -412,14 +412,18 @@ class AppController extends Controller
             $scene->position_x = $scenePosition[0] == '' ? null : $scenePosition[0];
             $scene->position_y = $scenePosition[1] == '' ? null : $scenePosition[1];
             $scene->save();
+            
 
             foreach( $scene->decorations as $decoration ){
 
                 // decoration 存在チェック（ Button, Link のみ ）
-                if( isset($request->decorations[$decoration->id]) ){
+                if( isset($request->decorations[$decoration->id]) && $request->decorations[$decoration->id] != 'null' ){
                     $decoration->move_scene_id = $request->decorations[$decoration->id];
                     $decoration->save();
 
+                }else{
+                    $decoration->move_scene_id = null;
+                    $decoration->save();
                 }
             }
         }
