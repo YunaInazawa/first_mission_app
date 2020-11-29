@@ -284,6 +284,7 @@ class AppController extends Controller
         foreach( $scenesData as $scene ){
             foreach( $scene->decorations as $deco ){
                 if( isset($request->decorations[$deco->id]) ){
+                    // データ更新
                     $editDecoData = explode(',', $request->decorations[$deco->id]);
                     $deco->text = $editDecoData[0];
                     $deco->font_size = $editDecoData[1];
@@ -294,7 +295,8 @@ class AppController extends Controller
                     $deco->save();
 
                 }else{
-                    // 削除処理
+                    // データ削除
+                    $deco->delete();
                 }
             }
         }
