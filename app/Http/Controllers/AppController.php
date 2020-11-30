@@ -145,17 +145,21 @@ class AppController extends Controller
         $projectData = Project::find($id);
         $projectName = $projectData->name;
         $projectId = $projectData->id;
-        $sceneId = $projectData->scenes[0]->id;
 
         // ログ登録
         $this->createLog('ユーザ「' . Auth::user()->name . '」がプロジェクト「' . $projectName . '」を削除', 'delete', $projectId);
 
         // DB 削除
         $projectData->delete();
-        Scene::where('project_id', $id)->delete();
         Member::where('project_id', $id)->delete();
-        Task::where('scene_id', $sceneId)->delete();
-        Decoration::where('scene_id', $sceneId)->delete();
+
+        // 画面を作成していた場合
+        if( count($projectData->scenes) != 0 ){
+            $sceneId = $projectData->scenes[0]->id;
+            Scene::where('project_id', $id)->delete();
+            Task::where('scene_id', $sceneId)->delete();
+            Decoration::where('scene_id', $sceneId)->delete();
+        }
 
         return redirect()->route('home')->with('flash_message', 'プロジェクト「' . $projectName . '」を削除しました');
     }
