@@ -83,7 +83,7 @@
                                     <div class="dialogBackground"></div>
                                     <div class="dialogContent">
                                         <div class="dialogMsg">
-                                            メンバーを追加します
+                                            プロジェクトを削除します
                                         </div>
                                         <hr class="dialog_hr">
                                         <div>

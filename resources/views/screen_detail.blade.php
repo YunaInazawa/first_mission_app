@@ -12,7 +12,17 @@
 
 <div class="container">
     <div class="row justify-content-center">
+
         <div class="col-lg-12">
+
+            <!-- フラッシュメッセージ -->
+            @if (session('flash_message'))
+                <div class="flash_message text-center">
+                    {!! nl2br(session('flash_message')) !!}
+                    <hr>
+                </div>
+            @endif
+
             <h3 class="text-center">{{ $sceneData->name }}</h3>
             <p class="text-center">{!! nl2br($sceneData->description) !!}</p>
             <div class="text-center"><a href="#">--- DELETE ---</a></div>

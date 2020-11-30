@@ -261,6 +261,23 @@ class AppController extends Controller
     }
 
     /**
+     * タスク削除
+     */
+    public function task_delete( $id ){
+        $delTask = Task::find($id);
+        $sceneId = $delTask->scene->id;
+        $projectId = $delTask->scene->project->id;
+        $delTitle = $delTask->title;
+
+        $delTask->delete();
+
+        // ログ登録
+        $this->createLog('ユーザ「' . Auth::user()->name . '」がタスク「' . $delTitle . '」を削除', 'delete', $projectId);
+
+        return redirect()->route('screen_detail', $sceneId)->with('flash_message', 'タスク「' . $delTitle . '」を削除しました');
+    }
+
+    /**
      * デザイン管理
      */
     public function design( $id = 1 )
