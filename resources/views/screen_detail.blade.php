@@ -25,7 +25,24 @@
 
             <h3 class="text-center">{{ $sceneData->name }}</h3>
             <p class="text-center">{!! nl2br($sceneData->description) !!}</p>
-            <div class="text-center"><a href="#">--- DELETE ---</a></div>
+
+            <!-- DELETE ダイアログ -->
+            <div id="dialogDelete" class="dialog">
+                <div class="dialogBackground"></div>
+                <div class="dialogContent">
+                    <div class="dialogMsg">
+                        画面を削除します
+                    </div>
+                    <hr class="dialog_hr">
+                    <div>
+                        画面「{{ $sceneData->name }}」を削除します<br />
+                        復元できませんが、よろしいですか？
+                        <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick=location.href="{{ route('scene_delete', $sceneData->id) }}" />
+                        <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide('dialogDelete');" />
+                    </div>
+                </div>
+            </div>
+            <div class="text-center"><span onclick="dialogShow('dialogDelete');"><a href="#">--- DELETE ---</a></span></div>
         </div>
             <div class="col-lg-12">
                 

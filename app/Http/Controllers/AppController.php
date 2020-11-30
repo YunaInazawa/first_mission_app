@@ -242,6 +242,32 @@ class AppController extends Controller
     }
 
     /**
+     * 画面削除
+     */
+    public function scene_delete( $id )
+    {
+        $delScene = Scene::find($id);
+        $sceneName = $delScene->name;
+        $projectId = $delScene->project->id;
+
+        // task / decoration 削除
+        Task::where('scene_id', $delScene->id)->delete();
+        Decoration::where('scene_id', $delScene->id)->delete();
+
+        // move_scene_id に削除した id が含まれている場合、null にする
+        $updateColumn = ['move_scene_id' => null];
+        $updateMove = Decoration::where('move_scene_id', $delScene->id)->update($updateColumn);
+
+        // scene 削除
+        $delScene->delete();
+
+        // ログ登録
+        $this->createLog('ユーザ「' . Auth::user()->name . '」が画面「' . $sceneName . '」を削除', 'delete', $projectId);
+
+        return redirect()->route('app_home', $projectId)->with('flash_message', '画面「' . $sceneName . '」を削除しました');
+    }
+
+    /**
      * タスク詳細
      */
     public function task_detail( $id = 1 )
