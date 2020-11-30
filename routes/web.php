@@ -24,6 +24,7 @@ Route::get('/app_delete/{id}', 'AppController@app_delete')->name('app_delete');
 Route::post('/add_member/{id}', 'AppController@add_member')->name('add_member');
 Route::post('/add_screen/{id}', 'AppController@add_screen')->name('add_screen');
 Route::get('/screen_detail/{id}', 'AppController@screen_detail')->name('screen_detail');
+Route::post('/scene_update/{id}', 'AppController@scene_update')->name('scene_update');
 Route::get('/scene_delete/{id}', 'AppController@scene_delete')->name('scene_delete');
 Route::get('/task_detail/{id}', 'AppController@task_detail')->name('task_detail');
 Route::get('/task_edit/{id}', 'AppController@task_edit')->name('task_edit');

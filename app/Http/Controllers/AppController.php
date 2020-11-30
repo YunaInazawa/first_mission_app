@@ -242,6 +242,26 @@ class AppController extends Controller
     }
 
     /**
+     * 画面編集
+     */
+    public function scene_update( $id, Request $request )
+    {
+        $request -> session() -> regenerateToken();
+        $screenName = $request->screenName;
+        $screenDescription = $request->screenDescription;
+
+        $editScene = Scene::find($id);
+        $editScene->name = $screenName;
+        $editScene->description = $screenDescription;
+        $editScene->save();
+
+        // ログ登録
+        $this->createLog('ユーザ「' . Auth::user()->name . '」が画面「' . $screenName . '」の情報を変更', 'update', $editScene->project->id);
+
+        return redirect()->route('screen_detail', $id)->with('flash_message', '画面情報を変更しました');
+    }
+
+    /**
      * 画面削除
      */
     public function scene_delete( $id )
