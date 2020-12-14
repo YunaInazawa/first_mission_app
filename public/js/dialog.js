@@ -31,6 +31,15 @@ function funcSetMoveScene(id) {
     return;
 }
 
+// 画面遷移管理 / 最初の画面設定
+function funcSetFirstScene(id) {
+    document.getElementById('firstSceneName').innerHTML =  '<span>' + document.getElementById('firstScene').value + '</span>';
+    document.getElementById('firstSceneSend').value = document.getElementById('firstScene').value;
+    
+    dialogHide(id);
+    return;
+}
+
 function func() {
     // ここに「はい」選択時の処理
      

@@ -25,6 +25,35 @@
                     </button>
                     <input type="hidden" id="scene_{{ $scene->id }}" name="scenes[{{ $scene->id }}]" value="{{ $scene->position_x }}, {{ $scene->position_y }}">
                     @endforeach
+
+                    <h2>最初の画面</h2>
+                    <button type="button">
+                        <div class="row dragitem screennames" id="firstSceneName" onclick="dialogShow('firstDialog');"><span>{{ $firstScene->name }}</span></div>
+                    </button>
+                    <input type="hidden" name="firstSceneSend" id="firstSceneSend" value="{{ $firstScene->name }}">
+
+                    <div id="firstDialog" class="dialog">
+                        <div class="dialogBackground"></div>
+                        <div class="dialogContent">
+                            <div class="dialogMsg">
+                                最初の画面を設定
+                            </div>
+                            <hr class="dialog_hr">
+                            <div>
+                                <fieldset>
+                                    <select id="firstScene"lass="form-control">
+                                        @foreach( $scenesData as $scene )
+                                        <option>{{ $scene->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <br>
+                                    <input type="hidden" id="divId" value="">
+                                    <input type="button" class="btn btn-primary dialog_btn" value="はい" onclick="funcSetFirstScene('firstDialog')" />
+                                    <input type="button" class="btn btn-primary dialog_btn" value="いいえ" onclick="dialogHide('firstDialog');" />
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
                     
                     <!-- 仮リンク -->
                     <button type="submit">完了</button>

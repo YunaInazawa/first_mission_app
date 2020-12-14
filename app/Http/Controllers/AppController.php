@@ -218,11 +218,13 @@ class AppController extends Controller
         $request -> session() -> regenerateToken();
         $screenName = $request->screenName;
         $screenDescription = $request->screenDescription;
+        $is_first = Scene::where('project_id', $id)->count() == 0 ? true : false;
 
         $addScene = new Scene;
         $addScene->name = $screenName;
         $addScene->description = $screenDescription;
         $addScene->project_id = $id;
+        $addScene->is_first = $is_first;
         $addScene->save();
 
         // ログ登録
@@ -453,6 +455,8 @@ class AppController extends Controller
         $elementsId = array();
         $e_name = ['Button', 'Link'];
 
+        $firstScene = Scene::where('project_id', $id)->where('is_first', true)->first();
+
         foreach( $scenesData as $scene ){
             $objects[$scene->id] = Decoration::where('scene_id', $scene->id)->get();
         }
@@ -461,7 +465,7 @@ class AppController extends Controller
             $elementsId[$e] = Element::where('name', $e)->first()->id;
         }
 
-        return view('transition_edit', ['projectId'=> $id, 'scenesData' => $scenesData, 'objects' => $objects, 'elementsId' => $elementsId]);
+        return view('transition_edit', ['projectId'=> $id, 'scenesData' => $scenesData, 'objects' => $objects, 'elementsId' => $elementsId, 'firstScene' => $firstScene]);
     }
 
     /**
@@ -471,12 +475,12 @@ class AppController extends Controller
     {
         $request -> session() -> regenerateToken();
         $scenesData = Scene::where('project_id', $id)->get();
-        $firstSceneId = $request->firstSceneId;
+        $firstScene = $request->firstSceneSend;
 
         foreach( $scenesData as $scene ){
 
             // is_first
-            $is_first = $scene->id == $firstSceneId ? true : false;
+            $is_first = $scene->name == $firstScene ? true : false;
             
             // scene / DB 登録
             $scenePosition = explode(',', $request->scenes[$scene->id]);
