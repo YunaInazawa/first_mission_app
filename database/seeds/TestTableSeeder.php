@@ -58,6 +58,7 @@ class TestTableSeeder extends Seeder
             'name' => 'TestSceneName',
             'project_id' => $project_id,
             'description' => 'TestSceneDiscription',
+            'is_first' => true,
             'created_at' => $now, 
             'updated_at' => $now,
         ]);

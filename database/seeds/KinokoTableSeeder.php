@@ -95,10 +95,12 @@ class KinokoTableSeeder extends Seeder
         $sceneNames = ['TOP', 'KINOKOlist', 'KINOKOrecipe', 'KINOKO', 'KINOKONOKO'];
         $sceneDescs = ['今が旬のおすすめキノコ', '全種キノコの分布MAP', 'キノコ料理レシピ集', 'キノコについて情報交換を行う場', 'キノコについて情報交換を行い愛を語り合う場'];
         for( $i = 0; $i < count($sceneNames); $i++ ){
+            $is_first = $sceneNames[$i] == 'TOP' ? true : false;
             DB::table('scenes')->insert([
                 'name' => $sceneNames[$i],
                 'project_id' => $project_id,
                 'description' => $sceneDescs[$i],
+                'is_first' => $is_first,
                 'created_at' => $now, 
                 'updated_at' => $now,
                 'deleted_at' => $sceneNames[$i] == 'KINOKO' ? $now : null, 
