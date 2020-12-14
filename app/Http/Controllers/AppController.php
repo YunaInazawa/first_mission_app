@@ -471,13 +471,18 @@ class AppController extends Controller
     {
         $request -> session() -> regenerateToken();
         $scenesData = Scene::where('project_id', $id)->get();
+        $firstSceneId = $request->firstSceneId;
 
         foreach( $scenesData as $scene ){
+
+            // is_first
+            $is_first = $scene->id == $firstSceneId ? true : false;
             
             // scene / DB 登録
             $scenePosition = explode(',', $request->scenes[$scene->id]);
             $scene->position_x = $scenePosition[0] == '' ? null : $scenePosition[0];
             $scene->position_y = $scenePosition[1] == '' ? null : $scenePosition[1];
+            $scene->is_first = $is_first;
             $scene->save();
             
 
