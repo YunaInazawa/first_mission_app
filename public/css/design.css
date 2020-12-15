@@ -12,7 +12,7 @@
 /*----------------------------------
  サイドメニュー調整
  ---------------------------------*/
-body {
+ body {
     margin: 0;
     padding: 0;
     background-color: var(--moon-mist);
@@ -119,6 +119,9 @@ button:focus{
     margin: 0 38px;
     margin-top: 5px;
     padding: 0px;
+}
+.ic_link{
+    text-decoration: underline;
 }
 .fa-check{
     top: -1px;
@@ -366,7 +369,9 @@ button:focus{
     background-color: var(--moon-mist);
     opacity: 0.5;
 }
-
+.obj_link{
+    text-decoration: underline;
+}
 
 .ac_menu {
     position: absolute;
@@ -493,6 +498,9 @@ button:focus{
     bottom: 0;
     height: auto;
     background-color: var(--fog);
+}
+.dragitem{
+    flex-wrap: inherit;
 }
 .dragitem.active{
     opacity: 0;

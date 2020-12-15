@@ -94,7 +94,9 @@ var object=JSON.parse('<?php echo $varJsSample; ?>');//jsonをparseしてJavaScr
                                     <div class="row dragitem" id="drop_checkbox_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjCheckBoxClick(event, {{ $e->id }})"><span class="col-lg-4 ic ic_checkb"><label class="fas fa-check"></label></span><span class="col-lg-8 obj_name">CheckBox</span></div>
                                 </button>
                                 @else
-                                <button type="button">{{ $e->name }}</button>
+                                    <button type="button">
+                                        <div class="row dragitem" id="drop_link_{{ $e->id }}" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" onclick="ObjLinkClick(event, {{ $e->id }})"><span class="col-lg-4 ic ic_link">link</span><span class="col-lg-8 obj_name">Link</span></div>
+                                    </button>
                                 @endif
                                 @endforeach
 
