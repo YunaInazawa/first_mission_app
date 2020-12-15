@@ -14,6 +14,7 @@ use App\Element;
 use App\Decoration;
 use App\Task;
 use App\Scene;
+use App\Status;
 
 class AppController extends Controller
 {
@@ -176,6 +177,50 @@ class AppController extends Controller
     public function task_edit( $id = 1 )
     {
         return view('task_edit', ['app_id'=> $id]);
+    }
+
+    /**
+     * タスク作成
+     */
+    public function task_create( $id = 1 )
+    {
+        $projectId = Scene::find($id)->project_id;
+        $members = Member::where('project_id', $projectId)->where('is_join', 1)->get();
+        $statuses = Status::get();
+
+        return view('task_create', ['sceneId'=> $id, 'members'=> $members, 'statuses'=> $statuses]);
+    }
+
+    /**
+     * タスク作成 / DB登録（POST）
+     */
+    public function task_new( $id = 1, Request $request )
+    {
+        // 二重送信禁止
+        $request->session()->regenerateToken();  
+        
+        // データ取得
+        $taskTitle = $request->task_title;
+        $taskUser = $request->task_user;
+        $taskStart = $request->task_start;
+        $taskEnd = $request->task_end;
+        $taskStatus = $request->task_status;
+        $taskDescription = $request->task_description;
+
+        // タスク作成
+        $newTask = new Task;
+        $newTask->title = $taskTitle;
+        $newTask->user_id = $taskUser;
+        $newTask->start_at = $taskStart;
+        $newTask->end_at = $taskEnd;
+        $newTask->status_id = $taskStatus;
+        $newTask->description = $taskDescription;
+        $newTask->scene_id = $id;
+        $newTask->save();
+        // ログ登録
+        //$this->createLog('ユーザ「' . Auth::user()->name . '」がタスク「' . $newTask->title . '」を作成', 'create', $newTask->project->id);        
+        
+        return redirect(route('screen_detail', ['id' => $id]));
     }
 
     /**
