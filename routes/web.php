@@ -27,6 +27,8 @@ Route::get('/screen_detail/{id}', 'AppController@screen_detail')->name('screen_d
 Route::post('/scene_update/{id}', 'AppController@scene_update')->name('scene_update');
 Route::get('/scene_delete/{id}', 'AppController@scene_delete')->name('scene_delete');
 Route::get('/task_detail/{id}', 'AppController@task_detail')->name('task_detail');
+Route::get('/task_create/{id}', 'AppController@task_create')->name('task_create');
+Route::post('/task_new', 'AppController@task_new')->name('task_new');
 Route::get('/task_edit/{id}', 'AppController@task_edit')->name('task_edit');
 Route::get('/task_delete/{id}', 'AppController@task_delete')->name('task_delete');
 Route::get('/design/{id}', 'AppController@design')->name('design');
