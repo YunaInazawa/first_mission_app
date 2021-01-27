@@ -364,10 +364,11 @@ class AppController extends Controller
         $newTask->description = $taskDescription;
         $newTask->scene_id = $id;
         $newTask->save();
+
         // ログ登録
         $this->createLog('ユーザ「' . Auth::user()->name . '」がタスク「' . $newTask->title . '」を作成', 'create', $newTask->scene->project->id);        
         
-        return redirect(route('screen_detail', ['id' => $id]));
+        return redirect()->route('screen_detail', $id);
     }
 
     /**

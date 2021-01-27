@@ -110,7 +110,7 @@
                                 @endif
                                 
                                 <br />
-                                <a href="{{ route('app_create') }}" class="btn_plus_circle">＋</a>
+                                <a href="{{ route('task_create', $sceneData->id) }}" class="btn_plus_circle">＋</a>
                                 </div>
                             </div>
 
