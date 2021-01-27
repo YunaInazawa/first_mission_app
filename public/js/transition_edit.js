@@ -59,7 +59,7 @@ function createPostSceneData(id, x, y){
  */
 function deleteTransition( scene_id ) {
     var objects = document.getElementById('objects_' + scene_id);
-    alert('screen_' + scene_id + '_obj_');
+    // alert('screen_' + scene_id + '_obj_');
 }
 
 /**
@@ -185,7 +185,7 @@ function ClickAdd(event){
 }
 
 function MoveConect(dropid){
-    alert(dropid);
+    // alert(dropid);
 
     // タブメニュークラス'.js-tab-trigger'を持つ要素を取得
     const conecters = document.querySelectorAll('.conecter');

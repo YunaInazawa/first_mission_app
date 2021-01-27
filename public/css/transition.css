@@ -74,18 +74,23 @@ body{
     position: absolute;
     z-index: 1;
 }
-.screens div:nth-child(1){
+
+.screens div:nth-child(n){
+    background-color:blue; 
+}
+
+/* .screens div:nth-child(1){
     background-color:red; 
     top: 85px;
     left: 200px;
-}
+} */
 
-.screens div:nth-child(2){
+/* .screens div:nth-child(2){
     background-color: blue;
     top: 900px;
     left: 2000px;
     
-}
+} */
 
 .screens{
     position: absolute;
@@ -93,11 +98,11 @@ body{
     top: 0;
     left: 0;
 }
-.screens div:nth-child(3){
+/* .screens div:nth-child(3){
     background-color: yellow;
     top: 1200px;
     left: -1200px;
-}
+} */
 
 .obj{
     position: absolute;

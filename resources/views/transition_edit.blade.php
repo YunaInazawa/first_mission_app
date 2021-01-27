@@ -29,7 +29,7 @@
 
                     <h2>最初の画面</h2>
                     <button type="button">
-                        <div class="row dragitem screennames" id="firstSceneName" onclick="dialogShow('firstDialog');"><span>{{ $firstScene->name }}</span></div>
+                        <div class="row dragitem" id="firstSceneName" onclick="dialogShow('firstDialog');"><span>{{ $firstScene->name }}</span></div>
                     </button>
                     <input type="hidden" name="firstSceneSend" id="firstSceneSend" value="{{ $firstScene->name }}">
 
