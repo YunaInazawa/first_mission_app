@@ -50,20 +50,18 @@ function StartFunc(){
 
     // 画面ループ (s_id = scene_id)
     for (var s_id in object) {
-
         // 要素ループ (e_id = element_id)
         for(var e_id in object[s_id]){
             var element = object[s_id][e_id];       // 略
-            var styleSet =                          // button / style 設定
+            var styleSet = "";
+            /* 要素が「Button」のとき */
+            if( element['element_id'] == elementsId['Button'] ){    
+                styleSet =                          // button / style 設定
                 'style="top: ' + element['position_y'] + 'px; ' + 
                 'left: ' + element['position_x'] + 'px; ' + 
                 'font-size: ' + element['font_size'] +'px; ' + 
                 'height: ' + element['height'] + 'px; ' + 
                 'width: ' + element['width'] + 'px;"';
-
-            /* 要素が「Button」のとき */
-            if( element['element_id'] == elementsId['Button'] ){    
-                    
                 /* 遷移先が設定されているとき */
                 if(element['move_scene_id'] != null){
 
@@ -89,12 +87,38 @@ function StartFunc(){
 
             /* 要素が「Link」のとき */
             }else if( element['element_id'] == elementsId['Link'] ){
+                styleSet =                          // link / style 設定
+                'style="top: ' + (element['position_y']-1) + 'px; ' + 
+                'left: ' + (element['position_x']-6) + 'px; ' + 
+                'font-size: ' + element['font_size'] +'px; ' + 
+                'height: ' + element['height'] + 'px; ' + 
+                'width: ' + element['width'] + 'px;"';
 
+                /* 遷移先が設定されているとき */
+                if(element['move_scene_id'] != null){
+
+                    // button 作成
+                    document.getElementById('t_' + element['scene_id']).innerHTML += 
+                    '<button onclick="ClickButton(event)" class="obj obj_link" ' + styleSet +' id="obj_already_btn_' + element['id'] + '" value="' + element['move_scene_id'] + '">' + element['text'] + '</button>';
+                    // canvas 作成
+                    document.getElementById('screenlist').innerHTML += 
+                    '<canvas class="conecter" id="t_' + element['scene_id'] + '_to_t_' + element['move_scene_id'] + '"></canvas>';
+
+                    // arrayJump, arrayForm 追加
+                    arrayJump.push(element['move_scene_id']);
+                    arrayform.push(element['scene_id']);
+
+                }else{
+
+                    // button 作成
+                    document.getElementById('t_' + element['scene_id']).innerHTML += 
+                    '<button class="obj obj_link" ' + styleSet +' id="obj_already_btn_' + element['id'] + '" value="">' + element['text'] + '</button>';
+
+                }
             }
 
         }
     }
-
     Conect(arrayJump,arrayform); 
 }
 

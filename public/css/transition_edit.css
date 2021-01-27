@@ -7,7 +7,7 @@
     margin-left: 15px;
 }
 .screens{
-    background-color: red;
+    background-color: aqua;
     height: 875px;
 }
 body{
@@ -20,6 +20,7 @@ body{
     position: absolute;
     border-radius: 5px;
     text-align: center;
+    z-index: 100;
 }
 .screen_objs{
     display: none;
@@ -31,4 +32,58 @@ body{
     pointer-events: none;
     background-color: var(--moon-mist);
     opacity: 0.5;
+}
+.conecter{
+    margin: 0;
+    position: absolute;
+    border-bottom: solid 2px black;
+}
+.hr_1{
+    margin: 0;
+    border-color: blue;
+    position: absolute;
+    z-index: 101;
+    /*
+    top: 271px;
+    width: 642px;
+    left: 294px;
+    transform: rotate(0deg);
+*/
+    top: 478.5px;
+    width: 260px;
+    left: 460px;
+    transform: rotate(0deg);
+}
+.hr_2{
+    border-color: red;
+    margin: 0;
+    position: absolute;
+    z-index: 100;
+
+  /*  top: 271px;
+    width: 645px; /*ここ*/
+/*    left: 294px;
+    transform: rotate(5.4deg);  /*ここ*/
+
+    
+    top: 478.5px;
+    width: 455.49533477304px;
+    left: 460px;
+    transform: rotate(-55.193469087092deg);
+}
+.hr_3{
+    border-color: indigo;
+    margin: 0;
+    position: absolute;
+    z-index: 100;
+    
+    /*top: 301px; /*ここ*/
+    /*width: 645px;
+    left: 294px;
+    transform: rotate(5.4deg);*/
+    
+    top: 187.00007012163px;
+    left: 460px;
+    width: 455.49533477304px;
+    transform: rotate(-55.1935deg);
 }

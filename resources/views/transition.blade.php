@@ -42,7 +42,19 @@ $screenID = 0;
 //         'jumpid' => '0',
 //     ),
 // );
-
+$topLeft = [];
+$isfirst = [];
+$cnt = 0;
+foreach ( $scenesData as $scene) {
+    $topLeft[$cnt][0] = ($scene->position_y)*10;
+    $topLeft[$cnt][1] = ($scene->position_x)*10;
+    if($scene->is_first == 1){
+        $isfirst[0] = (($scene->position_y)*-10)+85;
+        $isfirst[1] = (($scene->position_x)*-10)+200;
+    }
+    $cnt++;
+}
+$cnt = 0;
 /*
 foreach( $scenes_data as $s ){
     foreach( $decorations_data[$s->id] as $d ){
@@ -68,11 +80,13 @@ foreach( $scenes_data as $s ){
 <?php
 $sample = array('abc','def');//PHPで配列を生成
 $varJsSample=json_encode($objects);//JavaScriptに渡すためにjson_encodeを行う
+$varJsSa=json_encode($isfirst);//JavaScriptに渡すためにjson_encodeを行う
 ?>
 
 <script type="text/javascript">
 // var object=JSON.parse('<?php //echo $varJsSample; ?>');//jsonをparseしてJavaScriptの変数に代入
 var object = @json($objects);
+var isfirst = @json($isfirst);
 var elementsId = @json($elementsId);
 </script>
 
@@ -86,9 +100,9 @@ var elementsId = @json($elementsId);
 
 <div class="container">
     <div class="row">
-        <div class="screens" id="screenlist">
+        <div class="screens" id="screenlist" style="top:<?= $isfirst[0] ?>px;left:<?= $isfirst[1] ?>px;">
             @foreach( $scenesData as $scene )
-                <div class="screen" id="t_{{ $scene->id }}">{{ $scene->name }}</div>
+                <div class="screen" id="t_{{ $scene->id }}" style="top:<?php echo $topLeft[$cnt][0]; ?>px;left:<?php echo $topLeft[$cnt][1];$cnt++; ?>px;" >{{ $scene->name }}</div>
             @endforeach
         </div>
     </div>

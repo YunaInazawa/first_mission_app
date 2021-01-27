@@ -102,7 +102,17 @@ body{
 .obj{
     position: absolute;
 }
-
+.obj_link{
+    white-space: nowrap;
+    background: transparent;
+    border: transparent;
+    color: cadetblue;
+}
+.obj_link:active,.obj_link:focus,.obj_link:hover{
+    border: none;  /* 枠線を消す */
+    outline: none; /* クリックしたときに表示される枠線を消す */
+    background: transparent; /* 背景の灰色を消す */
+}
 .conecter {
     position : absolute;
     left: 0px;

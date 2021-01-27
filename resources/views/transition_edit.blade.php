@@ -1,5 +1,6 @@
 <script type="text/javascript">
     var scenesData = @json($scenesData);
+    var object = @json($objects);
     var elementsId = @json($elementsId);
 </script>
 
@@ -63,6 +64,9 @@
             </div>
             <div class="col-lg-8">
                 <div class="screens" id="drop" ondragover="DragOver(event)" ondrop="Drop(event)" >
+                <!--<hr class="hr_1">
+                <hr class="hr_2">
+                <hr class="hr_3">-->
                 </div>
             </div>
             <div class="col-lg-2 ">

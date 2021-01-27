@@ -12,7 +12,6 @@ function StartFunc(){
     // 画面ループ (s_id = scene_id)
     for (var s_id in scenesData) {
         var scene = scenesData[s_id];       // 略
-
         if( scene['position_x'] != null ){
             var styleSet = 'style="top:' + scene['position_y'] + 'px;left:' + scene['position_x'] + 'px;font-size:18px;"';
 
@@ -23,8 +22,26 @@ function StartFunc(){
             }
             document.getElementById('objlists_' + scene['id']).classList.add('active_objs');
             document.getElementById('drop_screen_' + scene['id']).classList.add('disable');
+            // 要素ループ (e_id = element_id)
+            
         }
 
+    }
+    for (var s_id in object) {
+        for(var e_id in object[s_id]){
+            var element = object[s_id][e_id];
+            /* 要素が「Button」のとき */
+            if( element['element_id'] == elementsId['Button'] || element['element_id'] == elementsId['Link']){    
+                /* 遷移先が設定されているとき */
+                if(element['move_scene_id'] != null){
+
+                    // hr 作成
+                    screens.innerHTML += '<hr class="conecter j_' + element['scene_id'] + ' f_' + element['move_scene_id'] + ' " id="t_' + element['scene_id'] + '_to_t_' + element['move_scene_id'] + '">';
+                    Conect(element['move_scene_id'],element['scene_id'],'t_' + element['scene_id'] + '_to_t_' + element['move_scene_id'])
+                
+                }
+            }
+        }
     }
     
 }
@@ -120,6 +137,7 @@ function Drop(event) {
     document.getElementById(id).style.left = ((document.getElementById(id).style.left).replace("px","") - (startX - endX)) + "px" ;
     event.currentTarget.appendChild(elm);
     event.preventDefault();
+    MoveConect(id.replace("obj_screen","") + " ");
 }
 function DrapAddStart(event) {
     event.target.classList.add('active');
@@ -164,4 +182,90 @@ function ObjClick(event) {
 
 function ClickAdd(event){
 
+}
+
+function MoveConect(dropid){
+    alert(dropid);
+
+    // タブメニュークラス'.js-tab-trigger'を持つ要素を取得
+    const conecters = document.querySelectorAll('.conecter');
+    var str = "";
+    for(let i = 0; i < conecters.length; i++){
+        str = String(conecters[i].classList);
+        if(str.indexOf(dropid) != -1){
+    //        alert("jump:" + str.substr(11,parseInt(str.indexOf('f_'))-12) +" form:" + str.substr(str.indexOf('f_')+2, (str.substr(str.indexOf('f_')+2)).indexOf(" ") ) + " hr:" + conecters[i].id );
+            Conect(str.substr(11,parseInt(str.indexOf('f_'))-12),str.substr(str.indexOf('f_')+2, (str.substr(str.indexOf('f_')+2)).indexOf(" ") ),conecters[i].id)
+        }
+    }
+}
+
+function Conect(jumpId,formerId,hrConect){
+    //alert("HEY")
+    var formCenterX = (document.getElementById('obj_screen_' + formerId).style.left).replace("px","");
+    var formCenterY = (document.getElementById('obj_screen_' + formerId).style.top).replace("px","");
+    var jumpCenterX = (document.getElementById('obj_screen_' + jumpId).style.left).replace("px","");
+    var jumpCenterY = (document.getElementById('obj_screen_' + jumpId).style.top).replace("px","");
+    //alert("FX:" + formCenterX + " FY:" + formCenterY + " JX:" +jumpCenterX+" JY:" +jumpCenterY)
+    var conTop = 0;
+    var conLeft = 0;
+    var conWidth = 0;
+    var conHeight = 0;
+    var R = 0;
+    var conDeg = 0;
+    var weveTop = 0;
+    var weveLeft = 0;
+    if(formCenterX > jumpCenterX){
+        conTop = parseFloat(jumpCenterY) + 42.5;
+        conLeft = parseFloat(jumpCenterX) + 65;
+        conWidth = formCenterX - jumpCenterX;
+        if(parseFloat(formCenterY) > parseFloat(jumpCenterY)){
+            conHeight = formCenterY - jumpCenterY;
+            R = Math.atan2(conHeight,conWidth);
+            conDeg = R*180/Math.PI
+            conWidth = conWidth / Math.cos (R);
+            weveTop = (conWidth / 2) * Math.sin (R);
+            weveLeft = (conWidth /2) - ((conWidth / 2) * Math.cos (R));
+            //weveLeft = (conHeight / 2) * Math.tan (R);
+        }else{
+            conHeight = jumpCenterY - formCenterY;
+            R = Math.atan2(conHeight,conWidth);
+            conDeg = (R*180/Math.PI)*-1
+            conWidth = conWidth / Math.cos (R);
+            weveTop = ((conWidth / 2) * Math.sin (R))*-1;
+            weveLeft = (conWidth / 2) - ((conWidth / 2) * Math.cos (R));
+            //weveLeft = (conHeight / 2) * Math.tan (R);
+        }
+        document.getElementById(hrConect).style.top = (parseFloat(jumpCenterY) + 42.5 + weveTop) + "px";
+        document.getElementById(hrConect).style.left = (parseFloat(jumpCenterX) + 65 - weveLeft) + "px";
+        document.getElementById(hrConect).style.width = (conWidth) + "px";
+        document.getElementById(hrConect).style.transform = "rotate(" + conDeg + "deg)";
+    }else{
+
+        conTop = parseFloat(formCenterY) + 42.5;
+        conLeft = parseFloat(formCenterX) + 65;
+        conWidth = jumpCenterX - formCenterX;
+        if(parseFloat(formCenterY) > parseFloat(jumpCenterY)){
+            conHeight = formCenterY - jumpCenterY;
+            R = Math.atan2(conHeight,conWidth);
+            conDeg =(R*180/Math.PI)* -1
+            conWidth = conWidth / Math.cos (R);
+            weveTop = ((conWidth / 2) * Math.sin (R))*-1;
+            weveLeft = (conWidth /2) - ((conWidth / 2) * Math.cos (R));
+            //weveLeft = (conHeight / 2) * Math.tan (R);
+        }else{
+            conHeight = jumpCenterY - formCenterY;
+            R = Math.atan2(conHeight,conWidth);
+            //alert(conHeight + ":" + conWidth + ":" + hrConect)
+            conDeg = R*180/Math.PI
+            
+            conWidth = conWidth / Math.cos (R);
+            weveTop = (conWidth / 2) * Math.sin (R);
+            weveLeft = (conWidth / 2) - ((conWidth / 2) * Math.cos (R));
+        }
+        
+        document.getElementById(hrConect).style.top = (parseFloat(formCenterY) + 42.5 + weveTop) + "px";
+        document.getElementById(hrConect).style.left = (parseFloat(formCenterX) + 65 - weveLeft) + "px";
+        document.getElementById(hrConect).style.width = (conWidth) + "px";
+        document.getElementById(hrConect).style.transform = "rotate(" + conDeg + "deg)";
+    }
 }
