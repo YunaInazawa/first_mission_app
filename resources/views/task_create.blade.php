@@ -47,7 +47,7 @@
                 </div> --}}
                 <div class="card input-card">
                     <div class="card-body">
-                        <form method="post" action="{{ route('task_new', ['id' => $sceneId]) }}">
+                        <form method="post" action="{{ route('task_new', $sceneId) }}">
                         @csrf
                             <div class="form-group row input_box">
                                 <label for="" class="col-lg-2 col-form-label text-md-right">{{ __('タイトル') }}</label>

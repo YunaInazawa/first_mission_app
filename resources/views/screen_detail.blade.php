@@ -82,34 +82,36 @@
 
                         <!-- タスク -->
                         <div id="panel1" class="tab_panel">
-
-                            @if(count($sceneData->tasks) == 0)
-                            nodata
-                            @else
-                            <div class="row">
-                                <table class="col-md-10 offset-md-1 table table-striped table-sm">
-                                @foreach($sceneData->tasks as $task)
-                                    <tr 
-                                    @if($task->status->id == 1)
-                                    class="table-success"
-                                    @elseif($task->status->id == 6)
-                                    class="table-danger"
-                                    @elseif($task->status->id == 5)
-                                    class="table-warning"
-                                    @endif>
-                                        <td><a href="{{ route('task_detail', $task->id) }}">{{ $task->title }}</a></td>
-                                        <td colspan="2">{!! nl2br($task->description) !!}</td>
-                                        <td>{{ $task->status->title }}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>{{ $task->user->name }}</td>
-                                        <td></td>
-                                        <td colspan="2">{{ $task->end_at }}</td>
-                                    </tr>
-                                @endforeach
-                                </table>
+                            <div class="row"><div class="col-md-10 offset-md-1">
+                                @if(count($sceneData->tasks) != 0)
+                                
+                                    <table class="table table-striped table-sm">
+                                    @foreach($sceneData->tasks as $task)
+                                        <tr 
+                                        @if($task->status->id == 1)
+                                        class="table-success"
+                                        @elseif($task->status->id == 6)
+                                        class="table-danger"
+                                        @elseif($task->status->id == 5)
+                                        class="table-warning"
+                                        @endif>
+                                            <td><a href="{{ route('task_detail', $task->id) }}">{{ $task->title }}</a></td>
+                                            <td colspan="2">{!! nl2br($task->description) !!}</td>
+                                            <td>{{ $task->status->title }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{{ $task->user->name }}</td>
+                                            <td></td>
+                                            <td colspan="2">{{ $task->end_at }}</td>
+                                        </tr>
+                                    @endforeach
+                                    </table>
+                                @endif
+                                
+                                <br />
+                                <a href="{{ route('app_create') }}" class="btn_plus_circle">＋</a>
+                                </div>
                             </div>
-                            @endif
 
                         </div>
 
