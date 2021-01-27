@@ -115,6 +115,31 @@ function StartFunc(){
                     '<button class="obj obj_link" ' + styleSet +' id="obj_already_btn_' + element['id'] + '" value="">' + element['text'] + '</button>';
 
                 }
+
+            /* 要素が「TextBox」のとき */
+            }else if( element['element_id'] == elementsId['TextBox'] ){
+                styleSet = 
+                'style="top: ' + (element['position_y']-1) + 'px; ' + 
+                'left: ' + (element['position_x']-6) + 'px; ' + 
+                'font-size: ' + element['font_size'] +'px; ' + 
+                'height: ' + element['height'] + 'px; ' + 
+                'width: ' + element['width'] + 'px;"';
+
+                // textBox 作成
+                document.getElementById('t_' + element['scene_id']).innerHTML += 
+                '<input type="text" class="obj obj_text" ' + styleSet +' id="obj_already_btn_' + element['id'] + '" value="">';
+
+            }else{
+                styleSet = 
+                'style="top: ' + (element['position_y']-1) + 'px; ' + 
+                'left: ' + (element['position_x']-6) + 'px; ' + 
+                'font-size: ' + element['font_size'] +'px; ' + 
+                'height: ' + element['height'] + 'px; ' + 
+                'width: ' + element['width'] + 'px;"';
+
+                // text 作成
+                document.getElementById('t_' + element['scene_id']).innerHTML += 
+                '<div class="obj obj_text" ' + styleSet +' id="obj_already_btn_' + element['id'] + '" value="">' + element['text'] + '</div>';
             }
 
         }

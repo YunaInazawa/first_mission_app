@@ -25,6 +25,7 @@
 
             <h3>{{ $sceneData->name }}</h3>
             <p>{!! nl2br($sceneData->description) !!}</p>
+            <p><button class="btn" onclick=onclick=location.href="{{ route('app_home', $sceneData->project->id) }}">プロジェクトTOPに戻る</button></p>
 
             <!-- UPDATE ダイアログ -->
             <form method="POST" action="{{ route('scene_update', $sceneData->id) }}">

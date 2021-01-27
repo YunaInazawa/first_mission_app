@@ -76,7 +76,7 @@ body{
 }
 
 .screens div:nth-child(n){
-    background-color:blue; 
+    background-color:gray; 
 }
 
 /* .screens div:nth-child(1){
