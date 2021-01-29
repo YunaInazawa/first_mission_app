@@ -53,7 +53,12 @@ function StartFunc(){
         // 要素ループ (e_id = element_id)
         for(var e_id in object[s_id]){
             var element = object[s_id][e_id];       // 略
-            var styleSet = "";
+            styleSet =                          // button / style 設定
+            'style="top: ' + element['position_y'] + 'px; ' + 
+            'left: ' + element['position_x'] + 'px; ' + 
+            'font-size: ' + element['font_size'] +'px; ' + 
+            'height: ' + element['height'] + 'px; ' + 
+            'width: ' + element['width'] + 'px;"';
             /* 要素が「Button」のとき */
             if( element['element_id'] == elementsId['Button'] ){    
                 styleSet =                          // button / style 設定
@@ -67,7 +72,7 @@ function StartFunc(){
 
                     // button 作成
                     document.getElementById('t_' + element['scene_id']).innerHTML += 
-                    '<button onclick="ClickButton(event)" class="obj" ' + styleSet +' id="obj_already_btn_' + element['id'] + '" value="' + element['move_scene_id'] + '">' + element['text'] + '</button>';
+                    '<button onclick="ClickButton(event)" class="obj obj_btn" ' + styleSet +' id="obj_already_btn_' + element['id'] + '" value="' + element['move_scene_id'] + '">' + element['text'] + '</button>';
 
                     // canvas 作成
                     document.getElementById('screenlist').innerHTML += 
@@ -81,7 +86,7 @@ function StartFunc(){
 
                     // button 作成
                     document.getElementById('t_' + element['scene_id']).innerHTML += 
-                    '<button class="obj" ' + styleSet +' id="obj_already_btn_' + element['id'] + '" value="">' + element['text'] + '</button>';
+                    '<button class="obj obj_btn" ' + styleSet +' id="obj_already_btn_' + element['id'] + '" value="">' + element['text'] + '</button>';
 
                 }
 
@@ -115,11 +120,24 @@ function StartFunc(){
                     '<button class="obj obj_link" ' + styleSet +' id="obj_already_btn_' + element['id'] + '" value="">' + element['text'] + '</button>';
 
                 }
+                
+            }else if( element['element_id'] == elementsId['CheckBox'] ){
+                document.getElementById('t_' + element['scene_id']).innerHTML += 
+                '<div class="obj obj_checkbox" ' + styleSet +' id="obj_already_checkbox_' + element['id'] + '"><input id="already_checkbox_' + element['id'] + '" type="checkbox">' + element['text'] + '</div>';
+            }else if(element['element_id'] == elementsId['Label']){
+                document.getElementById('t_' + element['scene_id']).innerHTML += 
+                '<div class="obj obj_label"' + styleSet +' id="obj_already_label_' + element['id'] + '">' + element['text'] + '</div>';
+            }else if(element['element_id'] == elementsId['RadioButton']){
+                document.getElementById('t_' + element['scene_id']).innerHTML += 
+                '<div class="obj obj_radio"' + styleSet +' id="obj_already_radio_' + element['id'] + '"><input id="already_radio_' + element['id'] + '" type="radio">' + element['text'] + '</div>';
+            }else if(element['element_id'] == elementsId['TextBox']){
+                document.getElementById('t_' + element['scene_id']).innerHTML += 
+                '<div class="obj obj_textbox"' + styleSet +' id="obj_already_textbox_' + element['id'] + '"><input id="already_textbox_' + element['id'] + '" type="text"></div>';
             }
 
         }
     }
-    Conect(arrayJump,arrayform); 
+    //Conect(arrayJump,arrayform); 
 }
 
 function ClickButton(event){
