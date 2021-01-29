@@ -102,7 +102,7 @@ var elementsId = @json($elementsId);
     <div class="row">
         <div class="screens" id="screenlist" style="top:<?= $isfirst[0] ?>px;left:<?= $isfirst[1] ?>px;">
             @foreach( $scenesData as $scene )
-                <div class="screen" id="t_{{ $scene->id }}" style="top:<?php echo $topLeft[$cnt][0]; ?>px;left:<?php echo $topLeft[$cnt][1];$cnt++; ?>px;" >{{ $scene->name }}</div>
+                <div class="screen" id="t_{{ $scene->id }}" style="top:<?php echo $topLeft[$cnt][0]; ?>px;left:<?php echo $topLeft[$cnt][1];$cnt++; ?>px;" ><div class="scene_titles">{{ $scene->name }}</div></div>
             @endforeach
         </div>
     </div>

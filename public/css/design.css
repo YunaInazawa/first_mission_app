@@ -141,12 +141,16 @@ button:focus{
  キャンバスの調整
  ---------------------------------*/
 .canvas{
-    height: 950px;
+    height: 850px;
     width: 100%;
-    background-color: gray;
+    background-color: var(--light);
     margin-left: -2%;
     z-index: 1;
 }
+.tab-content__item{
+    border-radius: 5px;
+}
+
 
 .col-lg-2{
     padding: 0;
@@ -356,6 +360,7 @@ button:focus{
     border-radius: 4px;/*角の丸み*/
     box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.19);
     font-weight: bold;
+    border: solid 1px;
 }
 .obj_radio input{
     margin-right: 5px;

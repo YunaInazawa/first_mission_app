@@ -21,7 +21,7 @@
                 <aside class="sidemenu sidemenu_left">
                     <h2>スクリーン</h2>
                     @foreach( $scenesData as $scene )
-                    <button type="button">
+                    <button type="button" id="menu_btn_{{ $scene->id }}">
                         <div class="row dragitem screennames" ondragend="DragAddEnd(event)" ondragstart="DrapAddStart(event)" draggable="true" id="drop_screen_{{ $scene->id }}"><span>{{ $scene->name }}</span></div>
                     </button>
                     <input type="hidden" id="scene_{{ $scene->id }}" name="scenes[{{ $scene->id }}]" value="{{ $scene->position_x }}, {{ $scene->position_y }}">
