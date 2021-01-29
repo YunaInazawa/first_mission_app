@@ -22,6 +22,8 @@ function StartFunc(){
             }
             document.getElementById('objlists_' + scene['id']).classList.add('active_objs');
             document.getElementById('drop_screen_' + scene['id']).classList.add('disable');
+            
+            document.getElementById('menu_btn_' + scene['id']).classList.add('disable');
             // 要素ループ (e_id = element_id)
             
         }
@@ -69,7 +71,7 @@ function deleteScene( scene_id ) {
 
     // 左側の scene 有効にする
     document.getElementById('drop_screen_' + scene_id).classList.remove('disable');
-
+    document.getElementById('menu_btn_' + scene_id).classList.remove('disable');
     // 未選択状態にする
     const objectlists = document.getElementsByClassName('screen_objs');
     for(var i = 0; i < objectlists.length; i++){
@@ -161,6 +163,7 @@ function DropAdd(id) {
     }
     document.getElementById('objlists_' + id).classList.add('active_objs');
     document.getElementById('drop_screen_' + id).classList.add('disable');
+    document.getElementById('menu_btn_' + id).classList.add('disable');
 
     // scene_{id} に登録（ POST で送る ）
     createPostSceneData(id, (event.clientY - 87), (event.clientX - 383))
@@ -185,8 +188,6 @@ function ClickAdd(event){
 }
 
 function MoveConect(dropid){
-    alert(dropid);
-
     // タブメニュークラス'.js-tab-trigger'を持つ要素を取得
     const conecters = document.querySelectorAll('.conecter');
     var str = "";
@@ -268,4 +269,78 @@ function Conect(jumpId,formerId,hrConect){
         document.getElementById(hrConect).style.width = (conWidth) + "px";
         document.getElementById(hrConect).style.transform = "rotate(" + conDeg + "deg)";
     }
+}
+
+// 画面遷移管理 / 遷移先設定
+function funcSetMoveScene2(id) {
+    var selectValue = document.getElementById('conectsel').value.split(',');
+
+    divId = document.getElementById('divId').value;
+    document.getElementById(divId).innerText = selectValue[0];
+    
+    var decoration_id = divId.substring(divId.lastIndexOf('_')+1);
+    document.getElementById('decoration_' + decoration_id).value = selectValue[1];
+    
+    dialogHide2('dialog');
+    return;
+}
+function dialogHide2( id ) {
+    var dialog = document.getElementById(id);
+    dialog.style.display = "none";
+    return;
+}
+
+
+function dialogConecterShow2(event, decoration_id,s_id){
+
+    // 選択している画面id
+    var id = document.getElementById('select_screen').value;
+    
+    // 全ての画面名
+    const screenNames = document.getElementsByClassName('screennames');
+    
+    // select の option を全削除
+    document.getElementById('conectsel').innerHTML = '';
+
+    // 選択したオブジェクト名
+    var str = event.target.innerText;
+
+    // option の valueStr / 選択したオブジェクト名だけ抽出
+    var valueStr = str.substring(0, str.indexOf(" ")) + ' : ---,null';
+
+    // 「---」を option に追加
+    document.getElementById('conectsel').innerHTML += '<option value="' + valueStr + '">' + '---' + '</option>'
+    
+    // 現在、遷移先に設定されている画面id
+    var nowScreenId = document.getElementById('decoration_' + decoration_id).value;
+
+    /* 画面の数だけ繰り返す */
+    for(var i = 0; i < screenNames.length; i++){
+
+        // 画面id
+        var scene_id = screenNames[i].id.replace('drop_screen_', '');
+        
+        /* 自分が置かれている画面以外の場合 */
+        if(scene_id != id){
+
+            // option の valueStr / 表示名を作る
+            var valueStr = str.substring(0, str.indexOf(" ")) + ' : ';
+            valueStr += screenNames[i].innerText + ',' + scene_id;
+
+            /* 現在、遷移先に設定されている画面を初期値に設定する */
+            if( nowScreenId == scene_id ){
+                document.getElementById('conectsel').innerHTML += '<option value="' + valueStr + '" selected>' + screenNames[i].innerText + '</option>'
+            }else{
+                document.getElementById('conectsel').innerHTML += '<option value="' + valueStr + '">' + screenNames[i].innerText + '</option>'
+            }
+            
+        }
+    }
+
+    // 選択したオブジェクトid を保存
+    document.getElementById('divId').value = event.target.id;
+
+    var dialog = document.getElementById('dialog');
+    dialog.style.display = "block";
+    return;
 }
