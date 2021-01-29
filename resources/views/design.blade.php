@@ -103,6 +103,7 @@ var object=JSON.parse('<?php echo $varJsSample; ?>');//jsonをparseしてJavaScr
                                 <!-- 仮リンク -->
                                 <button type="submit">完了</button>
 
+                                <!--
                                 <p>
                                 < scenes ><br />
                                 @foreach( $scenes_data as $s )
@@ -113,8 +114,8 @@ var object=JSON.parse('<?php echo $varJsSample; ?>');//jsonをparseしてJavaScr
                                     - {{ $d->position_x }} - {{ $d->position_y }} <br />
                                     @endforeach
                                 @endforeach
-                                
                                 </p>
+                                -->
                         </aside>
                     </div>
                 </div>

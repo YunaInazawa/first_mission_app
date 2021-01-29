@@ -1,3 +1,4 @@
+
 /*****************************************
  * design画面のオブジェクト追加、詳細変更js
  * 1.共通の変数初期化
@@ -131,6 +132,9 @@ function StartFunc(){
         }else if(object[key[k]]['element'] == "TextBox"){
             tabTarget.innerHTML += alreadyTmpObj + 'obj_textbox"' + styleSet +' id="obj_already_textbox_' + key[k] + '"><input id="already_textbox_' + key[k] + '" type="text"></div>';
             objitemset = '<li id="li_decoration_' + object[key[k]]['id'] + '">' + objListItem + 'alr_textbox_' + key[k] + '">' + object[key[k]]['element'] + key[k];
+        }else{
+            tabTarget.innerHTML += alreadyTmpObj + 'obj_link"' + styleSet +' id="obj_already_link_' + key[k] + '">' + object[key[k]]['name'] + '</div>';
+            objitemset = '<li id="li_decoration_' + object[key[k]]['id'] + '">' + objListItem + 'alr_link_' + key[k] + '">' + object[key[k]]['element'] + key[k];
         }
 
         // hidden を作成（ POST で送信 ）
@@ -558,4 +562,9 @@ function TreeClick(event){
     id = id.replace("new_p","list");
     id = id.replace("new_c","list");
     SelectSet(id);
+}
+
+
+function submit(){
+    $('form').submit();
 }
