@@ -71,7 +71,11 @@ h1{
     background-color: var(--blue-paradise) !important;
     z-index: 1000;
 }
-
+.logo_img{
+    height: 60px;
+    position: fixed;
+    top: -3px;
+}
 /*
  ナビゲーションリンクのスタイル
  ---------------------------------*/

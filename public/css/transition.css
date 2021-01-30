@@ -75,10 +75,6 @@ body{
     z-index: 1;
 }
 
-.screens div:nth-child(n){
-    background-color:gray; 
-}
-
 /* .screens div:nth-child(1){
     background-color:red; 
     top: 85px;
